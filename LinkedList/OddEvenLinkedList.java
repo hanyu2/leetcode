@@ -2,29 +2,20 @@ package LinkedList;
 
 public class OddEvenLinkedList {
 	public static ListNode oddEvenList(ListNode head) {
-		int count = 1;
-		if(head == null){
-            return null;
-        }
-        if(head.next == null){
-            return head;
-        }
-        
-		ListNode oddHead = head;
+		if(head == null || head.next == null){
+			return head;
+		}
+		ListNode even = head.next;
+		ListNode odd = head;
 		ListNode evenHead = head.next;
-		while (head.next != null && head.next.next != null) {
-			count++;
-			ListNode temp = head.next;
-			head.next = head.next.next;
-			head = temp;
+		while(even != null && even.next != null){
+			odd.next = even.next;
+			odd = even.next;
+			even.next = odd.next;
+			even = odd.next;
 		}
-		if(count % 2 == 0){
-			head.next.next = evenHead;
-			head.next = null;
-		}else{
-			head.next = evenHead;
-		}
-		return oddHead;
+		odd.next = evenHead;
+		return head;
 	}
 	
 	/*public static void main(String[] args) {
@@ -51,8 +42,8 @@ public class OddEvenLinkedList {
 		}
 	}*/
 }
-/*
-class ListNode {
+
+/*class ListNode {
 	int val;
 	ListNode next;
 
