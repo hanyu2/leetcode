@@ -11,7 +11,7 @@ public class PascalTriangle2 {
 			return list;
 		}
 		list.add(1);
-		for(int i = 1; i < index - 1; i++){
+		for(int i = 1; i < index; i++){
 			ArrayList<Integer> temp = new ArrayList<Integer>();
 			for(int j = 0; j < i + 1; j++){
 				temp.add(-1);
