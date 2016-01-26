@@ -38,7 +38,28 @@ public class TreePath {
 			}
 		}
 	}
-
+	
+	////////////////////////////////////
+	public List<String> binaryTreePaths2(TreeNode root) {
+        List<String> list = new ArrayList<String>();
+        if(root == null){
+            return list;
+        }
+        createPath(list, String.valueOf(root.val), root);
+        return list;
+    }
+    private void createPath(List<String> list, String path, TreeNode root){
+        if(root.left == null && root.right == null){
+            list.add(path);
+            return;
+        }
+        if(root.left != null){
+            createPath(list, path + "->" + String.valueOf(root.left.val), root.left);
+        }
+        if(root.right != null){
+            createPath(list, path + "->" + String.valueOf(root.right.val), root.right);
+        }
+    }
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(1);
 		//TreeNode n2 = new TreeNode(2);
