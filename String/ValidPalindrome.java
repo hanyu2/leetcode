@@ -15,7 +15,7 @@ public class ValidPalindrome {
 
             if (front == s.length()) { // for emtpy string “.,,,”     
                 return true; 
-            }           
+            }        
 
             while (end >= 0 && ! isvalid(s.charAt(end))) { // same here, need to check border of a,b
                 end--;
@@ -36,6 +36,6 @@ public class ValidPalindrome {
         return Character.isLetter(c) || Character.isDigit(c);
     }
 	 public static void main(String[] args) {
-		System.out.println(isPalindrome("a.b,."));
+		System.out.println(isPalindrome(".,"));
 	}
 }
