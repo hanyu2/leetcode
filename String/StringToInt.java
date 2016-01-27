@@ -38,6 +38,6 @@ public class StringToInt {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(myAtoi("+"));
+		System.out.println(myAtoi("+2"));
 	}
 }
