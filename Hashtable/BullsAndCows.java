@@ -1,7 +1,5 @@
 package Hashtable;
 
-import sun.print.resources.serviceui;
-
 public class BullsAndCows {
 	public static String getHint(String secret, String guess) {
 		int [] arrayA = new int [10];
