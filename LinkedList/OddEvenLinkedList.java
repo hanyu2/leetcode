@@ -18,7 +18,7 @@ public class OddEvenLinkedList {
 		return head;
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		ListNode n1 = new ListNode(1);
 		ListNode n2 = new ListNode(2);
 		ListNode n3 = new ListNode(3);
@@ -40,7 +40,7 @@ public class OddEvenLinkedList {
 			System.out.println(n1.val);
 			n1 = n1.next;
 		}
-	}*/
+	}
 }
 
 /*class ListNode {
