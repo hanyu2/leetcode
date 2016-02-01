@@ -6,7 +6,6 @@ import java.util.Map;
 public class IsomorphicString {
 	public static boolean isIsomorphic(String s, String t) {
 		if(s.length() != t.length()) return false;  
-        if(s.length() <=1) return true;  
         Map<Character, Character> dic = new HashMap<Character, Character>();  
         for(int i=0; i<s.length(); i++) {  
             char s1 = s.charAt(i);  
