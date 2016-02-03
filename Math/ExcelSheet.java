@@ -15,7 +15,17 @@ public class ExcelSheet {
         }
         return result;
     }
+	public static int titleToNumber2(String s) {
+        int len = s.length();
+        int sum = 0;
+        int temp = 0;
+        for(int i = 0; i < len; i++){
+            temp = s.charAt(i) - 'A' + 1;
+            sum = sum * 26 + temp;
+        }
+        return sum;
+    }
 	public static void main(String[] args) {
-		System.out.println(titleToNumber("A"));
+		System.out.println(titleToNumber2("A"));
 	}
 }
