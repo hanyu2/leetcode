@@ -20,8 +20,25 @@ public class IsomorphicString {
         }  
         return true;  
 	}
+	
+	public static boolean isIsomorphic2(String s, String t) {
+        if(s.length() != t.length()){
+            return false;
+        }
+        Map<Character, Character> map = new HashMap<Character, Character>();
+        for(int i = 0; i < s.length(); i++){
+            if(!map.containsKey(s.charAt(i))){
+                map.put(s.charAt(i), t.charAt(i));
+            }else{
+                if(map.get(s.charAt(i)) != t.charAt(i)){
+                	return false;
+                }
+            }
+        }
+        return true;
+    }
 	public static void main(String[] args) {
-		System.out.println(isIsomorphic("abcdefghi", ""));
+		System.out.println(isIsomorphic2("ab", "aa"));
 		
 	}
 }
