@@ -30,7 +30,7 @@ public class PascalTriangle {
 	        return rst;
 	}
 	
-	public List<List<Integer>> generate2(int numRows) {
+	public static List<List<Integer>> generate2(int numRows) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         if (numRows < 1) {
             return res;
@@ -48,6 +48,27 @@ public class PascalTriangle {
 
         return res; 
     }
+	
+	 public static List<List<Integer>> generate3(int numRows) {
+	        List<List<Integer>> lists = new ArrayList<List<Integer>>();
+	        if(numRows == 0){
+	            return lists;
+	        }
+	        List<Integer> list = new ArrayList<Integer>();
+	        list.add(1);
+	        lists.add(list);
+	        for(int i = 1; i < numRows; i++){
+	            List<Integer> last = lists.get(i - 1);
+	            List<Integer> cur = new ArrayList<Integer>();
+	            cur.add(1);
+	            for(int j = 1; j < last.size(); j++){
+	                cur.add(last.get(j - 1) + last.get(j));
+	            }
+	            cur.add(1);
+	            lists.add(cur);
+	        }
+	        return lists;
+	    }
 	
 	public static void main(String[] args) {
 		List<List<Integer>> lists = generate(6);
