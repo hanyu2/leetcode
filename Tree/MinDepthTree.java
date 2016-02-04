@@ -1,7 +1,5 @@
 package Tree;
 
-import com.sun.media.sound.MidiInDeviceProvider;
-
 public class MinDepthTree {
 	public static int minDepth(TreeNode root) {
 		if (root == null) {
