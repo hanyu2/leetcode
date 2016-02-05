@@ -1,10 +1,38 @@
 package Tree;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TreeLevelBottom {
-	public static ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
-		
+	public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+		List<List<Integer>> lists = new ArrayList<List<Integer>>();
+		if (root == null) {
+			return lists;
+		}
+		getOrder(root, lists, 0);
+		Collections.reverse(lists);
+		return lists;
+	}
+
+	public static void getOrder(TreeNode root, List<List<Integer>> lists, int level) {
+		if (root == null) {
+			return;
+		}
+		List<Integer> list;
+		if (lists.size() == level) {
+			list = new ArrayList<Integer>();
+			lists.add(list);
+		} else {
+			list = lists.get(level);
+		}
+		list.add(root.val);
+		if (root.left != null) {
+			getOrder(root.left, lists, level + 1);
+		}
+		if (root.right != null) {
+			getOrder(root.right, lists, level + 1);
+		}
 	}
 
 	public static void main(String[] args) {
@@ -23,6 +51,6 @@ public class TreeLevelBottom {
 		n3.left = n6;
 		n3.right = n7;
 
-		ArrayList<ArrayList<Integer>> list = levelOrderBottom(n1);
+		List<List<Integer>> list = levelOrderBottom(n1);
 	}
 }
