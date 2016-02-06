@@ -31,38 +31,6 @@ public class AddBinary {
 		return res;
 	}
 	
-	public static String addBinary3(String a, String b) {
-        if(a.length() < b.length()){
-            String temp = a;
-            a = b;
-            b = temp;
-        }
-        int indexa = a.length() - 1;
-        int indexb = b.length() - 1;
-        int carry = 0;
-        StringBuilder sb = new StringBuilder();
-        while(indexb >= 0){
-            int num = (int)(a.charAt(indexa) - '0') + (int)(b.charAt(indexb) - '0') + carry;
-            StringBuilder sb2 = new StringBuilder(num % 2);
-            sb = sb2.append(sb);
-            carry = num / 2;
-            indexa--;
-            indexb--;
-        }
-        while(indexa >= 0){
-            int num = (int)(a.charAt(indexa) - '0') + carry;
-            StringBuilder sb2 = new StringBuilder(num % 2);
-            sb = sb2.append(sb);
-            carry = num / 2;
-            indexa--;
-        }
-        if(carry == 1){
-            StringBuilder sb2 = new StringBuilder(1);
-            sb = sb2.append(sb);
-        }
-        return sb.toString();
-    }
-
 	public static String addBinary2(String a, String b) {
 		int p = a.length();
         int q = b.length();
@@ -95,6 +63,6 @@ public class AddBinary {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(addBinary3("0", "0"));
+		System.out.println(addBinary2("0", "0"));
 	}
 }
