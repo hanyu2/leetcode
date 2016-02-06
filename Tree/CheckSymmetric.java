@@ -20,7 +20,7 @@ public class CheckSymmetric {
 		if(left.val != right.val){
 			return false;
 		}
-		return check(left.left, left.right) && check(right.left, right.right);
+		return check(left.left, right.right) && check(left.right, right.left);
 	}
 	
 	public static boolean nonRecursive(TreeNode root){
