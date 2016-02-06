@@ -19,8 +19,9 @@ public class PlusOne {
         return rst;
 	}
 	
+	
 	public static void main(String[] args) {
-		int num [] = {9,9,9,9};
+		int num [] = {9};
 		num = plusOne(num);
 		for (int i = 0; i < num.length; i++) {
 			System.out.print(num[i]);
