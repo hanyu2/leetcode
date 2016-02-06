@@ -23,7 +23,7 @@ public class ZigzagConversion {
 
 			if (isGoingDown) {
 				if (index == numRows - 1) {
-					index = numRows - 2;
+					index--;
 					isGoingDown = false;
 				} else {
 					index++;
@@ -66,6 +66,6 @@ public class ZigzagConversion {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(convert2("ABCDEFGHIJK", 5));
+		System.out.println(convert2("PAYPALISHIRING", 3));
 	}
 }
