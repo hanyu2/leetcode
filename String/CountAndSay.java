@@ -6,7 +6,7 @@ public class CountAndSay {
 		for (int i = 1; i < n; i++) {
 			k = count(k);
 		}
-		return k ;
+		return k;
 	}
 
 	public static String count(String string) {
@@ -18,7 +18,7 @@ public class CountAndSay {
 			if (c[i] == first) {
 				time++;
 			} else {
-			    s.append(time).append(first);
+				s.append(time).append(first);
 				time = 1;
 				first = c[i];
 			}
@@ -26,7 +26,8 @@ public class CountAndSay {
 		s.append(time).append(first);
 		return s.toString();
 	}
+
 	public static void main(String[] args) {
-		System.out.println(countAndSay(3));
+		System.out.println(countAndSay(1));
 	}
 }
