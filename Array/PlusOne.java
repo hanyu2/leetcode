@@ -19,7 +19,6 @@ public class PlusOne {
         return rst;
 	}
 	
-	
 	public static void main(String[] args) {
 		int num [] = {9};
 		num = plusOne(num);
