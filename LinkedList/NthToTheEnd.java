@@ -20,7 +20,6 @@ public class NthToTheEnd {
 		return dummy.next;
 	}
 
-	}}
 
 	public static ListNode removeNthFromEnd2(ListNode head, int n) {
 		if (head == null) {
