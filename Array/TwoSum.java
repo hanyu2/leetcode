@@ -62,26 +62,15 @@ public class TwoSum {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for (int i : nums) {
-			if (map.containsKey(i)) {
-				int value = map.get(i);
-				if (value != 0) {
-					if (map.containsKey(target - i)) {
-						result.add(new ArrayList<Integer>(Arrays.asList(i, target - i)));
-						map.put(target - i, 0);
-						map.put(i, 0);
-					}
+			if(map.containsKey(target - i)){
+				result.add(new ArrayList<Integer>(Arrays.asList(i, target - i)));
+				if(map.get(target - i) == 1){
+					map.remove(target - i);
+				}else{
+					map.put(target - i, map.get(target - i) - 1);
 				}
-			} else {
-				if (map.containsKey(target - i)) {
-					int value = map.get(target - i);
-					if (value != 0) {
-						result.add(new ArrayList<Integer>(Arrays.asList(i, target - i)));
-						map.put(target - i, 0);
-						map.put(i, 0);
-					}
-				} else {
-					map.put(i, 1);
-				}
+			}else{
+				map.put(i, map.containsKey(i) ? map.get(i) + 1 : 1);
 			}
 		}
 		return result;
