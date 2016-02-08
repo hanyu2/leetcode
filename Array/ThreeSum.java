@@ -5,21 +5,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ThreeSum {
-	public List<List<Integer>> threeSum(int[] nums) {
+	public static List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if(nums == null || nums.length < 3){
 			return result;
 		}
 		Arrays.sort(nums);
-		for(int i = 0; i < nums.length - 2; i++){
-			while(i != 0 && nums[i] == nums[i - 1]){
-				continue;
+		for (int i = 0; i < nums.length - 2; i++) {
+			if (i != 0 && nums[i] == nums[i - 1]) {
+				continue; // to skip duplicate numbers; e.g [0,0,0,0]
 			}
+
 			int left = i + 1;
 			int right = nums.length - 1;
-			while(left < right){
+			while (left < right) {
 				int sum = nums[left] + nums[right] + nums[i];
-				if(sum == 0){
+				if (sum == 0) {
 					ArrayList<Integer> tmp = new ArrayList<Integer>();
 					tmp.add(nums[i]);
 					tmp.add(nums[left]);
@@ -41,5 +42,9 @@ public class ThreeSum {
 			}
 		}
 		return result;
+	}
+	public static void main(String[] args) {
+		int nums [] = {0, 0, 0, 0};
+		threeSum(nums);
 	}
 }
