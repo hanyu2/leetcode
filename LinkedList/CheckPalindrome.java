@@ -58,6 +58,39 @@ public class CheckPalindrome {
 		}
 		return true;
 	}
+	
+	 // same with 2
+	 public static boolean isPalindrome3(ListNode head) {
+	        if(head == null || head.next == null){
+	            return true;
+	        }
+	        ListNode fast = head;
+	        ListNode slow = head;
+	        while(fast != null && fast.next != null){
+	            slow = slow.next;
+	            fast = fast.next.next;
+	        }
+	        if(fast != null){// you cannot use fast.next == null here
+	            slow = slow.next;
+	        }
+	        ListNode next = slow.next;
+	        slow.next = null; // do not foget this!
+	        ListNode nextNext = null;
+	        while(next != null){
+	            nextNext = next.next;// cannot write slow.next.next
+	            next.next = slow;
+	            slow = next;
+	            next = nextNext;
+	        }
+	        while(slow != null){
+	            if(slow.val != head.val){
+	                return false;
+	            }
+	            slow = slow.next;
+	            head = head.next;
+	        }
+	        return true;
+	    }
 
 	public static void main(String[] args) {
 		ListNode n1 = new ListNode(1);
@@ -67,6 +100,6 @@ public class CheckPalindrome {
 		n1.next = n2;
 		n2.next = n3;
 		n3.next = n4;
-		System.out.println(isPalindrome2(n1));
+		System.out.println(isPalindrome3(n1));
 	}
 }
