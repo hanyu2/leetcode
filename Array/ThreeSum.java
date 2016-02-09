@@ -54,7 +54,7 @@ public class ThreeSum {
 	}
 
 	public static List<List<Integer>> threeSum2(int[] nums) {
-		Arrays.sort(nums);
+		Arrays.sort(nums);//DO NOT FORGET THIS!!!!!!
 		List<List<Integer>> res = new LinkedList<>();
 		for (int i = 0; i < nums.length - 2; i++) {
 			if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
