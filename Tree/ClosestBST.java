@@ -11,7 +11,6 @@ public class ClosestBST {
 				min = Math.abs(root.val - target);
 				closest = root.val;
 			}
-
 			if (target < root.val) {
 				root = root.left;
 			} else if (target > root.val) {
@@ -20,7 +19,6 @@ public class ClosestBST {
 				return root.val;
 			}
 		}
-
 		return closest;
 	}
 }
