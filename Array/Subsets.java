@@ -51,6 +51,23 @@ public class Subsets {
 		}
 		return res;
 	}
+	
+	//same logic as the last one, avoid using a temp list
+	public static List<List<Integer>> subsets5(int[] nums) {
+	    List<List<Integer>> res = new ArrayList<List<Integer>>();
+	    res.add(new ArrayList<Integer>());
+	    Arrays.sort(nums);
+	    for(int i = nums.length - 1; i >= 0; i--){
+	        int size = res.size() - 1;
+	        for(int j = size; j >= 0; j--){
+	            List<Integer> newList1 = new ArrayList<>();
+	            newList1.add(nums[i]);
+	            newList1.addAll(res.get(j));
+	            res.add(newList1);
+	        }
+	    }
+	    return res;
+	}
 	//bit manipulation
 	public static List<List<Integer>> subsets3(int[] nums) {
 		Arrays.sort(nums);
@@ -94,6 +111,6 @@ public class Subsets {
 	public static void main(String[] args) {
 		int nums [] = {2, 1, 3};
 		//int nums[] = { 0 };
-		subsets3(nums);
+		subsets5(nums);
 	}
 }
