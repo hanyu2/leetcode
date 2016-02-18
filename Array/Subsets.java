@@ -52,7 +52,8 @@ public class Subsets {
 		return res;
 	}
 	
-	//same logic as the last one, avoid using a temp list
+	// avoid using a temp list subsets order in ListList is different from the last one
+	// elements in a subsets are non-descending 
 	public static List<List<Integer>> subsets5(int[] nums) {
 	    List<List<Integer>> res = new ArrayList<List<Integer>>();
 	    res.add(new ArrayList<Integer>());
