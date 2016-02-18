@@ -67,6 +67,29 @@ public class Subsets {
 		}
 		return collection;
 	}
+	
+	//DFS
+	public static List<List<Integer>> subsets4(int[] nums) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+
+		if (nums.length == 0) {
+			return result;
+		}
+
+		Arrays.sort(nums);
+		dfs(nums, 0, new ArrayList<Integer>(), result);
+		return result;
+	}
+
+	public static void dfs(int[] nums, int index, List<Integer> path, List<List<Integer>> result) {
+		result.add(new ArrayList<Integer>(path));
+
+		for (int i = index; i < nums.length; i++) {
+			path.add(nums[i]);
+			dfs(nums, i + 1, path, result);
+			path.remove(path.size() - 1);
+		}
+	}
 
 	public static void main(String[] args) {
 		int nums [] = {2, 1, 3};
