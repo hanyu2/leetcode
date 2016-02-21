@@ -9,19 +9,12 @@ public class SearchInRotateArray {
 			if (nums[mid] == target)
 				return mid;
 
-			if (nums[start] <= nums[mid]) {
-				if (target < nums[mid] && target >= nums[start])// easy to
-																// understand >=
-																// as below
-																// target <=
-																// nums[end]
-					end = mid - 1; // because you have now separate the array
-									// into two parts
-				else // former parts is [start, mid) latter is(mid, end]
+			if (nums[mid] >= nums[start]) {
+				if (target < nums[mid] && target >= nums[start])// easy to understand >= as below target <= nums[end]
+					end = mid - 1; 								// because you have now separate the array into two parts
+				else 											// former parts is [start, mid) latter is(mid, end]
 					start = mid + 1;
-			}
-
-			if (nums[mid] <= nums[end]) {// can also be <
+			} else if (nums[mid] < nums[start]) {// can also be <
 				if (target > nums[mid] && target <= nums[end])
 					start = mid + 1;
 				else
