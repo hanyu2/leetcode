@@ -34,7 +34,7 @@ public class PeakElement {
 		return low;
 	}
 
-	// Interation Sequential search O(N)
+	// Interation Sequential search O(N)git 
 	public int findPeakElement3(int[] nums) {
 		for (int i = 1; i < nums.length; i++) {
 			if (nums[i] < nums[i - 1]) {
