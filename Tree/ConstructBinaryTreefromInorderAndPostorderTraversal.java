@@ -6,25 +6,23 @@ import java.util.Stack;
 
 public class ConstructBinaryTreefromInorderAndPostorderTraversal {
 	// Time Limit Exceed
-	public static TreeNode buildTree(int[] inorder, int[] postorder) {
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int i = 0; i < inorder.length; i++) {
-			map.put(inorder[i], i);
-		}
-		return helper(postorder.length - 1, 0, inorder.length - 1, postorder, inorder, map);
-	}
-
-	public static TreeNode helper(int postEnd, int inStart, int inEnd, int[] postorder, int[] inorder,
-			Map<Integer, Integer> map) {
-		if (postEnd < 0 || inStart > inEnd) {
-			return null;
-		}
-		TreeNode root = new TreeNode(postorder[postEnd]);
-		int index = map.get(root.val);
-		root.right = helper(postEnd - 1, index + 1, inEnd, postorder, inorder, map);
-		root.left = helper(postEnd - index + inStart, inStart, index - 1, postorder, inorder, map);
-		return root;
-	}
+	public TreeNode buildTree(int[] inorder, int[] postorder) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i], i);
+        }
+       return helper(postorder.length - 1, 0, inorder.length - 1, inorder, postorder, map);
+    } 
+    public TreeNode helper(int postEnd, int inStart, int inEnd, int[] inorder, int[] postorder, Map<Integer, Integer> map){
+        if(postEnd < 0 || inStart > inEnd){
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[postEnd]);
+        int index = map.get(root.val);
+        root.right = helper(postEnd - 1, index + 1, inEnd, inorder, postorder, map);
+        root.left = helper(postEnd - (index - inStart) - 1, inStart, index - 1, inorder, postorder, map);
+        return root;
+    }
 
 	
 	public static TreeNode buildTree2(int[] inorder, int[] postorder) {
@@ -50,10 +48,10 @@ public class ConstructBinaryTreefromInorderAndPostorderTraversal {
 		return root;
 	}
 	//https://leetcode.com/discuss/10961/my-recursive-java-code-with-o-n-time-and-o-n-space
-	int pInorder;   // index of inorder array
-	int pPostorder; // index of postorder array
+	static int pInorder;   // index of inorder array
+	static int pPostorder; // index of postorder array
 
-	private TreeNode helper3(int[] inorder, int[] postorder, TreeNode end) {
+	private static TreeNode helper3(int[] inorder, int[] postorder, TreeNode end) {
 	    if (pPostorder < 0) {
 	        return null;
 	    }
@@ -76,7 +74,7 @@ public class ConstructBinaryTreefromInorderAndPostorderTraversal {
 	    return n;
 	}
 
-	public TreeNode buildTree3(int[] inorder, int[] postorder) {
+	public static TreeNode buildTree3(int[] inorder, int[] postorder) {
 	    pInorder = inorder.length - 1;
 	    pPostorder = postorder.length - 1;
 
@@ -131,6 +129,6 @@ public class ConstructBinaryTreefromInorderAndPostorderTraversal {
 		/*
 		 * int[] inorder = { 1, 3, 2 }; int[] postorder = { 3, 2, 1 };
 		 */
-		buildTree2(inorder, postorder);
+		buildTree3(inorder, postorder);
 	}
 }
