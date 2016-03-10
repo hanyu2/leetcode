@@ -42,6 +42,7 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal {
 		}
 		return helper(0, 0, inorder.length - 1, preorder, inorder, map);
 	}
+	
 
 	public static TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder,
 			Map<Integer, Integer> map) {
@@ -89,11 +90,13 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal {
 		/*
 		 * _______7______ / \ __10__ ___2 / \ / 4 3 _8 \ / 1 11
 		 */
-		int[] preorder = { 7, 10, 4, 3, 1, 2, 8, 11 };
-		int[] inorder = { 4, 10, 3, 1, 7, 11, 8, 2 };
+		/*int[] preorder = { 7, 10, 4, 3, 1, 2, 8, 11 };
+		int[] inorder = { 4, 10, 3, 1, 7, 11, 8, 2 };*/
 		/*
 		 * int[] preorder = { 1, 2, 3, 4 }; int[] inorder = { 2, 4, 3, 1 };
 		 */
-		buildTree3(preorder, inorder);
+		int[] preorder = {1, 2, 3};
+		int[] inorder = {2, 3, 1}; 
+		buildTree2(preorder, inorder);
 	}
 }
