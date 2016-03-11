@@ -31,7 +31,7 @@ public class CombinationSum2 {
 		}
 	}
 	
-	public List<List<Integer>> combinationSum3(int[] candidates, int target) {
+	public static List<List<Integer>> combinationSum3(int[] candidates, int target) {
 		List<List<Integer>> ans = new ArrayList<>();
 		List<Integer> comb = new ArrayList<>();
 		Arrays.sort(candidates); // need sort to make this work.
@@ -39,7 +39,7 @@ public class CombinationSum2 {
 		return ans;
 	}
 
-	private void combination(int[] candi, int target, int start, List<Integer> comb, List<List<Integer>> ans) {
+	private static void combination(int[] candi, int target, int start, List<Integer> comb, List<List<Integer>> ans) {
 		for (int i = start; i < candi.length; i++) {
 			if (i > start && candi[i] == candi[i - 1]) // remove duplicates.
 				continue;
@@ -58,36 +58,11 @@ public class CombinationSum2 {
 		}
 	}
 	
-	public static List<List<Integer>> combinationSum4(int[] candidates, int target) {
-		Arrays.sort(candidates);
-		List<List<List<Integer>>> lists = new ArrayList();
-		for(int i = 1; i < target; i++){
-			List<List<Integer>> newList = new ArrayList<List<Integer>>();
-			for(int j = 0; j < candidates.length && candidates[j] <= i; j++){
-				if(j > 0 && candidates[j] == candidates[j - 1]) continue;
-				if(candidates[j] == i){
-					newList.add(Arrays.asList(candidates[j]));
-				}else{
-					for(List<Integer> l : lists.get(i - candidates[j] - 1)){
-						if(candidates[j] <= l.get(0) && j >= l.size() - 1){
-							List<Integer> temp = new ArrayList<Integer>();
-							temp.add(candidates[j]);
-							temp.addAll(l);
-							newList.add(temp);
-						}
-					}
-				}
-			}
-			lists.add(newList);
-		}
-		return lists.get(target - 1);
-	}
-
 	public static void main(String[] args) {
 		int[] candidates = { 10, 1, 2, 7, 6, 1, 5 };
 		// int [] candidates = {1, 2, 3, 1};
 		//int[] candidates = {1};
-		List<List<Integer>> lists = combinationSum4(candidates, 8);
+		List<List<Integer>> lists = combinationSum3(candidates, 8);
 		int i = 1;
 	}
 }
