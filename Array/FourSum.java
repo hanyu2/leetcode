@@ -252,6 +252,7 @@ public class FourSum {
 
     }
   //https://leetcode.com/discuss/9141/any-better-solution-than-o-n-3
+    //static class: http://stackoverflow.com/questions/9560600/java-no-enclosing-instance-of-type-foo-is-accessible
     static class Pair {
         int a;
         int ai;
