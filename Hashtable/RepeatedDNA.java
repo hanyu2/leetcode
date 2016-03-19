@@ -12,8 +12,8 @@ public class RepeatedDNA {
 		Set<String> set = new HashSet<String>();
 		Set<String> set2 = new HashSet<String>();
 		List<String> list = new ArrayList<String>();
-		for (int i = 0; i < s.length() - 9; i++) {
-			String t = s.substring(i, i + 10);
+		for (int i = 9; i < s.length(); i++) {
+			String t = s.substring(i - 9, i + 1);
 			if (set.contains(t)) {
 				if (!set2.contains(t)) {
 					list.add(t);
