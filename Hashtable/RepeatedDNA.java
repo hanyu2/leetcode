@@ -51,24 +51,10 @@ public class RepeatedDNA {
 	    return rv;
 	}
 	
-	private static final Map<Character, Integer> map = new HashMap<>();
-    static { map.put('A',0); map.put('C',1); map.put('G',2); map.put('T',3); }
-    private final static int A_SIZE_POW_9 = (int) Math.pow(map.size(), 9);
-
-    public static List<String> findRepeatedDnaSequences3(String s) {
-        Set<String> res = new HashSet<>();
-        Set<Integer> hashes = new HashSet<>();
-        for (int i = 0, rhash = 0; i < s.length(); i++) {
-            if (i > 9) rhash -= A_SIZE_POW_9 * map.get(s.charAt(i-10));
-            rhash = map.size() * rhash + map.get(s.charAt(i));
-            if (i > 8 && !hashes.add(rhash)) res.add(s.substring(i-9,i+1));
-        }
-        return new ArrayList<>(res);
-    }
 
 	public static void main(String[] args) {
 		String s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
-		List<String> list = findRepeatedDnaSequences3(s);
+		List<String> list = findRepeatedDnaSequences2(s);
 		int i = 1;
 	}
 }
