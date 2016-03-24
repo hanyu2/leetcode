@@ -20,16 +20,14 @@ public class ReorderList {
             cur.next = temp;
             next = temp;
         }
+        ListNode newHead = head; 
         ListNode newCur = slow.next;
-        
-        while(newCur != null){
-        	ListNode newHead = head.next; 
-        	ListNode newNext = newCur.next;
-        	head.next = newCur;
-        	slow.next = newNext;
-        	newCur.next = newHead;
-        	newCur = newNext;
-        	head = newHead;
+        while(newHead != slow){
+        	slow.next = newCur.next;
+        	newCur.next = newHead.next;
+        	newHead.next = newCur;
+        	newHead = newCur.next;
+        	newCur = slow.next;
         }
     }
 	public static void main(String[] args) {
