@@ -1,10 +1,10 @@
 package Tree;
 
 public class TreeNode {
-	TreeNode left;
-	TreeNode right;
+	public TreeNode left;
+	public TreeNode right;
 	int val;
-	TreeNode (int v){
+	public TreeNode (int v){
 		this.val = v;
 	}
 }
