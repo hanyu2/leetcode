@@ -37,7 +37,7 @@ public class UglyNumber2 {
 	    return q.poll().intValue();
 	}
 	public static void main(String[] args) {
-		System.out.println(nthUglyNumber2(10));
+		System.out.println(nthUglyNumber(10));
 	}
 
 }
