@@ -20,14 +20,14 @@ public class BasicCalculator2 {
                 continue;
             }else if(c == '*'){
                 int num2 = 0;
-                while(i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))){
+                while(i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))){//don't forget the first condition
                     num2 = num2*10 + s.charAt(i + 1) - '0';
                     i++;
                 }
                 num *= num2;
             }else if(c == '/'){
                 int num2 = 0;
-                while(i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))){
+                while(i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))){//don't forget the first condition
                     num2 = num2*10 + s.charAt(i + 1) - '0';
                     i++;
                 }
