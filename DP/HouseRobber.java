@@ -19,7 +19,15 @@ public class HouseRobber {
         }
         return res[n - 1];
 	}
-	
+	private static int rob2(int[] num) {
+	    int include = 0, exclude = 0;
+	    for (int j = 0; j <= num.length - 1; j++) {
+	        int i = include, e = exclude;
+	        include = e + num[j];
+	        exclude = Math.max(e, i);
+	    }
+	    return Math.max(include, exclude);
+	}
 	public static void main(String[] args) {
 		int nums [] = {1,2,1,3,5,1,2,10};
 		System.out.println(rob(nums));
