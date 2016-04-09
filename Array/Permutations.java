@@ -46,8 +46,31 @@ public class Permutations {
         return newList;
     }
     
+    public List<List<Integer>> permute2(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums.length == 0 || nums == null){
+            return res;
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(nums[0]);
+        res.add(list);
+        for(int i = 1; i < nums.length; i++){
+            List<List<Integer>> newList = new ArrayList<List<Integer>>();
+            for(int j = 0; j <= i; j++){
+                for(List l : res){
+                    List<Integer> temp = new ArrayList<Integer>(l);
+                    temp.add(j, nums[i]);
+                    newList.add(temp);
+                }
+            }
+            res = newList;
+        }
+        return res;
+    }
+
+    
     public static void main(String[] args) {
     	int [] nums = {1,2,3};
-		permute(nums);
+		permute2(nums);
 	}
 }
