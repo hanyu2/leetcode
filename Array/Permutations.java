@@ -46,7 +46,7 @@ public class Permutations {
         return newList;
     }
     
-    public List<List<Integer>> permute2(int[] nums) {
+    public static List<List<Integer>> permute2(int[] nums) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         if(nums.length == 0 || nums == null){
             return res;
