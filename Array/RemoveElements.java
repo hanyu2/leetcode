@@ -1,7 +1,19 @@
 package Array;
 
 public class RemoveElements {
-	public static int removeElement(int[] nums, int val) {
+	
+	public int removeElement(int[] nums, int val) {
+	    int i = 0;
+	    for (int j = 0; j < nums.length; j++) {
+	        if (nums[j] != val) {
+	            nums[i] = nums[j];
+	            i++;
+	        }
+	    }
+	    return i;
+	}
+	
+	public static int removeElement2(int[] nums, int val) {
 		int i = 0;
 		int pointer = nums.length - 1;
 		while (i <= pointer) {
@@ -15,7 +27,7 @@ public class RemoveElements {
 		return pointer + 1;
 	}
 	
-	public static int removeElement2(int[] nums, int val) {
+	/*public static int removeElement2(int[] nums, int val) {
         int start = 0;
         int end = nums.length - 1;
         while(start <= end){
@@ -30,7 +42,8 @@ public class RemoveElements {
             end--;
         }
         return start;
-    }
+    }*/
+	
 	public static void main(String[] args) {
 		//int [] nums = {5,2,4,5,8,1,6,0,4};
 		int [] nums = {1};
