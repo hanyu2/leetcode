@@ -30,6 +30,21 @@ public class MoveZeroes {
 		nums[i] = nums[j];
 		nums[j] = temp;
 	}
+	//My solution
+	public void moveZeroes3(int[] nums) {
+        int count = 0;
+        int p = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != 0){
+                nums[p] = nums[i];
+                p++;
+            }
+        }
+        for(; p < nums.length; p++){
+            nums[p] = 0;
+        }
+    }
+	
 	/* 
 	 * At first i and j start and move together 
 	 * when hit a zero i stop but j keeps going until find the next nonzero
