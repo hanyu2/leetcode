@@ -21,7 +21,7 @@ public class MinimumSizeSubarraySum {
 	}
 
 	// O(nlogn)
-	public static int minSubArrayLen2(int s, int[] nums) {
+	public static int minSubArrayLen2(int[] nums, int s) {
 		int[] sums = new int[nums.length + 1];
 		for (int i = 1; i < sums.length; i++)
 			sums[i] = sums[i - 1] + nums[i - 1];
@@ -35,7 +35,7 @@ public class MinimumSizeSubarraySum {
 		}
 		return minLen == Integer.MAX_VALUE ? 0 : minLen;
 	}
-
+	
 	private static int binarySearch(int start, int end, int key, int[] nums) {
 		while (start <= end) {
 			int mid = (start + end) / 2;
@@ -48,9 +48,23 @@ public class MinimumSizeSubarraySum {
 		return start;
 	}
 
+    public static int find(int start, int end, int key, int[] sums){
+        while(start <= end){
+            int mid = (start + end) / 2;
+            if(sums[mid] <= key){
+                start = mid + 1;
+            }else{
+                end = mid - 1;
+            }
+        }
+        return start;
+    }
+	
+	
 	public static void main(String[] args) {
-		//int nums[] = { 2, 3, 1, 2, 4, 3 };
-		int nums[] = {1, 2, 3, 4, 5};
-		System.out.println(minSubArrayLen2(11, nums));
+		//int nums[] = { 2, 2, 2, 5, 4, 2 };
+		//int nums[] = {1, 2, 3, 4, 5};
+		int nums[] = {1, 4};
+		System.out.println(minSubArrayLen(nums, 4));
 	}
 }

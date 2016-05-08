@@ -14,36 +14,10 @@ public class RemoveDuplicates {
 	        }
 	        return size + 1;
 	    }
-	 
-	 public static int removeDuplicates2(int[] nums) {
-	        int slow = 0;
-	        int fast = 1;
-	        while(fast < nums.length){
-	            if(nums[slow] == nums[fast]){
-	                while(fast < nums.length && nums[fast] == nums[slow]){
-	                    fast ++;
-	                }
-	                if(fast == nums.length){
-	                    return slow + 1;
-	                }else{
-	                    swap(nums, slow + 1, fast);
-	                    fast++;
-	                }
-	            }else{
-	                slow++;
-	                fast++;
-	            }
-	        }
-	        return slow + 1;
-	    }
-	    public static void swap(int[] nums, int i, int j){
-	        int temp = nums[i];
-	        nums[i] = nums[j];
-	        nums[j] = temp;
-	    }
+	
 	 public static void main(String[] args) {
 		//int nums [] = {1,1,2,3,3,4,5};
 		 int nums[] = {1, 1, 2};
-		System.out.println(removeDuplicates2(nums));
+		System.out.println(removeDuplicates(nums));
 	}
 }

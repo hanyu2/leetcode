@@ -23,8 +23,29 @@ public class Combination3 {
 			helper(lists, temp, k - 1, n - j, j + 1);
 		}
 	}
+	
+	public static List<List<Integer>> combinationSum2(int k, int n) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        combine(k, n, new ArrayList<Integer>(), res, 1);
+        return res;
+    }
+    
+    public static void combine(int step, int sum, List<Integer> list, List<List<Integer>> res, int start){
+        if(step == 0 && sum == 0){
+            res.add(list);
+            return;
+        }
+        if(sum < 0){
+            return;
+        }
+        for(int i = start; i <= sum && i <= 9; i++){
+            List<Integer> temp = new ArrayList<Integer>(list);
+            temp.add(i);
+            combine(step - 1, sum - i, temp, res, start + 1);
+        }
+    }
 	public static void main(String[] args) {
-		combinationSum3(3, 9);
+		combinationSum2(2, 18);
 		int i = 1;
 	}
 }
