@@ -27,7 +27,7 @@ public class FourSum {
                         Collections.sort(list);
                         res.add(list);
                     }
-                    if(sum < target){
+                    if(sum < target){// in case  {0,0,0,0}
                          while(left<right && nums[left] == nums[left+1]){
                             left++;
                         }
