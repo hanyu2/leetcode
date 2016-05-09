@@ -49,7 +49,7 @@ public class SpiralMatrix {
 		return res;
 	}
 	
-	public List<Integer> spiralOrder(int[][] matrix) {
+	public static List<Integer> spiralOrder2(int[][] matrix) {
         List<Integer> res = new ArrayList<Integer>();
         if(matrix.length == 0){
             return res;

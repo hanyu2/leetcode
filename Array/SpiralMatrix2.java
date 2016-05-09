@@ -31,7 +31,8 @@ public class SpiralMatrix2 {
 		}
 		return matrix;
 	}
+	
 	public static void main(String[] args) {
-		generateMatrix(4);
+		generateMatrix(1);
 	}
 }
