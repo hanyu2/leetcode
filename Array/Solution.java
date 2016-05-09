@@ -6,89 +6,53 @@ import java.util.Collections;
 import java.util.List;
 
 public class Solution {
-
-	public static List<List<Integer>> fourSum(int[] nums, int target) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if (nums.length < 4) {
-			return res;
-		}
-		Arrays.sort(nums);
-		for (int i = 0; i < nums.length - 3; i++) {
-			if (i > 0 && nums[i] == nums[i - 1]) {// put i > 0 first
-				continue;
-			}
-			for (int j = i + 1; j < nums.length - 2; j++) {
-				if (j > i + 1 && nums[j] == nums[j - 1]) {
-					continue;
-				}
-				int left = j + 1;
-				int right = nums.length - 1;
-				while (left < right) {
-					int sum = nums[i] + nums[j] + nums[left] + nums[right];
-					if (sum == target) {
-						List<Integer> temp = new ArrayList<Integer>();
-						temp.add(nums[right]);
-						temp.add(nums[left]);
-						temp.add(nums[j]);
-						temp.add(nums[i]);
-						Collections.sort(temp);
-						res.add(temp);
-					} else if (sum < target) {
-						left++;
-						while (left < right && nums[left] == nums[left - 1]) {
-							left++;
-						}
-					} else if (sum > target) {
-						right--;
-						while (right > left && nums[right] == nums[right - 1]) {
-							right--;
-						}
-					}
-				}
-			}
-		}
-		return res;
-	}
-	
-	public static List<List<Integer>> fourSum2(int[] nums, int target) {
-        Arrays.sort(nums);
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        for(int i = 0; i < nums.length - 3; i++){
-        	if(i > 0 && nums[i] == nums[i - 1] ){//put i > 0 first
-        		continue;
-        	}
-            for(int j = i + 1; j < nums.length - 2; j++){
-            	if(j > i + 1 && nums[j] == nums[j - 1]){
-            		continue;
-            	}
-                int left = j + 1; 
-                int right = nums.length - 1;
-                while(left < right){
-                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
-                    if(sum == target){
-                        List<Integer> list = new ArrayList<Integer>(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
-                        Collections.sort(list);
-                        res.add(list);
-                    }
-                    if(sum < target){
-                         while(left<right && nums[left] == nums[left+1]){
-                            left++;
-                        }
-                        left++;
-                    }else{
-                         while(left<right && nums[right] == nums[right-1]){
-                            right--;
-                        }
-                        right--;
-                    }
-                }
-            }
-        }
-        return  res;
-    }
+	 public static void nextPermutation(int[] nums) {
+	        if(nums.length <= 1){
+	            return;
+	        }
+	        int i = nums.length - 1;
+	        for(; i > 0; i--){
+	            if(nums[i] > nums[i - 1]){
+	                break;
+	            }
+	        }
+	        if(i != 0){
+	            int index = findIndex(nums, i, nums.length - 1);
+	            swap(nums, index, i - 1);
+	            sort(nums, i, nums.length - 1);
+	        }
+	    }
+	    
+	    public static void swap(int [] nums, int i, int j){
+	        int temp = nums[i];
+	        nums[i] = nums[j];
+	        nums[j] = temp;
+	    }
+	    
+	    public static void sort(int[] nums, int start, int end){
+	        for(int i = start; i < end; i++){
+	            for(int j = i + 1; j <= end; j++){
+	                if(nums[i] > nums[j]){
+	                    swap(nums, i, j);
+	                }
+	            }
+	        }
+	    }
+	    
+	    public static int findIndex(int[] nums, int start, int end){
+	        int min = Integer.MAX_VALUE;
+	        int index = 0;
+	        for(int i = start; i <= end; i++){
+	            if(nums[i] < min){
+	                min = nums[i];
+	                index= i;
+	            }
+	        }
+	        return index;
+	    }
 
 	public static void main(String[] args) {
-		int[] nums = { 0, 0, 0, 0 };
-		fourSum2(nums, 0);
+		int[] nums = {1,3,2};
+		nextPermutation(nums);
 	}
 }
