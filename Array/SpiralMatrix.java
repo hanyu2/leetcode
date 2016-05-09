@@ -48,11 +48,42 @@ public class SpiralMatrix {
 
 		return res;
 	}
+	
+	public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<Integer>();
+        if(matrix.length == 0){
+            return res;
+        }
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int small = Math.min(m, n);
+       
+        for(int i = 0; i <= (small - 1) / 2; i++){
+            for(int j = i; j < n - i; j++){
+                res.add(matrix[i][j]);
+            }
+            for(int j = i + 1; j < m - i; j++){
+                res.add(matrix[j][n - i - 1]);
+            }
+            if(i != m - i - 1){
+                for(int j = n - i - 2; j >= i; j--){
+                    res.add(matrix[m - i - 1][j]);
+                }
+            }
+            if(i != n - i - 1){
+                for(int j = m - i - 2; j > i; j--){
+                    res.add(matrix[j][i]);
+                }
+            }
+        }
+        return res;
+    }
 
 	public static void main(String[] args) {
 		// int [][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-		int[][] matrix = { { 1 }, { 2 }, { 3 }, { 4 }, { 5 }, { 6 }, { 7 }, { 8 }, { 9 }, { 10 }, };
-		List<Integer> res = spiralOrder(matrix);
+		//int[][] matrix = { { 1 }, { 2 }, { 3 }, { 4 }, { 5 }, { 6 }, { 7 }, { 8 }, { 9 }, { 10 }, };
+		int [][] matrix = {{2, 3}};
+		List<Integer> res = spiralOrder2(matrix);
 		for (Integer i : res) {
 			System.out.print(i + " ");
 		}
