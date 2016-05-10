@@ -28,7 +28,8 @@ public class MajorityElement2 {
 		}
 		return list;
 	}
-	//Boyer-Moore Majority Vote algorithm
+
+	// Boyer-Moore Majority Vote algorithm
 	public static List<Integer> majorityElement2(int[] nums) {
 		ArrayList<Integer> res = new ArrayList<Integer>();
 		if (nums.length == 0)
@@ -40,11 +41,11 @@ public class MajorityElement2 {
 		x[0] = 0;
 		x[1] = 1;
 		for (int i = 0; i < nums.length; i++) {
-			if (x[0] == nums[i]) {
+			if (x[0] == nums[i])
 				count[0]++;
-			} else if (x[1] == nums[i]) {
+			else if (x[1] == nums[i])
 				count[1]++;
-			} else if (count[0] == 0) {
+			else if (count[0] == 0) {
 				x[0] = nums[i];
 				count[0] = 1;
 			} else if (count[1] == 0) {
@@ -62,15 +63,17 @@ public class MajorityElement2 {
 				count[0]++;
 			else if (i == x[1])
 				count[1]++;
-			if(count[0] == nums.length / 3 || count[1] == nums.length / 3){
-				res.add(i);
-			}
+		}
+		for (int j = 0; j < 2; j++) {
+			if (count[j] > nums.length / 3 && !res.contains(x[j]))
+				res.add(x[j]);
 		}
 		return res;
 	}
 
 	public static void main(String[] args) {
-		int nums[] = { -2, 3, 3, 3, 2, 3 };
+		// int nums[] = { -2, 3, 3, 3, 2, 3 };
+		int nums[] = { 1, 2 };
 		majorityElement2(nums);
 	}
 }
