@@ -2,7 +2,7 @@ package Hashtable;
 
 public class BullsAndCows {
 	// this way is even faster
-	public String getHint(String secret, String guess) {
+	public static String getHint(String secret, String guess) {
 		int[] arrayA = new int[10];
 		int[] arrayB = new int[10];
 		int a = 0;
@@ -24,7 +24,7 @@ public class BullsAndCows {
 		return sb.append(a).append("A").append(b).append("B").toString();
 	}
 
-	public String getHint2(String secret, String guess) {
+	public static String getHint2(String secret, String guess) {
 		int[] array = new int[10];
 
 		int a = 0;
@@ -47,7 +47,8 @@ public class BullsAndCows {
 	}
 
 	public static void main(String[] args) {
-
+		getHint("1122", "1222");
+		getHint2("1234", "0111");
 	}
 
 }
