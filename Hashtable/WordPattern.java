@@ -26,27 +26,50 @@ public class WordPattern {
 		}
 		return true;
 	}
-	
-	 public static boolean wordPattern2(String pattern, String str) {
-         
-	        if (pattern.isEmpty() || str.isEmpty()) {
+
+	public static boolean wordPattern2(String pattern, String str) {
+
+		if (pattern.isEmpty() || str.isEmpty()) {
+			return false;
+		}
+
+		String[] s = str.split(" ");
+		if (s.length != pattern.length()) {
+			return false;
+		}
+
+		@SuppressWarnings("rawtypes")
+		HashMap<Comparable, Integer> hashMap = new HashMap<Comparable, Integer>();
+		for (int i = 0; i < pattern.length(); i++) {
+			if (!Objects.equals(hashMap.put(pattern.charAt(i), i), hashMap.put(s[i], i)))
+				return false;
+		}
+
+		return true;
+	}
+	//same as 1
+	public static boolean wordPattern3(String pattern, String str) {
+		 Map<Character, String> map = new HashMap<Character, String>();
+	        String s[] = str.split("\\s+");
+	        if(pattern.length() != s.length){
 	            return false;
 	        }
-	         
-	        String[] s = str.split(" ");
-	        if (s.length != pattern.length()) {
-	            return false;
+	        for(int i = 0; i < pattern.length(); i++){
+	            char c1 = pattern.charAt(i);
+	            if(!map.containsKey(c1)){
+	                if(map.containsValue(s[i])){
+	                    return false;
+	                }else{
+	                    map.put(c1, s[i]);
+	                }
+	            }else{
+	                if(!map.get(c1).equals(s[i])){
+	                    return false;
+	                }
+	            }
 	        }
-	         
-	        @SuppressWarnings("rawtypes")
-	        HashMap<Comparable, Integer> hashMap = new HashMap<Comparable, Integer>();
-	        for (int i = 0; i < pattern.length(); i++) {
-	            if (!Objects.equals(hashMap.put(pattern.charAt(i), i), hashMap.put(s[i], i)))
-	                return false;
-	        }
-	         
 	        return true;
-	    }
+	}
 
 	public static void main(String[] args) {
 		System.out.println(wordPattern2("abba", "dog cat cat dog"));
