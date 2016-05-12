@@ -37,9 +37,9 @@ public class HIndex {
     }
 	
 	public static void main(String[] args) {
-		//int[] citations = {3, 0, 6, 1, 5};
+		int[] citations = {3, 0, 6, 1, 5};
 		//int[] citations = {100};
-		int[] citations = {0};
-		System.out.println(hIndex(citations));
+		//int[] citations = {0};
+		System.out.println(hIndex2(citations));
 	}
 }

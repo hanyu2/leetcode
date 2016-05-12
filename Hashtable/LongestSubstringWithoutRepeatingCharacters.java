@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
+//https://leetcode.com/articles/longest-substring-without-repeating-characters/
 public class LongestSubstringWithoutRepeatingCharacters {
+	
 	public static int lengthOfLongestSubstring(String s) {
 		Map<Character, Integer> map = new HashMap<Character, Integer>();
 		int start = 0;
@@ -34,7 +35,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 		for (int i = 0, j = 0; i < s.length(); ++i) {
 			if (map.containsKey(s.charAt(i))) {
 				j = Math.max(j, map.get(s.charAt(i)) + 1);// use abba to test
-															// without max
+				//j = map.get(s.charAt(i));					// without max;
 															// condition
 			}
 			map.put(s.charAt(i), i);
@@ -70,12 +71,15 @@ public class LongestSubstringWithoutRepeatingCharacters {
 		}
 		return longest;
 	}
+	
+	
 
 	public static void main(String[] args) {
 		// System.out.println(lengthOfLongestSubstring("eee"));
 		// System.out.println(lengthOfLongestSubstring("aab"));
 		// System.out.println(lengthOfLongestSubstring("dvdf"));
-		 System.out.println(lengthOfLongestSubstring4("vqblqcb"));
-		//System.out.println(lengthOfLongestSubstring2("abba"));
+	    System.out.println(lengthOfLongestSubstring3("vqblqcb"));
+		System.out.println(lengthOfLongestSubstring2("abba"));
+		System.out.println(lengthOfLongestSubstring3("abcabcbb"));
 	}
 }
