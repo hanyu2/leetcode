@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MinimumWindowSubstring {
-	
+	//https://leetcode.com/discuss/72701/here-10-line-template-that-can-solve-most-substring-problems
+	//https://leetcode.com/discuss/51381/java-solution-using-two-pointers-hashmap
 	public static String minWindow(String s, String t) {
 		Map<Character, Integer> map = new HashMap<Character, Integer>();
 		for (int i = 0; i < t.length(); i++) {
