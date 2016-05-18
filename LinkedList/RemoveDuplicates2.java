@@ -15,7 +15,6 @@ public class RemoveDuplicates2 {
                 next = next.next;
             }
             if(cur.next == next){
-                head.next = cur;
                 head = cur;
                 cur = next;
             }else{
