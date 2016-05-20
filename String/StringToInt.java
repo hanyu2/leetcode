@@ -36,8 +36,9 @@ public class StringToInt {
 		}
 		return (int) num * sign; ///////////notice cannot (int) sign *  num
 	}
-
+	
 	public static void main(String[] args) {
+		System.out.println(myAtoi("123"));
 		System.out.println(myAtoi("2147483648"));
 	}
 }
