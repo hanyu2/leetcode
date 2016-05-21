@@ -1,6 +1,5 @@
 package Hashtable;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,11 +72,27 @@ public class MaxPointsOnALine {
 	            }
 	            res = Math.max(res, lineMax + overlap + 1);
 	        }
+	        
 	        return res;
 	    }
 
 	    public int generateGcd(int x, int y) {
 	        if (y == 0) return x;
 	        return generateGcd(y, x % y);
+	    }
+	    
+	  
+	    public static void main(String[] args) {
+			Point p1 = new Point(0, 0);
+			Point p2 = new Point(1, 1);
+			Point p3 = new Point(1, -1);
+			Point [] points = {p1, p2, p3};
+			//System.out.println(maxPoints2(points));
+		}
+	    static class Point {
+	      int x;
+	      int y;
+	      Point() { x = 0; y = 0; }
+	      Point(int a, int b) { x = a; y = b; }
 	    }
 }

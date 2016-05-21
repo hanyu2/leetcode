@@ -61,8 +61,35 @@ public class AddBinary {
         }
         return String.valueOf(num).trim();
 	}
+	
+	 public static String addBinary3(String a, String b) {
+	        int lenA = a.length();
+	        int lenB = b.length();
+	        if(lenA < lenB){
+	            String temp = a;
+	            a = b;
+	            b = temp;
+	        }
+	        StringBuilder sb = new StringBuilder();
+	        int carry = 0;
+	        for(int i = 0; i < b.length(); i++){
+	            int s1 = a.charAt(a.length() - i - 1) - '0';
+	            int s2 = b.charAt(b.length() - i - 1) - '0';
+	            sb.insert(0, (s1 + s2 + carry) % 2);
+	            carry = (s1 + s2 + carry) / 2;
+	        }
+	        for(int i = a.length() - b.length() - 1; i >= 0; i--){
+	            int t = a.charAt(i) - '0';
+	            sb.insert(0, (t + carry) % 2);
+	            carry = (t + carry) / 2;
+	        }
+	        if(carry == 1){
+	            sb.insert(0, 1);
+	        }
+	        return sb.toString();
+	    }
 
 	public static void main(String[] args) {
-		System.out.println(addBinary2("0", "0"));
+		System.out.println(addBinary3("1010", "1011"));
 	}
 }

@@ -76,7 +76,8 @@ public class FractionToRecurringDecimal {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(fractionToDecimal2(1, 6));
+		//System.out.println(fractionToDecimal3(1, 6));
+		System.out.println(fractionToDecimal2(1, 333));
 		System.out.println(fractionToDecimal2(4, 7));
 		System.out.println(fractionToDecimal2(-50, 8));
 		System.out.println(fractionToDecimal2(-1, -2147483648));

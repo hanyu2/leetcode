@@ -10,6 +10,6 @@ public class TrailingZero {
         return sum;
     }
 	public static void main(String[] args) {
-		System.out.println(trailingZeroes(10));
+		System.out.println(trailingZeroes(15));
 	}
 }

@@ -10,6 +10,7 @@ public class CountPrimes {
 				for (int j = i; i * j < n; j++) {
 					a[i * j] = true;
 				}
+				
 			}
 		}
 		int c = 0;
