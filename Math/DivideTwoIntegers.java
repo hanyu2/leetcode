@@ -41,25 +41,7 @@ public class DivideTwoIntegers {
 	    //Look for additional value for the multiple from the reminder (dividend - sum) recursively.
 	    return multiple + ldivide(ldividend - sum, ldivisor);
 	}
-	//TLE
-	public static int divide2(int dividend, int divisor) {
-        int sign = 1;
-        if((dividend < 0) ^ (divisor < 0)){
-            sign = -1;
-        }
-        dividend = Math.abs(dividend);
-        divisor = Math.abs(divisor);
-        int sum = 0;
-        int multiple = 0;
-        while(sum <= dividend){
-            sum += divisor;
-            multiple++;
-            if(sum == dividend){
-                break;
-            }
-        }
-        return sign * multiple;
-    }
+	
 	public static void main(String[] args) {
 		System.out.println(divide(65, -13));
 	}
