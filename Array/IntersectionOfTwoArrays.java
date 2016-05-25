@@ -1,0 +1,55 @@
+package Array;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+public class IntersectionOfTwoArrays {
+	public static int[] intersection(int[] nums1, int[] nums2) {
+		int res[] = new int[nums1.length + nums2.length];
+		Set<Integer> set = new HashSet<Integer>();
+		for (int i = 0; i < nums1.length; i++) {
+			set.add(nums1[i]);
+		}
+		int t = 0;
+		for (int i = 0; i < nums2.length; i++) {
+			if (set.contains(nums2[i])) {
+				res[t] = nums2[i];
+				t++;
+			}
+		}
+		return res;
+	}
+	
+	//two pointers
+	public int[] intersection2(int[] nums1, int[] nums2) {
+		Arrays.sort(nums1);
+		Arrays.sort(nums2);
+		int p1 = 0;
+		int p2 = 0;
+		Set<Integer> set = new HashSet<Integer>();
+		while (p1 < nums1.length && p2 < nums2.length) {
+			if (nums1[p1] < nums2[p2]) {
+				p1++;
+			} else if (nums1[p1] > nums2[p2]) {
+				p2++;
+			} else {
+				set.add(nums1[p1]);
+				p1++;
+				p2++;
+			}
+		}
+		int[] result = new int[set.size()];
+		int k = 0;
+		for (Integer num : set) {
+			result[k++] = num;
+		}
+		return result;
+	}
+
+	public static void main(String[] args) {
+		int nums1[] = { 1 };
+		int nums2[] = { 1 };
+		intersection(nums1, nums2);
+	}
+}
