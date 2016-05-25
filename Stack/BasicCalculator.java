@@ -95,7 +95,7 @@ public class BasicCalculator {
 
 	public static void main(String[] args) {
 		String s = "(1-(14+10+2)-13)+(6+18)";
-		String s1 = "(18)";
-		System.out.println(calculate2(s));
+		String s1 = "6+(8-2)";
+		System.out.println(calculate2(s1));
 	}
 }
