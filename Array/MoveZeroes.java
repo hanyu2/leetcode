@@ -72,6 +72,6 @@ public class MoveZeroes {
 
 	public static void main(String[] args) {
 		int nums[] = { 2, 1, 0, 3, 4, 0, 12 };
-		moveZeroes2(nums);
+		moveZeroes(nums);
 	}
 }
