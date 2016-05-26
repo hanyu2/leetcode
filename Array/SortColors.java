@@ -4,7 +4,8 @@ public class SortColors {
 	public static void sortColors(int[] nums) {
        int n = nums.length - 1;
        int count  = 0;
-       for(int i = 0; i < n; i++){
+       for(int i = 0; i <= n; i++){
+    	   //attention : when 2 <-> 0 then there may be 1 0 2 and the next while will swap 1 and 0
     	   while(nums[i] == 2 && i < n) swap(nums, i, n--);
     	   while(nums[i] == 0 && i > count) swap(nums, i, count++);
        }
@@ -56,7 +57,8 @@ public class SortColors {
 	}
 	
 	public static void main(String[] args) {
-		int nums [] = {1,2,0,1,0,2,0,1};
-		sortColors4(nums);
+		//int nums [] = {1,2,0,1,0,2,0,1};
+		int nums[] = {1, 0};
+		sortColors(nums);
 	}
 }

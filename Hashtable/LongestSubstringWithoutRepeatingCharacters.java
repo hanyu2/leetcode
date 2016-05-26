@@ -72,7 +72,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 		return longest;
 	}
 	
-	
+
 
 	public static void main(String[] args) {
 		// System.out.println(lengthOfLongestSubstring("eee"));
@@ -80,6 +80,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
 		// System.out.println(lengthOfLongestSubstring("dvdf"));
 	    System.out.println(lengthOfLongestSubstring3("vqblqcb"));
 		System.out.println(lengthOfLongestSubstring2("abba"));
-		System.out.println(lengthOfLongestSubstring3("abcabcbb"));
+		System.out.println(lengthOfLongestSubstring2("abcabcbb"));
 	}
 }
