@@ -29,6 +29,6 @@ public class RemoveDuplicate2 {
 		//int nums [] = {1, 2, 2, 2};
 		//int nums [] = {1, 1, 1, 2};
 		int nums [] = {1, 1, 1, 1, 2, 2, 2, 2, 3};
-		System.out.println(removeDuplicates(nums));
+		System.out.println(removeDuplicates2(nums));
 	}
 }

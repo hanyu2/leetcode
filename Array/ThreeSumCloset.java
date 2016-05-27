@@ -38,14 +38,14 @@ public class ThreeSumCloset {
 
 	public int threeSumClosest2(int[] num, int target) {
 		int result = num[0] + num[1] + num[num.length - 1];
-		Arrays.sort(num);
+		Arrays.sort(num);//do not miss
 		for (int i = 0; i < num.length - 2; i++) {
 			int start = i + 1, end = num.length - 1;
-			while (start < end) {
+			while (start < end) {// not <=
 				int sum = num[i] + num[start] + num[end];
 				if (sum > target) {
 					end--;
-				} else {
+				} else {//not else if , or will result in infinite loop
 					start++;
 				}
 				if (Math.abs(sum - target) < Math.abs(result - target)) {
@@ -81,8 +81,6 @@ public class ThreeSumCloset {
                             right--;
                         }
                         right--;
-                    }else{
-                        return sum;
                     }
                     //update the closest sum if needed.
                     if(Math.abs(target - sum) < Math.abs(target - closestSum)){
