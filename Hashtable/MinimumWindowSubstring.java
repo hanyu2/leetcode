@@ -46,7 +46,7 @@ public class MinimumWindowSubstring {
 		return d == Integer.MAX_VALUE ? "" : s.substring(head, head + d);
 	}
 
-	public String minWindow2(String s, String t) {
+	public static String minWindow2(String s, String t) {
 		char[] s_array = s.toCharArray();
 		char[] t_array = t.toCharArray();
 		int[] map = new int[256];
@@ -83,11 +83,11 @@ public class MinimumWindowSubstring {
 
 	public static void main(String[] args) {
 		// System.out.println(minWindow("a", "aa"));
-		System.out.println(minWindow2("a", "a"));
+		//System.out.println(minWindow2("a", "a"));
 		// System.out.println(minWindow("abc", "ab"));
 		// System.out.println(minWindow("ab", "b"));
 		// System.out.println(minWindow2("bba", "ab"));
-		// System.out.println(minWindow2("of_characters_and_as", "aas"));
+		 System.out.println(minWindow2("of_characters_and_as", "aas"));
 		// System.out.println(minWindow("acbbaca", "aba"));
 		// System.out.println(minWindow("ABABBbbBbBB", "BaAA"));
 	}
