@@ -24,8 +24,9 @@ public class FourSum {
                     int sum = nums[i] + nums[j] + nums[left] + nums[right];
                     if(sum == target){
                         List<Integer> list = new ArrayList<Integer>(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
-                        Collections.sort(list);
+                        //Collections.sort(list);
                         res.add(list);
+                        //do not add break;
                     }
                     if(sum < target){// in case  {0,0,0,0}
                          while(left<right && nums[left] == nums[left+1]){
@@ -223,7 +224,7 @@ public class FourSum {
                     ++start;
                     while(start < end && nums[end] == nums[end-1]) --end;
                     --end;
-                }else if(sum < target){
+                }else if(sum < target){//attention! this is else if cannot be if
                     //avoid duplicate
                     while(start < end && nums[start] == nums[start+1]) ++start;
                     ++start;

@@ -1,50 +1,78 @@
 package Array;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
-	public static String getHint(String secret, String guess) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int i = 0; i < secret.length(); i++){
-            int t = secret.charAt(i) - '0';
-            if(!map.containsKey(t)){
-                map.put(t, 1);
-            }else{
-                map.put(t, map.get(t) + 1);
-            }
+	public static List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        sum(res, new ArrayList<Integer>(), nums, 4, target,0, nums.length - 1);
+        return res;
+    }
+    
+    public static void sum(List<List<Integer>> res, List<Integer> list, int [] nums, int k, int target,int start, int end){
+        if(k == 0 || start > end || nums.length == 0){
+            return;
         }
-        int a = 0;
-        int b = 0;
-        for(int i = 0; i < secret.length(); i++){
-            if(guess.charAt(i) == secret.charAt(i)){
-                a++;
-                int temp = guess.charAt(i) - '0';
-                int num = map.get(temp);
-                num--;
-                if(num == 0){
-                    map.remove(temp);
-                }else{
-                    map.put(temp, num);
+        if(k == 1){
+            for(int i = start; i <= end; i++){
+                if(nums[i] == target){
+                    list.add(nums[i]);
+                    res.add(new ArrayList<Integer>(list));
+                    list.remove(nums[i]);
                 }
-            }else{
-                if(map.containsKey(guess.charAt(i) - '0')){
-                    int t = map.get(guess.charAt(i) - '0');
-                    b++;
-                    t--;
-                    if(t == 0){
-                        map.remove(guess.charAt(i) - '0');
-                    }else{
-                        map.put(guess.charAt(i) - '0', t);
+            }
+            return;
+        }
+        if(k == 2){
+            if(nums[start] * k > target || nums[end] * k < target) return;
+            while(start < end){
+                int sum = nums[start] + nums[end];
+                if(sum == target){
+                    list.add(nums[start]);
+                    list.add(nums[end]);
+                    res.add(new ArrayList(list));
+                    list.remove(list.size() - 1);
+                    list.remove(list.size() - 1);
+                    //avoid duplicate
+                    while(start < end && nums[start] == nums[start+1]) ++start;
+                    ++start;
+                    while(start < end && nums[end] == nums[end-1]) --end;
+                    --end;
+                }
+                if(sum < target){
+                    while(start < end && nums[start] == nums[start + 1]){
+                        start++;
                     }
+                    start++;
+                }else{
+                    while(start < end && nums[end] == nums[end - 1]){
+                        end--;
+                    }
+                    end--;
                 }
             }
+            return;
         }
-        return a + "A" + b + "B";
+        
+        if(nums[start] * k > target || nums[end] * k < target) return;
+        for(int i = start; i < nums.length - k; i++){
+            if(i > start && nums[i] == nums[i - 1]){
+                continue;
+            }
+            if(nums[i] * k > target){
+                return;
+            }
+            list.add(nums[i]);
+            sum(res, list, nums, k - 1, target - nums[i], i + 1, end);
+            list.remove(list.size() - 1);
+        }
     }
 
 	public static void main(String[] args) {
-		int[] nums = {1,3,2};
-		getHint("1122","1222");
+		int[] nums = {-3,-2,-1,0,0,1,2,3};
+		fourSum(nums, 0);
 	}
 }
