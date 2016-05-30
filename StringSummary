@@ -1,0 +1,1 @@
+while(start + wordLen * words.length <= s.length() && end + wordLen <= s.length())
