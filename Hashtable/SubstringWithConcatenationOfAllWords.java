@@ -57,14 +57,75 @@ public class SubstringWithConcatenationOfAllWords {
         return res;
     }
 	
+	public static List<Integer> findSubstring2(String s, String[] words) {
+        List<Integer> res = new ArrayList<Integer>();
+        if(words.length == 0 | words[0].length() == 0){
+            return res;
+        }
+        Map<String, Integer> dic = new HashMap<String, Integer>();
+        for(int i  = 0; i < words.length; i++){
+            if(dic.containsKey(words[i])){
+                dic.put(words[i], dic.get(words[i]) + 1);
+            }else{
+                dic.put(words[i], 1);
+            }
+        }
+        Map<String, Integer> cur = new HashMap<String, Integer>();
+        int wordLen = words[0].length();
+        for(int i = 0; i < wordLen; i++){
+            int start = i, end = i;
+            int count = 0;
+            while(start + words.length * wordLen <= s.length() && end + wordLen <= s.length()){
+                String substring = s.substring(end, end + wordLen);
+                if(!cur.containsKey(substring)){
+                    count = 0;
+                    cur.clear();
+                    start += wordLen;
+                    end = start;
+                    continue;
+                }
+                if(!cur.containsKey(substring) || cur.get(substring) != dic.get(substring)){
+                    if(!cur.containsKey(substring)){
+                        cur.put(substring, 1);
+                    }else{
+                        cur.put(substring, cur.get(substring) + 1);
+                    }
+                    count++;
+                    if(count == words.length){
+                        res.add(start);
+                        String head = s.substring(start, start + wordLen);
+                        count--;
+                        if(cur.get(head) == 1){
+                            cur.remove(head);
+                        }else{
+                            cur.put(head, cur.get(head) - 1);
+                        }
+                        start += wordLen;
+                    }
+                    end += wordLen;
+                }else{
+                    String head = s.substring(start, start + wordLen);
+                    count--;
+                    if(cur.get(head) == 1){
+                        cur.remove(head);
+                    }else{
+                        cur.put(head, cur.get(head) - 1);
+                    }
+                    start += wordLen;
+                }
+            }
+            cur.clear();
+        }
+        return res;
+    }
 
 	public static void main(String[] args) {
-		/*
-		 * String s = "barfoothefoobarman"; String words[] = {"foo", "bar"};
-		 */
+		
+		 /*String s = "barfoothefoobarman"; String words[] = {"foo", "bar"};*/
+		 
 
 		String s = "wordgoodgoodgoodbestword";
 		String words[] = { "word", "good", "best", "good" };
-		findSubstring(s, words);
+		findSubstring2(s, words);
 	}
 }
