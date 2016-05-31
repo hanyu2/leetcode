@@ -24,8 +24,8 @@ public class FindDuplicate {
 	public static int findDuplicate2(int[] nums) {
 		if (nums.length == 0 || nums == null)
 			return 0;
-		int low = 0, high = nums.length - 1, mid;
-		while (low <= high) {
+		int low = 1, high = nums.length - 1, mid;// low abd high are numbers from 1 - n
+		while (low < high) {
 			mid = low + (high - low) / 2;
 			int count = 0;
 			for (int i = 0; i < nums.length; i++) {
@@ -33,7 +33,7 @@ public class FindDuplicate {
 					count++;
 			}
 			if (count > mid)
-				high = mid - 1;
+				high = mid;
 			else
 				low = mid + 1;
 		}
