@@ -21,14 +21,14 @@ public class MajorityNum {
 	}
 	
 	public static int majority(int[] nums, int left, int right){
-		if(left == right) return nums[left];
+		if(left == right) return nums[left];//this is nums[left]
 		int mid = (left + right) / 2;
 		int lm = majority(nums, left, mid);
 		int lr = majority(nums, mid + 1, right);
 		if(lm == lr){
 			return lm;
 		}
-		return count(nums, left, mid, lm) > count(nums, mid + 1, right, lr) ? lm : lr;
+		return count(nums, left, right, lm) > count(nums, left, right, lr) ? lm : lr;
 	}
 	
 	public static int count(int [] nums, int start, int end, int val){
@@ -58,7 +58,8 @@ public class MajorityNum {
 	}
 	
 	public static void main(String[] args) {
-		int nums [] = {5,2,2,1,2,5,2,1,2,2,5};
+		//int nums [] = {5,2,2,1,2,5,2,1,2,2,5};
+		int nums[] = {1};
 		System.out.println(majorityElement(nums));
 	}
 }
