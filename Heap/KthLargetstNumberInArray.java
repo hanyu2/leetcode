@@ -104,6 +104,6 @@ public class KthLargetstNumberInArray {
 
 	public static void main(String[] args) {
 		int [] nums = {4, 1, 2, 5, 9, 6, 3, 8, 7};
-		System.out.println(findKthLargest3(nums, 3));
+		System.out.println(findKthLargest2(nums, 3));
 	}
 }
