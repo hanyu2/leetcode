@@ -1,0 +1,1 @@
+Arrays.copyOfRange(arr, 0, mid) Arrays.copyOfRange(arr, mid, arr.length)
