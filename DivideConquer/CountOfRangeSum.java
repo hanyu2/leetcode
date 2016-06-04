@@ -4,29 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CountOfRangeSum {
-	/*public static int countRangeSum(int[] nums, int lower, int upper) {
-        if(nums.length == 0){
-            return 0;
-        }
-        return count(nums, 0, nums.length - 1, lower, upper);
-    }
-    public static int count(int[] nums, int start, int end, int lower, int upper){
-    	if(end < start || end >= nums.length || start < 0){
-    		return 0;
-    	}
-        int mid = start + (end - start) / 2;
-        int left = count(nums, start, mid - 1, lower, upper);
-        int right = count(nums, mid + 1, end, lower, upper);
-        int c = (nums[mid] >= lower && nums[mid] <= upper) ? 1 : 0;
-        int leftSum = 0;
-        int rightSum = 0;
-        int l = mid - 1, r = mid + 1;
-        while(l >= start && r <= end){
-        	
-        }
-        return left + right + c;
-    }*/
-	
+	//https://leetcode.com/discuss/79083/share-my-solution
 	public static int countRangeSum(int[] nums, int lower, int upper) {
 	    int n = nums.length;
 	    long[] sums = new long[n + 1];
