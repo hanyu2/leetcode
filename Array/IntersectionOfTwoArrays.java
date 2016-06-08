@@ -20,8 +20,8 @@ public class IntersectionOfTwoArrays {
 		}
 		return res;
 	}
-	
-	//two pointers
+
+	// two pointers
 	public int[] intersection2(int[] nums1, int[] nums2) {
 		Arrays.sort(nums1);
 		Arrays.sort(nums2);
@@ -45,6 +45,38 @@ public class IntersectionOfTwoArrays {
 			result[k++] = num;
 		}
 		return result;
+	}
+
+	// binary search
+	public int[] intersection3(int[] nums1, int[] nums2) {
+		Arrays.sort(nums2);    // sort first!!!!
+		Set<Integer> set = new HashSet<Integer>();
+		for (int i = 0; i < nums1.length; i++) {
+			if (search(nums2, 0, nums2.length - 1, nums1[i])) {
+				set.add(nums1[i]);
+			}
+		}
+		int[] res = new int[set.size()];
+		int i = 0;
+		for (Integer num : set) {
+			res[i++] = num;
+		}
+		return res;
+	}
+
+	public boolean search(int[] nums, int start, int end, int target) {
+		while (start <= end) {
+			int mid = (start + end) / 2;
+			if (nums[mid] == target) {
+				return true;
+			}
+			if (nums[mid] < target) {
+				start = mid + 1;
+			} else {
+				end = mid - 1;
+			}
+		}
+		return false;
 	}
 
 	public static void main(String[] args) {
