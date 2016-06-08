@@ -1,35 +1,38 @@
 package BinarySearch;
 
 public class SearchForRange {
-	public static int[] searchRange(int[] nums, int target) {
-		 int start = 0;
-	        int end = nums.length - 1;
-	        int range[] = {-1, -1};
-	        while(start < end){
+	 public static int[] searchRange(int[] nums, int target) {
+	        int [] res = {-1, -1};
+	        if(nums.length == 0){
+	            return res;
+	        }
+	        int start = 0; int end = nums.length - 1;
+	        while(start <= end){
 	            int mid = (start + end) / 2;
-	            if(target > nums[mid]){
-	                start = mid + 1;
-	            }else{
-	                end = mid;
-	            }
-	        }
-	        if(nums[start] != target){
-	            return range;
-	        }else{
-	            range[0] = start;
-	        }
-	        end = nums.length - 1;
-	        while(start < end){
-	            int mid = (start + end) / 2 + 1;
-	            if(nums[mid] > target){
+	            if(target <= nums[mid]){
+	                if(nums[mid] == target){
+	                    res[0] = mid;
+	                }
 	                end = mid - 1;
 	            }else{
-	                start = mid;
+	                start = mid + 1;
 	            }
 	        }
-	        range[1] = end;
-	        return range;
-	}
+	        
+	        end = nums.length - 1;
+	        while(start <= end){
+	            int mid = (start + end) / 2;
+	            if(target >= nums[mid]){
+	                if(target == nums[mid]){
+	                    res[1] = mid;
+	                }
+	                start = mid + 1;
+	            }else{
+	                end = mid - 1;
+	            }
+	        }
+	        return res;
+	    }
 	
 	public static int[] searchRange2(int[] nums, int target) {
 		int [] range = {Integer.MAX_VALUE, -1};
@@ -64,6 +67,6 @@ public class SearchForRange {
 	public static void main(String[] args) {
 		//int[] nums = {0,1,2,3,4,4,4,4,5,5,6,10};
 		int[] nums = {1};
-		searchRange2(nums, 1);
+		searchRange(nums, 0);
 	}
 }

@@ -1,1 +1,14 @@
 When doing binary search, don't forget to sort the array first;
+
+Search left bound
+while(start <= end){
+    int mid = start + (end-start)/2;
+    if(target <= nums[mid] ){
+        if(target == nums[mid]){
+            result[0] = mid;
+        }
+        end = mid-1;
+    }else{
+        start = mid +1;
+    }
+}
