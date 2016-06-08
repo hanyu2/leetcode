@@ -25,4 +25,17 @@ public class Pow {
 	    }
 	    return ans;
 	}
+	//no bug solution the former ones failed on 2.00000 -2147483648
+	static double myPow3(double x, int n) { 
+		if(n==0) return 1;
+	    double t = myPow3(x,n/2);
+	    if(Math.abs(n%2) == 1){
+	    	return n<0 ? 1/x*t*t : x*t*t;
+	    }
+	    else return t*t;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(myPow3(34.00515, -3));
+	}
 }
