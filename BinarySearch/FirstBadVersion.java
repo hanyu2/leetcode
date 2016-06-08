@@ -29,5 +29,4 @@ public class FirstBadVersion {
 	public static void main(String[] args) {
 		System.out.println(firstBadVersion(9));
 	}
-
 }
