@@ -40,3 +40,13 @@ public int findMin2(int[] nums) {
     }
     return nums[start];
 }
+
+Arrays.binarySearch()
+for(int[] envelope : envelopes){
+    int index = Arrays.binarySearch(dp, 0, len, envelope[1]);
+    if(index < 0)
+        index = -(index + 1);
+    dp[index] = envelope[1];
+    if(index == len)
+        len++;
+}
