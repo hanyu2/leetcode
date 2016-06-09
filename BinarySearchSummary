@@ -50,3 +50,12 @@ for(int[] envelope : envelopes){
     if(index == len)
         len++;
 }
+
+In a rotated sorted array
+
+find the minimum:
+compare mid with end
+
+find an element
+try to find the pure increasing half of the array
+compare target with start and mid
