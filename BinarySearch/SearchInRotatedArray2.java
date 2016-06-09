@@ -1,5 +1,6 @@
 package BinarySearch;
 //81
+//https://leetcode.com/discuss/223/when-there-are-duplicates-the-worst-case-is-could-we-do-better
 public class SearchInRotatedArray2 {
 	public static boolean search(int[] nums, int target) {
 		int start = 0, end = nums.length - 1;
