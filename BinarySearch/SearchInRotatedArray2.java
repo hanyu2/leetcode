@@ -1,5 +1,5 @@
 package BinarySearch;
-
+//81
 public class SearchInRotatedArray2 {
 	public static boolean search(int[] nums, int target) {
 		int start = 0, end = nums.length - 1;
@@ -18,6 +18,10 @@ public class SearchInRotatedArray2 {
 				else
 					end = mid - 1;
 			} else
+				//duplicates, we know nums[mid] != target, so nums[start] != target
+	            //based on current information, we can only move left pointer to skip one cell
+	            //thus in the worst case, we would have target: 2, and array like 11111111, then
+	            //the running time would be O(n)
 				start++;
 		}
 		return false;
