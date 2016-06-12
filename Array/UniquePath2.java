@@ -13,7 +13,7 @@ public class UniquePath2 {
 			if (grid[i][0] != 1) {
 				path[i][0] = 1;
 			} else {
-				break;
+				break; 
 			}
 		}
 
