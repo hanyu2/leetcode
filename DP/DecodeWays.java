@@ -38,5 +38,6 @@ public class DecodeWays {
 
 	public static void main(String[] args) {
 		System.out.println(numDecodings2("10003"));
+		System.out.println(numDecodings2("12415"));
 	}
 }
