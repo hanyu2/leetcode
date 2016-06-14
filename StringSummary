@@ -1,1 +1,4 @@
 while(start + wordLen * words.length <= s.length() && end + wordLen <= s.length())
+
+substring(int beginIndex) (to the end)
+Returns a new string that is a substring of this string.
