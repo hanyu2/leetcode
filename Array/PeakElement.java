@@ -43,7 +43,7 @@ public class PeakElement {
 			}
 		}
 		return nums.length - 1;
-	}
+	}s
 	
 	public static void main(String[] args) {
 		int nums[] = { 2, 3, 4, 3, 2, 1 };
