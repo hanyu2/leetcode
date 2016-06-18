@@ -85,11 +85,31 @@ public class CombinationSum {
 		return dp.get(target - 1);
 	}
 	
+	public static List<List<Integer>> combinationSum5(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        combine5(0, candidates, 0, target, new ArrayList<Integer>(), res);
+        return res;
+    }
+    
+    public static void combine5(int start, int[] candidates, int result, int target, List<Integer> list,List<List<Integer>> res){
+        if(result > target){
+            return;
+        }
+        if(result == target){
+            res.add(list);
+            return;
+        }
+        for(int i = start; i < candidates.length; i++){
+            list.add(candidates[i]);
+            combine5(i, candidates, result + candidates[i], target, list, res);
+            list.remove(list.size() - 1);
+        }
+    }
 
 	public static void main(String[] args) {
 		int[] nums = { 2, 3, 6, 7 };
 		// int[] nums = {1, 1};
-		combinationSum3(nums, 7);
+		combinationSum5(nums, 7);
 	}
 
 }

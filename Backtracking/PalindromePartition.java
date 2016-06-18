@@ -4,29 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PalindromePartition {
+
 	public static List<List<String>> partition(String s) {
 		List<List<String>> res = new ArrayList<List<String>>();
-		List<String> list = new ArrayList<String>();
-		find(res, list, s, 0);
+		if (s.length() == 0) {
+			return res;
+		}
+		part(0, s, new ArrayList<String>(), res);
 		return res;
 	}
 
-	public static void find(List<List<String>> res, List<String> list,String s, int index) {
-		//Don't forget this
-		if(index == s.length()){
-			res.add(list);
+	public static void part(int index, String s, List<String> list, List<List<String>> res) {
+		if (index == s.length()) {
+			res.add(new ArrayList<String>(list));
 			return;
 		}
-		if(index == s.length() - 1){
-			list.add(s.substring(index));
-			res.add(list);
-			return;
-		}
-		for(int i = index; i < s.length(); i++){
-			if(isPalindrome(s.substring(index, i + 1))){
-				List<String> temp = new ArrayList<String>(list);
-				temp.add(s.substring(index, i + 1));
-				find(res, temp, s, i + 1);
+
+		for (int i = index; i < s.length(); i++) {
+			String sub = s.substring(index, i + 1);
+			if (isPalindrome(sub)) {
+				list.add(sub);
+				part(i + 1, s, list, res);
+				list.remove(list.size() - 1);
 			}
 		}
 	}
@@ -44,9 +43,9 @@ public class PalindromePartition {
 		}
 		return true;
 	}
-	
+
 	public static void main(String[] args) {
-		//String s = "aab";
+		// String s = "aab";
 		String s = "bb";
 		partition(s);
 	}

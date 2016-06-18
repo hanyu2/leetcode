@@ -87,9 +87,8 @@ public class Permutations {
         return res;
     }
 
-    
     public static void main(String[] args) {
     	int [] nums = {1,2,3};
-		permute3(nums);
+		permute2(nums);
 	}
 }
