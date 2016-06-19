@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestoreIP {
-	public List<String> restoreIpAddresses(String s) {
+	public static List<String> restoreIpAddresses(String s) {
 		List<String> res = new ArrayList<String>();
 		int len = s.length();
 		for (int i = 1; i < 4 && i < len - 2; i++) {
@@ -21,7 +21,7 @@ public class RestoreIP {
 		return res;
 	}
 
-	public boolean isValid(String s) {
+	public static boolean isValid(String s) {
 		if (s.length() > 3 || s.length() == 0 || (s.charAt(0) == '0' && s.length() > 1) || Integer.parseInt(s) > 255)
 			return false;
 		return true;
@@ -77,8 +77,9 @@ public class RestoreIP {
     }
 
 	public static void main(String[] args) {
-		String s = "25525511135";
-		restoreIpAddresses4(s);
+		String s = "0000";
+		//String s = "25525511135";
+		restoreIpAddresses(s);
 	}
 
 }
