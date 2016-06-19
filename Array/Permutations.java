@@ -6,45 +6,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Permutations {
+	
 	public static List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> lists = new ArrayList<List<Integer>>();
-        if(nums == null || nums.length == 0){
-            return lists;
-        }
-        return permuteList(nums);
+        return perm(0, nums);
     }
     
-    public static List<List<Integer>> permuteList(int [] nums){
-        if(nums.length == 1){
-            List<List<Integer>> result = new ArrayList<List<Integer>>();
-            result.add(Arrays.asList(nums[0]));
-            return result;
+    public static List<List<Integer>> perm(int index, int[] nums){
+        if(index == nums.length - 1){
+            List<List<Integer>> res = new ArrayList<List<Integer>>();
+            res.add(Arrays.asList(nums[index]));
+            return res;
         }
-        List<List<Integer>> lists = new ArrayList<List<Integer>>();
-        int c = nums[0];
-        int [] newNum = new int [nums.length - 1];
-        for(int i = 1; i < nums.length; i++){
-            newNum[i - 1] = nums[i];
-        }
-        List<List<Integer>> result = permuteList(newNum);
-        for(List<Integer> list : result){
-            for(int i = 0; i <= list.size(); i++){
-                List<Integer> newList = insert(list, c, i);
-                lists.add(newList);
+        List<List<Integer>> res =  perm(index + 1, nums);
+        List<List<Integer>> newList = new ArrayList<List<Integer>>();
+        for(List l : res){
+            for(int i = 0; i <= l.size(); i++){
+                List<Integer> temp = insert(l, i, nums[index]);
+                newList.add(temp);
             }
         }
-        return lists;
-    }
-    public static List<Integer> insert(List<Integer> list, int c, int j){
-    	List<Integer> newList = new ArrayList<Integer>();
-        for(int i = 0; i < j; i++){
-        	newList.add(list.get(i));
-        }
-        newList.add(c);
-        for(int i = j; i < list.size(); i++){
-        	newList.add(list.get(i));
-        }
         return newList;
+    }
+    
+    public static List<Integer> insert(List<Integer> list, int index, int target){
+        List<Integer> tempList = new ArrayList<Integer>();
+        for(int i = 0; i < index; i++){
+            tempList.add(list.get(i));
+        }
+        tempList.add(target);
+        for(int i = index; i < list.size(); i++){
+            tempList.add(list.get(i));
+        }
+        return tempList;
     }
     
     public static List<List<Integer>> permute2(int[] nums) {
@@ -86,9 +79,11 @@ public class Permutations {
         }
         return res;
     }
+    
+    
 
     public static void main(String[] args) {
     	int [] nums = {1,2,3};
-		permute2(nums);
+		permute(nums);
 	}
 }
