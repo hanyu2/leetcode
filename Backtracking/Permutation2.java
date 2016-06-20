@@ -51,8 +51,8 @@ public class Permutation2 {
 			if (i > start && nums.get(i) == nums.get(i - 1))
 				continue;
 			nums.add(start, nums.get(i));// swap
-			nums.remove(i + 1);
-			permute2(nums, start + 1, res);
+			nums.remove(i + 1);           //cannot swap directly because this kind swap could keep the
+			permute2(nums, start + 1, res);//elements come after start in order
 			nums.add(i + 1, nums.get(start));
 			nums.remove(start);
 		}
@@ -96,9 +96,47 @@ public class Permutation2 {
 		nums[i] = nums[j];
 		nums[j] = save;
 	}
+	
+	/*public static List<List<Integer>> permuteUnique4(int[] nums) {
+		Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums.length == 0){
+            return res;
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i : nums){
+            list.add(i)   ;
+        }
+        perm(list, 0, res);
+        return res;
+    }
+    
+    public static void perm(List<Integer> list, int start, List<List<Integer>> res){
+        if(start == list.size() - 1){
+            List<Integer> temp = new ArrayList<Integer>(list);
+            res.add(temp);
+            return ;
+        }
+        for(int i = start; i < list.size(); i++){
+            if(i > start && list.get(i) == list.get(i - 1)){
+                continue;
+            }
+            swap(list, i , start);
+            perm(list, start + 1, res);
+            swap(list, i, start);
+        }
+    }*/
+    
+    public static void swap(List<Integer> list, int i, int j){
+        int temp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, temp);
+    }
 
 	public static void main(String[] args) {
-		int[] nums = { 1, 1, 2 };
+		//int[] nums = { 1, 1, 2 };
+		//int[] nums = { 2, 2, 1, 1};
+		int[] nums = { 0, 1, 0, 0, 9};
 		permuteUnique2(nums);
 	}
 }
