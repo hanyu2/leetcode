@@ -5,37 +5,41 @@ import java.util.Stack;
 import Tree.TreeNode;
 
 public class BSTIterator {
-	private Stack<TreeNode> stack = new Stack<TreeNode>();
+	 private Stack<TreeNode> stack;
+	    public BSTIterator(TreeNode root) {
+	        stack = new Stack<>();
+	        TreeNode cur = root;
+	        while(cur != null){
+	            stack.push(cur);
+	            if(cur.left != null)
+	                cur = cur.left;
+	            else
+	                break;
+	        }
+	    }
 
-	public BSTIterator(TreeNode root) {
-		pushAll(root);
-	}
+	    /** @return whether we have a next smallest number */
+	    public boolean hasNext() {
+	        return !stack.isEmpty();
+	    }
 
-	/** @return whether we have a next smallest number */
-	public boolean hasNext() {
-		return !stack.isEmpty();
-	}
-
-	/** @return the next smallest number */
-
-	/* The average time complexity
-	 * of next() function is O(1) indeed in your case. As the next function can
-	 * be called n times at most, and the number of right nodes in
-	 * self.pushAll(tmpNode.right) function is maximal n in a tree which has n
-	 * nodes, so the amortized time complexity is O(1).
-	 */
-	public int next() {
-		TreeNode tmpNode = stack.pop();
-		pushAll(tmpNode.right);
-		return tmpNode.val;
-	}
-
-	private void pushAll(TreeNode node) {
-		while (node != null) {
-			stack.push(node);
-			node = node.left;
-		}
-	}
+	    /** @return the next smallest number */
+	    public int next() {
+	        TreeNode node = stack.pop();
+	        TreeNode cur = node;
+	        // traversal right branch
+	        if(cur.right != null){
+	            cur = cur.right;
+	            while(cur != null){
+	                stack.push(cur);
+	                if(cur.left != null)
+	                    cur = cur.left;
+	                else
+	                    break;
+	            }
+	        }
+	        return node.val;
+	    }
 }
 
 /**
