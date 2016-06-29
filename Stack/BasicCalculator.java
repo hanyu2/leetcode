@@ -92,10 +92,48 @@ public class BasicCalculator {
 		}
 		return val;
 	}
+	
+	 public static int calculate3(String s) {
+	        s = "(" + s + ")";
+	        Stack<String> stack = new Stack<String>();
+	        int num = 0;
+	        for(int i = 0; i < s.length(); i++){
+	            if(s.charAt(i) >= '0' && s.charAt(i) <= '9'){
+	                num = num * 10 + Character.getNumericValue(s.charAt(i));
+	            }else if(s.charAt(i) == '+' || s.charAt(i) == '-'){
+	                stack.push(String.valueOf(num));
+	                num = 0;
+	                stack.push(String.valueOf(s.charAt(i)));
+	            }else if(s.charAt(i) == '('){
+	                stack.push(String.valueOf(s.charAt(i)));
+	            }else if(s.charAt(i) == ')'){
+	            	stack.push(String.valueOf(num));
+	            	num = 0;
+	                int result = 0;
+	                while(true){
+	                    int n = Integer.valueOf(stack.pop());
+	                    if(stack.peek().equals("+")){
+	                        result += n;
+	                        stack.pop();
+	                    }else if(stack.peek().equals("-")){
+	                        result -= n;
+	                        stack.pop();
+	                    }else if(stack.peek().equals("(")){
+	                    	result += n;
+	                    	stack.pop();
+	                        stack.push(String.valueOf(result));
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	        return stack.isEmpty() ? 0 : Integer.valueOf(stack.pop());
+	    }
 
 	public static void main(String[] args) {
-		String s = "(1-(14+10+2)-13)+(6+18)";
+		String s = "(2-(14+10+2)-13)+(6+18)";
 		String s1 = "6+(8-2)";
-		System.out.println(calculate2(s1));
+		String s3 = "1";
+		System.out.println(calculate(s));
 	}
 }

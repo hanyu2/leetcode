@@ -22,7 +22,7 @@ public class TrappingRainWater {
 		}
 		return area;
 	}
-	
+	//histogram
 	public static int trap2(int[] height) {
         if (height==null) return 0;
         Stack<Integer> s = new Stack<Integer>();
@@ -43,6 +43,6 @@ public class TrappingRainWater {
 
 	public static void main(String[] args) {
 		int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
-		trap2(height);
+		trap(height);
 	}
 }
