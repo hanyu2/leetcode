@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class KthSmallestElementInABST {
@@ -38,7 +40,7 @@ public class KthSmallestElementInABST {
         }
         if (n.right != null) helper(n.right);
     }
-    
+    //需要在节点中保留一些额外的信息: 左子树的大小. 在插入删除时也要同时维护左子树的大小. 再查找时,可以用二分. 时间复杂度为O(h)
     //Iterative
     public int kthSmallest3(TreeNode root, int k) {
         Stack<TreeNode> st = new Stack<>();
@@ -61,12 +63,11 @@ public class KthSmallestElementInABST {
 
         return -1; // never hit if k is valid
   }
-
     
     public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(2);
 		TreeNode n2 = new TreeNode(1);
 		n1.left = n2;
 		System.out.println(kthSmallest(n1, 1));
-	}
+    }
 }

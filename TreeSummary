@@ -14,3 +14,24 @@ public void levelMaker(List<List<Integer>> list, TreeNode root, int level) {
     levelMaker(list, root.right, level+1);
     list.get(list.size()-level-1).add(root.val);
 }
+
+validate binary search tree
+public boolean isValidBST(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<TreeNode> ();
+       TreeNode cur = root ;
+       TreeNode pre = null ;           
+       while (!stack.isEmpty() || cur != null) {               
+           if (cur != null) {
+               stack.push(cur);
+               cur = cur.left ;
+           } else {                
+               TreeNode p = stack.pop() ;
+               if (pre != null && p.val <= pre.val) {                      
+                   return false ;
+               }                   
+               pre = p ;                       
+               cur = p.right ;
+           }
+       }
+    return true ; 
+}
