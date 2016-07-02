@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class BinaryTreeRightSideView {
 	// BFS
-	public List<Integer> rightSideView(TreeNode root) {
+	public static List<Integer> rightSideView(TreeNode root) {
 		List<Integer> res = new ArrayList<Integer>();
 		Queue<TreeNode> q = new LinkedList<TreeNode>();
 		if (root == null) {
@@ -50,7 +50,7 @@ public class BinaryTreeRightSideView {
 		rightView(curr.left, result, currDepth + 1);
 
 	}
-	
+
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(1);
 		TreeNode n2 = new TreeNode(2);
