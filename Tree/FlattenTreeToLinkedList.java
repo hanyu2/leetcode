@@ -14,38 +14,49 @@ public class FlattenTreeToLinkedList {
 		root.left = null;
 		prev = root;
 	}
-	//straight forward
+
+	// straight forward
 	public void flatten2(TreeNode root) {
-        if (root == null) return;
+		if (root == null)
+			return;
 
-        TreeNode left = root.left;
-        TreeNode right = root.right;
+		TreeNode left = root.left;
+		TreeNode right = root.right;
 
-        root.left = null;
+		root.left = null;
 
-        flatten(left);
-        flatten(right);
+		flatten(left);
+		flatten(right);
 
-        root.right = left;
-        TreeNode cur = root;
-        while (cur.right != null) cur = cur.right;
-        cur.right = right;
-    }
-	
-	//DFS Use a stack
+		root.right = left;
+		TreeNode cur = root;
+		while (cur.right != null)
+			cur = cur.right;
+		cur.right = right;
+	}
+
+	// DFS Use a stack
 	public void flatten3(TreeNode root) {
-        if (root == null) return;
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        stack.push(root);
-        while (!stack.isEmpty()){
-            TreeNode curr = stack.pop();
-            if (curr.right!=null)  
-                 stack.push(curr.right);
-            if (curr.left!=null)  
-                 stack.push(curr.left);
-            if (!stack.isEmpty()) 
-                 curr.right = stack.peek();
-            curr.left = null;  // dont forget this!! 
-        }
-    }
+		if (root == null)
+			return;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			TreeNode curr = stack.pop();
+			if (curr.right != null)
+				stack.push(curr.right);
+			if (curr.left != null)
+				stack.push(curr.left);
+			if (!stack.isEmpty())
+				curr.right = stack.peek();
+			curr.left = null; // dont forget this!!
+		}
+	}
+/*	
+	public static void main(String[] args) {
+		TreeNode n1 = new TreeNode(1);
+		TreeNode n2 = new TreeNode(2);
+		n1.right = n2;
+		flatten(n1);
+	}*/
 }
