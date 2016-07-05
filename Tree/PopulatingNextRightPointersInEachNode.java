@@ -30,17 +30,17 @@ public class PopulatingNextRightPointersInEachNode {
 	}
 
 	// same idea
-		public void connect2(TreeLinkNode root) {
-			while (root != null && root.left != null) {
-				TreeLinkNode cur = root;
-				while (cur != null) {
-					cur.left.next = cur.right;
-					cur.right.next = cur.next == null ? null : cur.next.left;
-					cur = cur.next;
-				}
-				root = root.left;
+	public static void connect2(TreeLinkNode root) {
+		while (root != null && root.left != null) {
+			TreeLinkNode cur = root;
+			while (cur != null) {
+				cur.left.next = cur.right;
+				cur.right.next = cur.next == null ? null : cur.next.left;
+				cur = cur.next;
 			}
+			root = root.left;
 		}
+	}
 	
 	public static void connect22(TreeLinkNode root) {
 		if (root == null) {

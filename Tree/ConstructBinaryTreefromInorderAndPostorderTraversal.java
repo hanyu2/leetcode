@@ -4,82 +4,31 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+
 public class ConstructBinaryTreefromInorderAndPostorderTraversal {
-	// Time Limit Exceed
-	public TreeNode buildTree(int[] inorder, int[] postorder) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int i = 0; i < inorder.length; i++){
-            map.put(inorder[i], i);
-        }
-       return helper(postorder.length - 1, 0, inorder.length - 1, inorder, postorder, map);
-    } 
-    public TreeNode helper(int postEnd, int inStart, int inEnd, int[] inorder, int[] postorder, Map<Integer, Integer> map){
-        if(postEnd < 0 || inStart > inEnd){
+	//http://www.cnblogs.com/higerzhang/p/4130731.html
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(inorder.length == 0){
             return null;
         }
-        TreeNode root = new TreeNode(postorder[postEnd]);
-        int index = map.get(root.val);
-        root.right = helper(postEnd - 1, index + 1, inEnd, inorder, postorder, map);
-        root.left = helper(postEnd - (index - inStart) - 1, inStart, index - 1, inorder, postorder, map);
-        return root;
+        return build(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
     }
-
+    public TreeNode build(int[] inorder, int is, int ie, int[] postorder, int ps, int pe){
+         if (is > ie || ps > pe || ie - is != pe - ps) return null;
+         int val = postorder[pe];
+         TreeNode root = new TreeNode(val);
+         int index = 0;
+         for(int i = is; i <= ie; i++){
+             if(inorder[i] == val){
+                 index = i;
+             }
+         }
+         root.left = build(inorder, is, index - 1, postorder, ps, ps + index - is - 1);
+         root.right = build(inorder, index + 1, ie, postorder, ps + index - is, pe - 1);
+         return root;
+    }
 	
-	public static TreeNode buildTree2(int[] inorder, int[] postorder) {
-		if (inorder == null || postorder == null || inorder.length != postorder.length)
-			return null;
-		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int i = 0; i < inorder.length; ++i) {
-			map.put(inorder[i], i);
-		}
-		return helper2(0, inorder.length - 1, 0, postorder.length - 1, inorder, postorder, map);
-	}
-
-	private static TreeNode helper2(int inStart, int inEnd, int postStart, int postEnd,  int[] inorder, int[] postorder,
-			HashMap<Integer, Integer> map) {
-		if (postStart > postEnd || inStart > inEnd)
-			return null;
-		TreeNode root = new TreeNode(postorder[postEnd]);
-		int index = map.get(postorder[postEnd]);
-		TreeNode leftchild = helper2(inStart, index - 1, postStart, postStart + index - inStart - 1, inorder, postorder, map);
-		TreeNode rightchild = helper2(index + 1, inEnd, postStart + index - inStart, postEnd - 1, inorder, postorder, map);
-		root.left = leftchild;
-		root.right = rightchild;
-		return root;
-	}
-	//https://leetcode.com/discuss/10961/my-recursive-java-code-with-o-n-time-and-o-n-space
-	static int pInorder;   // index of inorder array
-	static int pPostorder; // index of postorder array
-
-	private static TreeNode helper3(int[] inorder, int[] postorder, TreeNode end) {
-	    if (pPostorder < 0) {
-	        return null;
-	    }
-
-	    // create root node
-	    TreeNode n = new TreeNode(postorder[pPostorder--]);
-
-	    // if right node exist, create right subtree
-	    if (inorder[pInorder] != n.val) {
-	        n.right = helper3(inorder, postorder, n);
-	    }
-
-	    pInorder--;
-
-	    // if left node exist, create left subtree
-	    if ((end == null) || (inorder[pInorder] != end.val)) {
-	        n.left = helper3(inorder, postorder, end);
-	    }
-
-	    return n;
-	}
-
-	public static TreeNode buildTree3(int[] inorder, int[] postorder) {
-	    pInorder = inorder.length - 1;
-	    pPostorder = postorder.length - 1;
-
-	    return helper3(inorder, postorder, null);
-	}
+    
 	//https://leetcode.com/discuss/15115/my-comprehension-of-o-n-solution-from-%40hongzhi
 	 public TreeNode buildTree4(int[] inorder, int[] postorder) {
 	        if (inorder == null || inorder.length < 1) return null;
@@ -129,6 +78,6 @@ public class ConstructBinaryTreefromInorderAndPostorderTraversal {
 		/*
 		 * int[] inorder = { 1, 3, 2 }; int[] postorder = { 3, 2, 1 };
 		 */
-		buildTree3(inorder, postorder);
+		//buildTree(inorder, postorder);
 	}
 }
