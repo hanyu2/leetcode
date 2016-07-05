@@ -5,28 +5,28 @@ import java.util.Map;
 import java.util.Stack;
 
 public class ConstructBinaryTreefromPreorderandInorderTraversal {
-	// https://leetcode.com/discuss/12179/my-accepted-java-solution
-	// http://articles.leetcode.com/construct-binary-tree-from-inorder-and-preorder-postorder-traversal
-	public static TreeNode buildTree(int[] preorder, int[] inorder) {
-		return helper(0, 0, inorder.length - 1, preorder, inorder);
-	}
-
-	public static TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
-		if (preStart > preorder.length - 1 || inStart > inEnd) {
-			return null;
-		}
-		TreeNode root = new TreeNode(preorder[preStart]);
-		int inIndex = 0; // Index of current root in inorder
-		for (int i = inStart; i <= inEnd; i++) {
-			if (inorder[i] == root.val) {
-				inIndex = i;
-				break;
-			}
-		}
-		root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
-		root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
-		return root;
-	}
+	 public TreeNode buildTree(int[] preorder, int[] inorder) {
+	        if(preorder.length == 0){
+	            return null;
+	        }
+	        return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+	    }
+	    public TreeNode build(int[] preorder, int ps, int pe, int[] inorder, int is, int ie){
+	        if(ps > pe || is > ie || (pe - ps) != (ie - is)){
+	            return null;
+	        }
+	        int val = preorder[ps];
+	        TreeNode root = new TreeNode(val);
+	        int index = 0;
+	        for(int i = is; i <= ie; i++){
+	            if(inorder[i] == val){
+	                index = i;
+	            }
+	        }
+	        root.left =  build(preorder, ps + 1, ps + index - is, inorder, is, index - 1);
+	        root.right = build(preorder, ps + index - is + 1, pe, inorder, index + 1, ie);
+	        return root;
+	    }
 
 	/*
 	 * A more efficient way is to eliminate the search by using an efficient
