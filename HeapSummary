@@ -1,0 +1,3 @@
+PriorityQueue is min heap by default
+max:
+PriorityQueue<Integer> queue = new PriorityQueue<>(10, Collections.reverseOrder());
