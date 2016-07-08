@@ -9,14 +9,8 @@ public class MergeKSortedList {
 			return null;
 
 		PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, new Comparator<ListNode>() {
-			public int compare(ListNode l1, ListNode l2) {
-				if (l1.val < l2.val) {
-					return -1;
-				} else if (l1.val > l2.val) {
-					return 1;
-				} else {
-					return 0;
-				}
+			public int compare(ListNode n1, ListNode n2) {
+				return n1.val - n2.val;
 			}
 		});
 
@@ -37,7 +31,7 @@ public class MergeKSortedList {
 		}
 		return dummy.next;
 	}
-	
+
 	// divide and conquer
 	public static ListNode mergeKLists2(ListNode[] lists) {
 		return partion(lists, 0, lists.length - 1);

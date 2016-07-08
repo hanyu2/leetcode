@@ -1,15 +1,15 @@
 package Array;
 
 public class JumpGame {
-	public static boolean canJump(int[] nums) {
-		int max = nums[0];
-		for (int i = 0; i < max; i++) {
-			max = Math.max(nums[i] + i, max);
-			if (max >= nums.length - 1) {
-				return true;
+	public boolean canJump(int[] nums) {
+		int max = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (i > max) {
+				return false;
 			}
+			max = Math.max(nums[i] + i, max);
 		}
-		return false;
+		return true;
 	}
 
 	// The easiest way to think about this problem is to ask are the elements
