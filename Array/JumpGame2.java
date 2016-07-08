@@ -3,17 +3,17 @@ package Array;
 public class JumpGame2 {
 
 	public static int jump(int[] nums) {
-		int maxReach = nums[0];
-		int minStep = 1;
-		int edge = nums[0];
-		for (int i = 1; i < nums.length; i++) {
-			if (i > edge) {
-				edge = maxReach;
-				minStep += 1;
-			}
-			maxReach = Math.max(nums[i] + i, maxReach);
+		int step_count = 0;
+		int last_jump_max = 0;
+		int current_jump_max = 0;
+		for(int i=0; i<nums.length-1; i++) {
+		    current_jump_max = Math.max(current_jump_max, i+nums[i]);
+		    if( i == last_jump_max ) {
+		        step_count++;
+		        last_jump_max = current_jump_max;
+		    } 
 		}
-		return nums.length == 1 ? 0 : minStep;
+		return step_count;
 	}
 
 	public static int jump2(int[] nums){
