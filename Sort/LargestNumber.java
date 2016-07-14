@@ -41,33 +41,30 @@ public class LargestNumber {
 	public static String largestNumber2(int[] nums) {
 		if (nums == null || nums.length == 0)
 			return "";
-		String[] strings = new String[nums.length];
+		String[] strs = new String[nums.length];
 		for (int i = 0; i < nums.length; i++) {
-			strings[i] = String.valueOf(nums[i]);
+			strs[i] = nums[i] + "";
 		}
-		Comparator<String> comparator = new Comparator<String>() {
+		Arrays.sort(strs, new Comparator<String>() {
 			@Override
-			public int compare(String s1, String s2) {
-				String string1 = s1 + s2;
-				String string2 = s2 + s1;
-				return string2.compareTo(string1);
+			public int compare(String i, String j) {
+				String s1 = i + j;
+				String s2 = j + i;
+				return s1.compareTo(s2);
 			}
-		};
-
-		Arrays.sort(strings, comparator);
-		if (strings[0].charAt(0) == '0') {
+		});
+		if (strs[strs.length - 1].charAt(0) == '0')
 			return "0";
-		}
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < strings.length; i++) {
-			sb.append(strings[i]);
+		for (int i = 0; i < strs.length; i++) {
+			sb.insert(0, strs[i]);
 		}
 		return sb.toString();
 	}
 
 	public static void main(String[] args) {
-		//int[] nums = { 0, 0 };
-		int[] nums = {1, 2};
-		System.out.println(largestNumber(nums));
+		int[] nums = { 1, 0, 0 };
+		// int[] nums = { 1, 2 };
+		System.out.println(largestNumber2(nums));
 	}
 }
