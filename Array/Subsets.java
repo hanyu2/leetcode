@@ -95,6 +95,7 @@ public class Subsets {
 	}
 
 	// bit manipulation
+	//https://discuss.leetcode.com/topic/2764/my-solution-using-bit-manipulation/7
 	public static List<List<Integer>> subsets3(int[] nums) {
 		Arrays.sort(nums);
 		int totalNumber = 1 << nums.length;
