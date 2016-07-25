@@ -2,12 +2,11 @@ package BitManipulation;
 
 public class NumOf1Bits {
 	//Wrong
-	/*public static int hammingWeight(int n) {
+	/*public static int hammingWeight1(int n) {
 		int count = 0;
 		for(int i = 0; i < 32; i++){
-			if((count & (i << 1)) == 1){
-				count++;
-			}
+			int t = 1 << i;
+			count += n & t;  10 & 10 = 2;
 		}
 		return count;
 	}*/
@@ -24,7 +23,19 @@ public class NumOf1Bits {
 		return ones;
 	}
 
-	public static void main(String[] args) {
+/*	The key idea here is to realize that for any number nn, 
+ * doing a bit-wise AND of nn and n - 1n−1 
+ * flips the least-significant 11-bit in nn to 00
+*/	public int hammingWeight3(int n) {
+	    int sum = 0;
+	    while (n != 0) {
+	        sum++;
+	        n &= (n - 1);
+	    }
+	    return sum;
+	}
+	
+	static void main(String[] args) {
 		System.out.println(hammingWeight(2));
 	}
 }
