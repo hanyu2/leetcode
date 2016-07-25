@@ -23,9 +23,10 @@ public class NumOf1Bits {
 		return ones;
 	}
 
-/*	The key idea here is to realize that for any number nn, 
- * doing a bit-wise AND of nn and n - 1n−1 
- * flips the least-significant 11-bit in nn to 00
+/*	The key idea here is to realize that for any number n, 
+ * doing a bit-wise AND of n and n - 1
+ * n - 1 flips the least-significant 1-bit in n to 0
+ * https://leetcode.com/articles/number-1-bits/
 */	public int hammingWeight3(int n) {
 	    int sum = 0;
 	    while (n != 0) {
