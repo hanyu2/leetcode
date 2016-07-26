@@ -1,4 +1,4 @@
-package Array;
+package Backtracking;
 
 public class WordSearch {
 	 public static boolean exist(char[][] board, String word) {

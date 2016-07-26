@@ -65,12 +65,12 @@ public class NumArray {
 			return root.sum;
 		} else {
 			int mid = root.start + (root.end - root.start) / 2;
-			if (end <= mid) {
+			if (mid >= end) {
 				return sumRange(root.left, start, end);
-			} else if (start >= mid + 1) {
+			} else if (mid + 1 <= start) {
 				return sumRange(root.right, start, end);
 			} else {
-				return sumRange(root.right, mid + 1, end) + sumRange(root.left, start, mid);
+				return sumRange(root.left, start, mid) + sumRange(root.right, mid + 1, end);
 			}
 		}
 	}
