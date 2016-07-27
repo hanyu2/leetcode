@@ -53,6 +53,7 @@ public class CountOfSmallerNumbersAfterSelf {
 	}
 
 	// BST
+	//http://www.cnblogs.com/grandyang/p/5078490.html
 	static class TreeNode {
 		int smallCount;
 		int val;
