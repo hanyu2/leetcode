@@ -51,8 +51,46 @@ public class CountOfSmallerNumbersAfterSelf {
 		}
 		return arr;
 	}
+
+	// BST
+	static class TreeNode {
+		int smallCount;
+		int val;
+		TreeNode left;
+		TreeNode right;
+
+		public TreeNode(int count, int val) {
+			this.smallCount = count;
+			this.val = val;
+		}
+	}
+
+	public static List<Integer> countSmaller2(int[] nums) {
+		TreeNode root = null;
+		Integer[] ret = new Integer[nums.length];
+		if (nums == null || nums.length == 0)
+			return Arrays.asList(ret);
+		for (int i = nums.length - 1; i >= 0; i--) {
+			root = insert(root, nums[i], ret, i, 0);
+		}
+		return Arrays.asList(ret);
+	}
+
+	public static TreeNode insert(TreeNode root, int val, Integer[] ans, int index, int preSum) {
+		if (root == null) {
+			root = new TreeNode(0, val);
+			ans[index] = preSum;
+		} else if (val < root.val) {
+			root.smallCount++;
+			root.left = insert(root.left, val, ans, index, preSum);
+		} else {
+			root.right = insert(root.right, val, ans, index, root.smallCount + preSum + (val > root.val ? 1 : 0));
+		}
+		return root;
+	}
+
 	public static void main(String[] args) {
-		int[] nums = {5, 2, 6, 1};
-		countSmaller(nums);
+		int[] nums = { 5, 2, 6, 1 };
+		countSmaller2(nums);
 	}
 }
