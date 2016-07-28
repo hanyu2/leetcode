@@ -1,0 +1,15 @@
+TreeSet:
+
+ceiling(E e)
+Returns the least element in this set greater than or equal to the given element, or null if there is no such element.
+
+floor(E e)
+Returns the greatest element in this set less than or equal to the given element, or null if there is no such element.
+
+TreeMap:
+
+higherKey(K key)
+Returns the least key strictly greater than the given key, or null if there is no such key.
+
+lowerKey(K key)
+Returns the greatest key strictly less than the given key, or null if there is no such key.
