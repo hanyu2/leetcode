@@ -38,6 +38,7 @@ public class CountOfRangeSum {
 	}
 
 	//Divide and conquer O(n ^ 2)
+	//T(N) = 2*T(N/2) + (N/2)^2
 	long[] counts;
 	int lower, upper;
 
@@ -71,7 +72,6 @@ public class CountOfRangeSum {
 					++total;
 			}
 		}
-		// 采用二分法
 		return total + countNum(nums, left, mid) + countNum(nums, mid + 1, right);
 	}
 
@@ -111,6 +111,7 @@ public class CountOfRangeSum {
 			sum += bit[i];
 		return sum;
 	}
+	
 
 	public static void main(String[] args) {
 		int[] nums = { -3, 1, 2, -2, 2, -1 };
