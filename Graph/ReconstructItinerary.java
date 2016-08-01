@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class ReconstructItinerary {
 	//http://www.jianshu.com/p/38b54e28dfe2
@@ -58,6 +59,7 @@ public class ReconstructItinerary {
         return result;
     }
 	
+	//DFS
 	static Map<String, PriorityQueue<String>> flights;
     static LinkedList<String> path;
 
@@ -81,10 +83,36 @@ public class ReconstructItinerary {
         path.addFirst(departure);
     }
 	
+    //STACK
+    public static List<String> findItinerary3(String[][] tickets) {
+        List<String> res = new ArrayList<String>();
+        if (tickets.length < 1)
+            return res;
+        Map<String, PriorityQueue<String>> myMap = new HashMap<String, PriorityQueue<String>>();
+        for (int i = 0; i < tickets.length; i++) {
+            if(!myMap.containsKey(tickets[i][0])) myMap.put(tickets[i][0], new PriorityQueue<String>());
+            myMap.get(tickets[i][0]).add(tickets[i][1]);
+        }
+
+        String now = "JFK";
+        Stack<String> s = new Stack<String>();
+        for(int i = 0; i < tickets.length; i++) {
+            while(!myMap.containsKey(now) || myMap.get(now).isEmpty()) {
+                s.push(now);
+                now = res.remove(res.size()-1);
+            }
+            res.add(now);
+            now = myMap.get(now).poll();
+        }
+        res.add(now);
+        while(!s.isEmpty()) res.add(s.pop());
+        return res;
+    }
+    
 	public static void main(String[] args) {
 		//String[][] tickets = {{"JFK","SFO"},{"JFK","ATL"},{"SFO","ATL"},{"ATL","JFK"},{"ATL","SFO"}};
 		//String[][] tickets = {{"MUC", "LHR"}, {"JFK", "MUC"}, {"SFO", "SJC"}, {"LHR", "SFO"}};
 		String[][] tickets = {{"JFK","KUL"},{"JFK","NRT"},{"NRT","JFK"}};
-		System.out.println(findItinerary2(tickets));
+		System.out.println(findItinerary3(tickets));
 	}
 }
