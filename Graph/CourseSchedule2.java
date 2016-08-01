@@ -2,12 +2,15 @@ package Graph;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 public class CourseSchedule2 {
 	//https://leetcode.com/discuss/35605/two-ac-solution-in-java-using-bfs-and-dfs-with-explanation
-	public int[] findOrder(int numCourses, int[][] prerequisites) {
+	public static int[] findOrder(int numCourses, int[][] prerequisites) {
 		int[] indegrees = new int[numCourses];
 		List<List<Integer>> adjs = new ArrayList<>(numCourses);
 		initialiseGraph(indegrees, adjs, prerequisites);
@@ -15,7 +18,7 @@ public class CourseSchedule2 {
 		// return solveByDFS(adjs);
 	}
 
-	private void initialiseGraph(int[] indegrees, List<List<Integer>> adjs, int[][] prerequisites) {
+	private static void initialiseGraph(int[] indegrees, List<List<Integer>> adjs, int[][] prerequisites) {
 		int n = indegrees.length;
 		while (n-- > 0)
 			adjs.add(new ArrayList<Integer>());
@@ -25,7 +28,7 @@ public class CourseSchedule2 {
 		}
 	}
 
-	private int[] solveByBFS(int[] indegrees, List<List<Integer>> adjs) {
+	private static int[] solveByBFS(int[] indegrees, List<List<Integer>> adjs) {
 		int[] order = new int[indegrees.length];
 		Queue<Integer> q = new ArrayDeque<>();
 		for (int i = 0; i < indegrees.length; i++) {
@@ -47,6 +50,7 @@ public class CourseSchedule2 {
 
 	public static void main(String[] args) {
 		int[][] pre = { { 1, 0 } };
-		// findOrder(2, pre);
+		//int[][] pre = {{}};
+		findOrder(2, pre);
 	}
 }
