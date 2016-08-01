@@ -3,8 +3,10 @@ package Graph;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class ReconstructItinerary {
 	//http://www.jianshu.com/p/38b54e28dfe2
@@ -55,10 +57,34 @@ public class ReconstructItinerary {
         }
         return result;
     }
+	
+	static Map<String, PriorityQueue<String>> flights;
+    static LinkedList<String> path;
+
+    public static List<String> findItinerary2(String[][] tickets) {
+        flights = new HashMap<>();
+        path = new LinkedList<>();
+        for (String[] ticket : tickets) {
+        	if(!flights.containsKey(ticket[0])){
+        		flights.put(ticket[0], new PriorityQueue<String>());
+        	}
+        	flights.get(ticket[0]).add(ticket[1]);
+        }
+        dfs("JFK");
+        return path;
+    }
+
+    public static void dfs(String departure) {
+        PriorityQueue<String> arrivals = flights.get(departure);
+        while (arrivals != null && !arrivals.isEmpty())
+            dfs(arrivals.poll());
+        path.addFirst(departure);
+    }
+	
 	public static void main(String[] args) {
 		//String[][] tickets = {{"JFK","SFO"},{"JFK","ATL"},{"SFO","ATL"},{"ATL","JFK"},{"ATL","SFO"}};
 		//String[][] tickets = {{"MUC", "LHR"}, {"JFK", "MUC"}, {"SFO", "SJC"}, {"LHR", "SFO"}};
 		String[][] tickets = {{"JFK","KUL"},{"JFK","NRT"},{"NRT","JFK"}};
-		System.out.println(findItinerary(tickets));
+		System.out.println(findItinerary2(tickets));
 	}
 }
