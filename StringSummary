@@ -5,3 +5,5 @@ Returns a new string that is a substring of this string.
 
 Can't use Integer.ValueOf(char) to get a char's value, it can only get the ASCII value of that char
 use Character.getNumericValue(char)
+
+String[] verArr2 = version2.split("\\."); "12.34"

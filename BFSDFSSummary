@@ -1,0 +1,3 @@
+For matrix proplems, if you've marked one position with '*' 
+and go down to the next step , 
+don't forget to check '*' (leetcode 130)
