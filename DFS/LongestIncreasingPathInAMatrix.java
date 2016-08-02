@@ -6,7 +6,7 @@ import java.util.Map;
 public class LongestIncreasingPathInAMatrix {
 	public static final int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
-	public int longestIncreasingPath(int[][] matrix) {
+	public static int longestIncreasingPath(int[][] matrix) {
 	    if(matrix.length == 0) return 0;
 	    int m = matrix.length, n = matrix[0].length;
 	    int[][] cache = new int[m][n];
@@ -20,7 +20,7 @@ public class LongestIncreasingPathInAMatrix {
 	    return max;
 	}
 
-	public int dfs(int[][] matrix, int i, int j, int m, int n, int[][] cache) {
+	public static int dfs(int[][] matrix, int i, int j, int m, int n, int[][] cache) {
 	    if(cache[i][j] != 0) return cache[i][j];
 	    int max = 1;
 	    for(int[] dir: dirs) {
