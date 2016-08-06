@@ -3,6 +3,7 @@ package String;
 public class DistinctSubsequences {
 	//https://discuss.leetcode.com/topic/9488/easy-to-understand-dp-in-java/2
 	//http://www.cnblogs.com/higerzhang/p/4133793.html
+	//http://blog.csdn.net/feliciafay/article/details/42959119
 	public int numDistinct(String S, String T) {
 		// array creation
 		int[][] mem = new int[T.length() + 1][S.length() + 1];
