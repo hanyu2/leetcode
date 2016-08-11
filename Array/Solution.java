@@ -5,33 +5,38 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
-	public static boolean search(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
-        while(start <= end){
-            int mid = (start + end) / 2;
-            if(nums[mid] == target){
-                return true;
-            }
-            if(nums[mid] >= nums[start]){
-                if(target >= nums[start] && target < nums[mid]){
-                    end = mid - 1;
-                }else{
-                    start = mid + 1;
-                }
-            }else{
-                if(target > nums[mid] && target <= nums[end]){
-                    start = mid + 1;
-                }else{
-                    end = mid - 1;
-                }
-            }
-        }
-        return false;
-    }
+	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		int[] array = new int[nums1.length + nums2.length];
+		if (array.length == 0) {
+			return 0;
+		}
+		int i = 0, j = 0;
+		int t = 0;
+		while (i < nums1.length && j < nums2.length) {
+			if (nums1[i] < nums2[j]) {
+				array[t++] = nums1[i++];
+			} else {
+				array[t++] = nums2[j++];
+			}
+		}
+		if (i < nums1.length) {
+			array[t++] = nums1[i++];
+		}
+		if (j < nums2.length) {
+			array[t] = nums2[j];
+			t++;
+			j++;
+		}
+		if (array.length % 2 == 1) {
+			return (double) array[array.length / 2];
+		} else {
+			return (double) (array[array.length / 2] + array[array.length / 2 - 1]) / 2;
+		}
+	}
 
 	public static void main(String[] args) {
-		int[] nums = { 1, 3 ,1 ,1, 1};
-		System.out.println(search(nums, 3));
+		int[] nums1 = {};
+		int[] nums2 = { 2, 3 };
+		System.out.println(findMedianSortedArrays(nums1, nums2));
 	}
 }

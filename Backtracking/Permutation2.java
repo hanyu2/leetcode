@@ -136,7 +136,8 @@ public class Permutation2 {
 	public static void main(String[] args) {
 		//int[] nums = { 1, 1, 2 };
 		//int[] nums = { 2, 2, 1, 1};
-		int[] nums = { 0, 1, 0, 0, 9};
+		//int[] nums = { 0, 1, 0, 0, 9};
+		int[] nums = {1, 2, 3};
 		permuteUnique2(nums);
 	}
 }
