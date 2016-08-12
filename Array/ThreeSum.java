@@ -53,30 +53,35 @@ public class ThreeSum {
 		return result;
 	}
 
-	public static List<List<Integer>> threeSum2(int[] nums) {
-		Arrays.sort(nums);//DO NOT FORGET THIS!!!!!!
-		List<List<Integer>> res = new LinkedList<>();
-		for (int i = 0; i < nums.length - 2; i++) {
-			if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
-				int lo = i + 1, hi = nums.length - 1, sum = 0 - nums[i];
-				while (lo < hi) {
-					if (nums[lo] + nums[hi] == sum) {
-						res.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
-						while (lo < hi && nums[lo] == nums[lo + 1])
-							lo++;
-						while (lo < hi && nums[hi] == nums[hi - 1])
-							hi--;
-						lo++;
-						hi--;
-					} else if (nums[lo] + nums[hi] < sum)
-						lo++;
-					else
-						hi--;
-				}
-			}
-		}
-		return res;
-	}
+	public List<List<Integer>> threeSum2(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        for(int i = 0; i < nums.length - 2; i++){
+            if(i == 0 ||(i > 0 && nums[i] != nums[i - 1])){
+                int left = i + 1;
+                int right =  nums.length - 1;
+                while(left < right){
+                    int sum = nums[i] + nums[left] + nums[right];
+                    if(sum > 0){
+                        right--;
+                    }else if(sum < 0){
+                        left++;
+                    }else{
+                        res.add(new ArrayList<Integer>(Arrays.asList(nums[i], nums[left], nums[right])));
+                        while(left < right && nums[left] == nums[left + 1]){
+                            left++;
+                        }
+                        while(left < right && nums[right] == nums[right - 1]){
+                            right--;
+                        }
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 
 	public static void main(String[] args) {
 		int nums[] = { -1, 0, 1 };

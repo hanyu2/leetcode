@@ -23,6 +23,6 @@ public class IntToRoman {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(intToRoman2(1));
+		System.out.println(intToRoman2(836));
 	}
 }

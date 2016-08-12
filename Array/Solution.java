@@ -7,6 +7,7 @@ import java.util.List;
 public class Solution {
 	public static int reverse(int x) {
 		int sign = 1;
+		int t = 0;
 		if (x < 0) {
 			sign = -1;
 			x = -x;
@@ -24,6 +25,6 @@ public class Solution {
 
 	public static void main(String[] args) {
 
-		System.out.println(reverse(-2147483648));
+		System.out.println(reverse(-423458));
 	}
 }
