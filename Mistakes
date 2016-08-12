@@ -1,0 +1,1 @@
+combine(s + numString.charAt(i), index ++, digits, str, res);// dont pass ++ when doing recursion

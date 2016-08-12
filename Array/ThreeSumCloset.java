@@ -3,40 +3,8 @@ package Array;
 import java.util.Arrays;
 
 public class ThreeSumCloset {
-	
-	//Wrong solution
-	public static int threeSumClosest(int[] nums, int target) {
-		Arrays.sort(nums);
-		int distance = Integer.MAX_VALUE;
-		int sum = 0;
-		for (int i = 0; i < nums.length - 2; i++) {
-			int left = i + 1;
-			int right = nums.length - 1;
-			int tempDist = Integer.MAX_VALUE;
-			while (left < right) {
-				if (Math.abs(nums[i] + nums[left] + nums[right] - target) < tempDist) {
-					tempDist = Math.abs(nums[i] + nums[left] + nums[right] - target);
-				}
-				if (tempDist == 0) {
-					return nums[i] + nums[left] + nums[right];
-				}
-				if (tempDist < distance) {
-					distance = tempDist;
-					sum = nums[i] + nums[left] + nums[right];
-				}
-				if (Math.abs(nums[i] + nums[left + 1] + nums[right] - target) <= tempDist) {
-					left++;
-				} else if (Math.abs(nums[i] + nums[left] + nums[right - 1] - target) <= tempDist) {
-					right--;
-				} else {
-					break;
-				}
-			}
-		}
-		return sum;
-	}
 
-	public int threeSumClosest2(int[] num, int target) {
+	public static int threeSumClosest(int[] num, int target) {
 		int result = num[0] + num[1] + num[num.length - 1];
 		Arrays.sort(num);//do not miss
 		for (int i = 0; i < num.length - 2; i++) {
