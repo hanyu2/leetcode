@@ -1,1 +1,3 @@
 combine(s + numString.charAt(i), index ++, digits, str, res);// dont pass ++ when doing recursion
+
+Always remember check isEmpty when using Queue or Stack and check whether it is empty when return
