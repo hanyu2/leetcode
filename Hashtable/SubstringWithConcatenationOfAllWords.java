@@ -16,9 +16,10 @@ public class SubstringWithConcatenationOfAllWords {
             if(!wordDict.containsKey(word)) wordDict.put(word,1);
             else wordDict.put(word,wordDict.get(word) + 1);
         }
-        Map<String,Integer> currWords = new HashMap<String,Integer>();
+        
         int len = words[0].length();
         for(int i = 0; i < len; i++) {
+        	Map<String,Integer> currWords = new HashMap<String,Integer>();
             int k = i, j = i; //k is at the head of the window and j is the last.
             int addedCount = 0; //to indicate whether we add index to res.
             while(k<= s.length()-len*words.length&&j + len <= s.length()) { //make sure the remaining length is enough.
@@ -52,7 +53,6 @@ public class SubstringWithConcatenationOfAllWords {
                     k += len; //don't move j this case.
                 }
             }
-            currWords.clear();
         }
         return res;
     }

@@ -13,6 +13,18 @@ while(start <= end){
     }
 }
 
+Search right bound
+while(start <= end){
+    int mid = (start + end) / 2;
+    if(target >= nums[mid]){
+        if(target == nums[mid]){
+            res[1] = mid;
+        }
+        start = mid + 1;
+    }else{
+        end = mid - 1;
+    }
+}
 Search insert position
 public int searchInsert(int[] nums, int target) {
     int start = 0;
