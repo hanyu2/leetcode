@@ -1,2 +1,4 @@
 Arrays.copyOfRange(arr, 0, mid) Arrays.copyOfRange(arr, mid, arr.length)
 LinkedList<int[]> rs = new LinkedList<int[]>(); rs.getFirst()  rs.getLast()
+
+when using both index and element value, use XOR or swap element to its right position
