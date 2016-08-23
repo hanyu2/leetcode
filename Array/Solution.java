@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
-	public static List<List<Integer>> permute(int[] nums) {
+	public static List<List<Integer>> permuteUnique(int[] nums) {
 		Arrays.sort(nums);
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		if (nums.length == 0) {
@@ -24,6 +24,9 @@ public class Solution {
 			res.add(temp);
 		}
 		for (int i = start; i < nums.length; i++) {
+		    if(i > start && nums[i] == nums[i - 1]){
+		        continue;
+		    }
 			swap(nums, i, start);
 			perm(nums, start + 1, res);
 			swap(nums, i, start);
@@ -37,7 +40,7 @@ public class Solution {
 	}
 
 	public static void main(String[] args) {
-		int nums[] = {1, 2, 3 };
-		System.out.println(permute(nums));
+		int nums[] = {0, 0, 9, 0, 1};
+		System.out.println(permuteUnique(nums));
 	}
 }

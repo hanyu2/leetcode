@@ -2,3 +2,8 @@ int i = 0;
 for (Integer num : set) {
     res[i++] = num;
 }
+
+for(String key: map.keySet()) {
+    Collections.sort(map.get(key));
+}
+return new ArrayList<List<String>>(map.values());

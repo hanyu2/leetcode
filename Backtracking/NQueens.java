@@ -29,7 +29,7 @@ public class NQueens {
 		}
 
 		for (int j = 0; j < n; j++)
-			if (!ocp90[j] && !ocp45[depth + j] && !ocp135[j - depth + n - 1]) {
+			if (!ocp90[j] && !ocp45[depth + j] && !ocp135[n - depth + j - 1]) {
 				ocp90[j] = true;
 				ocp45[depth + j] = true;
 				ocp135[n - depth + j - 1] = true;
