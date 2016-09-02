@@ -2,7 +2,7 @@ package BitManipulation;
 
 public class BitwiseANDOfNumbersRange {
 	// https://yq.aliyun.com/articles/3512
-	public int rangeBitwiseAnd(int m, int n) {
+	public static int rangeBitwiseAnd(int m, int n) {
 		int count = 0;
 		while (m != n) {
 			m = m >>> 1; // shift numbers right
@@ -17,5 +17,8 @@ public class BitwiseANDOfNumbersRange {
 		while ((m & r) != (n & r))
 			r = r << 1;
 		return n & r;
+	}
+	public static void main(String[] args){
+		System.out.println(rangeBitwiseAnd(5, 9));
 	}
 }
