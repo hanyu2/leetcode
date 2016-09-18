@@ -38,8 +38,6 @@ public class MajorityElement2 {
 		int count[] = new int[2];
 		int x[] = new int[2];
 
-		x[0] = 0;
-		x[1] = 1;
 		for (int i = 0; i < nums.length; i++) {
 			if (x[0] == nums[i])
 				count[0]++;
@@ -65,7 +63,7 @@ public class MajorityElement2 {
 				count[1]++;
 		}
 		for (int j = 0; j < 2; j++) {
-			if (count[j] > nums.length / 3 && !res.contains(x[j]))
+			if (count[j] > nums.length / 3)
 				res.add(x[j]);
 		}
 		return res;
