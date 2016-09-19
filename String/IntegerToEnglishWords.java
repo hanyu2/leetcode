@@ -58,6 +58,6 @@ public class IntegerToEnglishWords {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(numberToWords(1234567));
+		System.out.println(numberToWords(2147483647));
 	}
 }

@@ -24,7 +24,7 @@ public class SlidingWindowMaximum {
 			}
 			// q contains index... r contains content
 			q.offer(i);
-			if (i >= k - 1) {
+			if(i >= k - 1) {
 				r[ri++] = nums[q.peek()];
 			}
 		}
@@ -32,7 +32,8 @@ public class SlidingWindowMaximum {
 	}
 	public static void main(String[] args) {
 		int [] nums = {1,3,-1,-3,5,3,6,7};
-		maxSlidingWindow(nums, 3);
+		int [] nums2 = {9, 11};
+		maxSlidingWindow(nums2, 2);
 		/*int [] nums = {1};
 		maxSlidingWindow(nums, 1);*/
 	}

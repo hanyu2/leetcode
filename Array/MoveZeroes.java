@@ -69,9 +69,17 @@ public class MoveZeroes {
 			++j;
 		}
 	}
+	
+	public static void moveZeroes4(int[] nums){
+		for (int lastNonZeroFoundAt = 0, cur = 0; cur < nums.length; cur++) {
+	        if (nums[cur] != 0) {
+	            swap(nums, lastNonZeroFoundAt++, cur);
+	        }
+	    }
+	}
 
 	public static void main(String[] args) {
 		int nums[] = { 2, 1, 0, 3, 4, 0, 12 };
-		moveZeroes(nums);
+		moveZeroes4(nums);
 	}
 }

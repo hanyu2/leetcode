@@ -78,6 +78,6 @@ public class PerfectSquare {
     }
 
 	public static void main(String[] args) {
-		System.out.println(numSquares(12));
+		System.out.println(numSquares3(12));
 	}
 }
