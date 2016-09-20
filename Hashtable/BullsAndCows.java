@@ -47,7 +47,7 @@ public class BullsAndCows {
 	}
 
 	public static void main(String[] args) {
-		getHint("1122", "1222");
+		getHint("1807", "7810");
 		getHint2("1234", "0111");
 	}
 

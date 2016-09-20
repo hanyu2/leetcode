@@ -6,13 +6,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class SerializeAndDeserializeBinaryTree {
-	public String serialize(TreeNode root) {
+	public static String serialize(TreeNode root) {
         StringBuilder sb = new StringBuilder();
         buildString(root, sb);
         return sb.toString();
     }
 
-    private void buildString(TreeNode node, StringBuilder sb) {
+    private static void buildString(TreeNode node, StringBuilder sb) {
         if (node == null) {
             sb.append("#").append(",");
         } else {
@@ -22,13 +22,13 @@ public class SerializeAndDeserializeBinaryTree {
         }
     }
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public static TreeNode deserialize(String data) {
         Deque<String> nodes = new LinkedList<>();
         nodes.addAll(Arrays.asList(data.split(",")));
         return buildTree(nodes);
     }
     
-    private TreeNode buildTree(Deque<String> nodes) {
+    private static TreeNode buildTree(Deque<String> nodes) {
         String val = nodes.remove();
         if (val.equals("#")) return null;
         else {
