@@ -80,6 +80,6 @@ public class RemoveInvalidParentheses {
 
 	public static void main(String[] args) {
 		String s = "(a)())()";
-		System.out.println(removeInvalidParentheses2(s));
+		System.out.println(removeInvalidParentheses(s));
 	}
 }
