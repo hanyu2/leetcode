@@ -1,38 +1,34 @@
 package BFS;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Solution {
-	public static void solve(char[][] board) {
-		for (int i = 0; i < board[0].length; i++) {
-			search(0, i, board);
-			search(board.length - 1, i, board);
-		}
-		for (int i = 1; i < board.length - 1; i++) {
-			search(i, 0, board);
-			search(i, board[0].length - 1, board);
-		}
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[0].length; j++) {
-				if (board[i][j] == 'O') {
-					board[i][j] = 'X';
-				} else if (board[i][j] == '*') {
-					board[i][j] = 'O';
-				}
+	public static List<String> subset(String s){
+		List<String> res = new ArrayList<String>();
+		res.add("");
+		for(int i = 0; i < s.length(); i++){
+			int size = res.size() - 1;
+			for(int j = 0; j <= size; j++){
+				String temp = "";
+				temp += s.charAt(i);
+				temp += res.get(j);
+				res.add(temp);
 			}
 		}
+		res.remove(0);
+		String[] subsets = new String[res.size()];
+		subsets = res.toArray(subsets);
+		Arrays.sort(subsets);
+		for(String string : subsets){
+			System.out.println(string);
+		}
+		return res;
 	}
 
-	public static void search(int i, int j, char[][] board) {
-		if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] == 'X' ||  board[i][j] == '*') {
-			return;
-		}
-		board[i][j] = '*';
-		search(i - 1, j, board);
-		search(i + 1, j, board);
-		search(i, j - 1, board);
-		search(i, j + 1, board);
-	}
 	public static void main(String[] args) {
-		char[][] board = {{'O', 'O'}, {'O', 'O'}};
-		solve(board);
+		subset("cba");
 	}
 }
