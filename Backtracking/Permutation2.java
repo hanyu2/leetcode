@@ -32,31 +32,31 @@ public class Permutation2 {
 		return new ArrayList<List<Integer>>(permutations);
 	}
 
-	public static List<List<Integer>> permuteUnique2(int[] nums) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		Arrays.sort(nums);
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		for (int num : nums)
-			list.add(num);
-		permute2(list, 0, res);
-		return res;
-	}
+	 public static List<List<Integer>> permuteUnique2(int[] nums) {
+			List<List<Integer>> res = new ArrayList<List<Integer>>();
+			Arrays.sort(nums);
+			List<Integer> list = new ArrayList<Integer>();
+			for (int num : nums)
+				list.add(num);
+			permute2(list, 0, res);
+			return res;
+		}
 
-	private static void permute2(LinkedList<Integer> nums, int start, List<List<Integer>> res) {
-		if (start == nums.size() - 1) {
-			res.add(new LinkedList<Integer>(nums));
-			return;
+		private static void permute2(List<Integer> nums, int start, List<List<Integer>> res) {
+			if (start == nums.size() - 1) {
+				res.add(new LinkedList<Integer>(nums));
+				return;
+			}
+			for (int i = start; i < nums.size(); i++) {
+				if (i > start && nums.get(i) == nums.get(i - 1))
+					continue;
+				nums.add(start, nums.get(i));// swap
+				nums.remove(i + 1);           //cannot swap directly because this kind swap could keep the
+				permute2(nums, start + 1, res);//elements come after start in order
+				nums.add(i + 1, nums.get(start));
+				nums.remove(start);
+			}
 		}
-		for (int i = start; i < nums.size(); i++) {
-			if (i > start && nums.get(i) == nums.get(i - 1))
-				continue;
-			nums.add(start, nums.get(i));// swap
-			nums.remove(i + 1);           //cannot swap directly because this kind swap could keep the
-			permute2(nums, start + 1, res);//elements come after start in order
-			nums.add(i + 1, nums.get(start));
-			nums.remove(start);
-		}
-	}
 
 	/*
 	 * The idea is for each recursion level, swap the current element at 1st

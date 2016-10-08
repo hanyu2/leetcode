@@ -1,6 +1,8 @@
 package Array;
 
 import java.util.BitSet;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FirstMissingPositive {
 	public static int firstMissingPositive(int[] nums) {
@@ -33,5 +35,7 @@ public class FirstMissingPositive {
 	public static void main(String[] args) {
 		int[] nums ={1};
 		System.out.println(firstMissingPositive(nums));
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(1);
 	}
 }
