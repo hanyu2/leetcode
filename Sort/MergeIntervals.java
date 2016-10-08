@@ -1,6 +1,7 @@
 package Sort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -38,26 +39,25 @@ public class MergeIntervals {
 		result.add(new Interval(start, end));
 		return result;
 	}
-	
-	 public List<Interval> merge2(List<Interval> intervals) {
-	        Collections.sort(intervals, new Comparator<Interval>(){
-	            @Override
-	            public int compare(Interval obj0, Interval obj1) {
-	                return obj0.start - obj1.start;
-	            }
-	        });
 
-	        List<Interval> ret = new ArrayList<>();
-	        Interval prev = null;
-	        for (Interval inter : intervals) {
-	            if (  prev==null || inter.start>prev.end ) {
-	                ret.add(inter);
-	                prev = inter;
-	            } else if (inter.end>prev.end) {
-	                // Modify the element already in list
-	                prev.end = inter.end;
-	            }
-	        }
-	        return ret;
-	    }
+	public List<Interval> merge2(List<Interval> intervals) {
+		int n = intervals.size();
+		int[] starts = new int[n];
+		int[] ends = new int[n];
+		for (int i = 0; i < n; i++) {
+			starts[i] = intervals.get(i).start;
+			ends[i] = intervals.get(i).end;
+		}
+		Arrays.sort(starts);
+		Arrays.sort(ends);
+		// loop through
+		List<Interval> res = new ArrayList<Interval>();
+		for (int i = 0, j = 0; i < n; i++) { // j is start of interval.
+			if (i == n - 1 || starts[i + 1] > ends[i]) {
+				res.add(new Interval(starts[j], ends[i]));
+				j = i + 1;
+			}
+		}
+		return res;
+	}
 }
