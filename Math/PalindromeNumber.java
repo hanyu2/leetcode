@@ -22,28 +22,7 @@ public class PalindromeNumber {
 		return true;
 	}
 	
-	public static boolean isPalindrome2(int x) {
-        if(x < 0){
-            return false;
-        }
-        String s = String.valueOf(x);
-        int num = 1;
-        for(int i = 0; i < s.length() - 1; i++){
-            num *= 10;
-        }
-        while(num > 0){
-            int left = x / num;
-            int right = x % 10;
-            if(left != right){
-                return false;
-            }
-            x = x % num;
-            x /= 10;
-            s = String.valueOf(x);
-        }
-        return true;
-    }
 	public static void main(String[] args) {
-		isPalindrome2(1000021);
+		isPalindrome(1000021);
 	}
 }

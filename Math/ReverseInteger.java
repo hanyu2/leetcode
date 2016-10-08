@@ -2,7 +2,7 @@ package Math;
 
 public class ReverseInteger {
 
-	public int reverse(int x) {
+	public static int reverse(int x) {
         int sign = 1;
         if(x < 0){
             sign = -1;

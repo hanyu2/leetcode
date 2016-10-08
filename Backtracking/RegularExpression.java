@@ -2,7 +2,7 @@ package Backtracking;
 
 public class RegularExpression {
 	//http://www.cnblogs.com/lupx/p/leetcode-10.html
-	public boolean isMatch(String s, String p) {
+	public static boolean isMatch(String s, String p) {
 		if (p.length() == 0) {
 			return s.length() == 0;
 		}
@@ -23,8 +23,9 @@ public class RegularExpression {
 					&& isMatch(s.substring(1), p.substring(1));
 		}
 	}
-
-	//http://www.cnblogs.com/lupx/p/leetcode-10.html
+	
+	
+    	//http://www.cnblogs.com/lupx/p/leetcode-10.html
 	public static boolean isMatch2(String s, String p) {
 		          int slen = s.length();
 		         int plen = p.length();
@@ -95,6 +96,6 @@ public class RegularExpression {
 		         return dp[slen][plen];
 		     }
 	public static void main(String[] args) {
-		isMatch2("aa", "a*");
+		System.out.println(isMatch("aa", "a*"));
 	}
 }

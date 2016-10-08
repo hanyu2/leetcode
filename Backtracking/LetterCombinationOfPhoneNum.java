@@ -16,9 +16,9 @@ public class LetterCombinationOfPhoneNum {
 			int size = list.size();
 			int x = Character.getNumericValue(digits.charAt(i));
 			for(int j = 0; j < size; j++){
-				String t = list.remove();
-				for (char s : mapping[x].toCharArray()){
-					list.add(t + s);
+				String s = list.remove();
+				for (char c : mapping[x].toCharArray()){
+					list.add(s + c);
 				}
 			}
 		}
