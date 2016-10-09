@@ -37,6 +37,7 @@ public class UniquePath2 {
 		return path[m - 1][n - 1];
 	}
 	
+	//O(N) space
 	public static int uniquePathsWithObstacles2(int[][] obstacleGrid) {
 	    int width = obstacleGrid[0].length;
 	    int[] dp = new int[width];

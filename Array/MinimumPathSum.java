@@ -46,6 +46,30 @@ public class MinimumPathSum {
         }
         return help[m - 1][n - 1];
     }
+	
+	public static int minPathSum5(int[][] grid) {
+		if(grid == null || grid.length == 0){
+        	return 0;
+        }
+        int m = grid.length;
+        int n = grid[0].length;
+        int[]dp = new int[n + 1];
+        for(int i = 0; i < n; i++){
+        	dp[i + 1] = grid[0][i] + dp[i];
+        }
+        for(int i = 1; i < m; i++){
+        	for(int j = 0; j < n; j++){
+        		if(j == 0){
+        			dp[j + 1] = grid[i][j] + dp[j + 1];
+        		}else{
+        			dp[j + 1] = grid[i][j] + Math.min(dp[j], dp[j + 1]);
+        		}
+        	}
+        }
+        return dp[n];
+    }
+	
+	
 	// Dijkstra
 
 	static class PointComparator implements Comparator<int[]> {
@@ -114,6 +138,8 @@ public class MinimumPathSum {
 		int grid[][] = {{3, 5, 1}, {2, 7, 4}, {9, 2, 0}};
 		//int [][] grid = {{1, 2}, {1, 2}};
 		//int [][] grid = {{1, 2}, {5, 6}, {1, 1}};
-		System.out.println(minPathSum(grid));
+		int grid2[][] = {{1, 2},{5, 6}, {1, 1}};
+		int grid3[][] = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
+		System.out.println(minPathSum5(grid2));
 	}
 }
