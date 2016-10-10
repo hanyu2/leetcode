@@ -56,7 +56,7 @@ public class CopyListWithRandomPointer {
 		n = head;
 		RandomListNode head2 = head.next;
 		while (n2 != null && n != null) {
-			n.next = n.next.next;
+			n.next = n2.next;
 			if (n2.next == null) {
 				break;
 			}
