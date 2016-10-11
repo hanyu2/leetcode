@@ -50,4 +50,5 @@ public class BinaryTreeLevelOrderTraverse {
         traverse(res, level + 1, root.left);
         traverse(res, level + 1, root.right);
     }
+
 }
