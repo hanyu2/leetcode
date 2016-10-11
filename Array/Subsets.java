@@ -80,18 +80,17 @@ public class Subsets {
 	// elements in a subsets are non-descending
 	public static List<List<Integer>> subsets5(int[] nums) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		res.add(new ArrayList<Integer>());
-		Arrays.sort(nums);
-		for (int i = nums.length - 1; i >= 0; i--) {
-			int size = res.size() - 1;
-			for (int j = size; j >= 0; j--) {
-				List<Integer> newList1 = new ArrayList<>();
-				newList1.add(nums[i]);
-				newList1.addAll(res.get(j));
-				res.add(newList1);
-			}
-		}
-		return res;
+        res.add(new ArrayList<Integer>());
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length; i++){
+            int size = res.size();
+            for(int j = 0; j < size; j++){
+                List<Integer> temp = new ArrayList<Integer>(res.get(j));
+                temp.add(nums[i]);
+                res.add(temp);
+            }
+        }
+        return res;
 	}
 
 	// bit manipulation

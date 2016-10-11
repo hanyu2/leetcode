@@ -17,14 +17,14 @@ public class Subsets2 {
 		if (pos <= n.length) {
 			res.add(each);
 		}
-		int i = pos;
-		while (i < n.length) {
-			each.add(n[i]);
-			helper(res, new ArrayList<>(each), i + 1, n);
+		
+		while (pos < n.length) {
+			each.add(n[pos]);
+			helper(res, new ArrayList<>(each), pos + 1, n);
 			each.remove(each.size() - 1);
-			i++;
-			while (i < n.length && n[i] == n[i - 1]) {
-				i++;
+			pos++;
+			while (pos < n.length && n[pos] == n[pos - 1]) {
+				pos++;
 			}
 		}
 		return;

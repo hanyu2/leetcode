@@ -8,22 +8,21 @@ import java.util.List;
 public class Combinations {
 	public static List<List<Integer>> combine(int n, int k) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		helper(res, new ArrayList<Integer>(), n, 1, k);
+		combine(res, new ArrayList<Integer>(), 1, n, k);
 		return res;
 	}
-
-	public static void helper(List<List<Integer>> res, List<Integer> list, int n, int index, int k) {
-		if (k == 0) {
-			res.add(list);
+	public static void combine(List<List<Integer>> res, List<Integer> comb, int start, int n, int k) {
+		if(k==0) {
+			res.add(new ArrayList<Integer>(comb));
 			return;
 		}
-		for (int i = index; i <= n; i++) {
-			List<Integer> temp = new ArrayList<Integer>(list);
-			temp.add(i);
-			helper(res, temp, n, i + 1, k - 1);
+		for(int i=start;i<=n;i++) {
+			comb.add(i);
+			combine(res, comb, i+1, n, k-1);
+			comb.remove(comb.size()-1);
 		}
 	}
-	//Iterative
+	//Iterative much faster!
 	public static List<List<Integer>> combine2(int n, int k) {
 	    if (n == 0 || k == 0 || k > n) return Collections.emptyList();
 	    List<List<Integer>> res = new ArrayList<List<Integer>>();
