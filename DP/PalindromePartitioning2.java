@@ -1,6 +1,6 @@
 package DP;
 
-public class PalindromePartitioning {
+public class PalindromePartitioning2 {
 	 //https://discuss.leetcode.com/topic/32575/easiest-java-dp-solution-97-36/2
 	 public int minCut(String s) {
 		    char[] c = s.toCharArray();
@@ -21,3 +21,11 @@ public class PalindromePartitioning {
 		    return cut[n - 1];
 		}
 }
+
+//https://www.youtube.com/watch?v=lDYIvtBVmgo
+/*if isPalindrome(i, j)
+	T[i][j] = 0
+else
+	T[i][j] = 1 + min(T[i][k] + T[k + 1][j]) k == 1 ... j -1*/
+
+	
