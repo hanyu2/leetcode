@@ -28,6 +28,24 @@ public class SingleNumber2 {
 	                 // if p = 2, in binary form p = '10', then p2 = 1, so we should return x2.
 	}
 	
+	/*
+	 * 考虑每个元素的为一个32位的二进制数，这样每一位上出现要么为1 ，要么为0。
+	 * 对数组，统计每一位上1 出现的次数count，必定是3N或者3N+1
+	 * 次。让count对3取模，能够获得到那个只出现1次的元素该位是0还是1。
+	 */	
+	
+	public int singleNumer3(int[] nums){
+		int len = nums.length, result = 0;
+		for (int i = 0; i < 32; i++) {
+			int sum = 0;
+			for (int j = 0; j < len; j++) {
+				sum += (nums[j] >> i) & 1;
+			}
+			result |= (sum % 3) << i;
+		}
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		int[] nums = {1, 1, 1, 9};
 		System.out.println(singleNumber(nums));
