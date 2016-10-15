@@ -51,7 +51,6 @@ public class RepeatedDNA {
 	    return rv;
 	}
 	
-
 	public static void main(String[] args) {
 		String s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
 		List<String> list = findRepeatedDnaSequences2(s);

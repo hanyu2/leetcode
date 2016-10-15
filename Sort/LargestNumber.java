@@ -61,10 +61,10 @@ public class LargestNumber {
 		}
 		return sb.toString();
 	}
-
+	
 	public static void main(String[] args) {
-		int[] nums = { 1, 0, 0 };
-		// int[] nums = { 1, 2 };
+		//int[] nums = { 1, 0, 0 };
+		int[] nums = { 2, 1 };
 		System.out.println(largestNumber2(nums));
 	}
 }

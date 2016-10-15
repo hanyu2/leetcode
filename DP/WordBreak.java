@@ -26,15 +26,39 @@ public class WordBreak {
 		}
 		return word[len - 1];
 	}
+	
+	
+	//TLE
+	public static boolean wordBreak2(String s, Set<String> wordDict) {
+        if(s.length() == 0){
+            return false;
+        }
+        return breakup(0, s, wordDict);
+    }
+    
+    public static boolean breakup(int index, String s, Set<String> set){
+        if(index >= s.length()){
+            return true;
+        }
+        for(int i = index + 1; i <= s.length(); i++){
+            String temp = s.substring(index, i);
+            if(set.contains(temp)){
+                if(breakup(i, s, set)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 	public static void main(String[] args) {
 		Set<String> set = new HashSet<String>();
 		/*set.add("aaaa");
 		set.add("aa");
 		String s = "aaaaaaa";*/
-		set.add("a");
-		set.add("b");
-		String s = "ab";
-		System.out.println(wordBreak(s, set));
+		set.add("leet");
+		set.add("code");
+		String s = "leetcode";
+		System.out.println(wordBreak2(s, set));
 	}
 }

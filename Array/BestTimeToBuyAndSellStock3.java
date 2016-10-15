@@ -14,37 +14,28 @@ public class BestTimeToBuyAndSellStock3 {
 	}
 
 	public static int maxProfit2(int[] prices) {
-
-		if (prices == null || prices.length == 0)
+		int n = prices.length;
+		if(n <= 1){
 			return 0;
-		int lenght = prices.length;
-
-		int[] leftProfit = new int[lenght];
-		int leftMaxProfit = 0;
-		int leftMin = prices[0];
-		for (int i = 0; i < lenght; i++) {
-			if (prices[i] < leftMin)
-				leftMin = prices[i];
-			if (prices[i] - leftMin > leftMaxProfit)
-				leftMaxProfit = prices[i] - leftMin;
-			leftProfit[i] = leftMaxProfit;
 		}
-
-		int maxProfit = 0;
-		int rightMaxProfit = 0;
-		int rightMax = prices[lenght - 1];
-		for (int i = lenght - 1; i >= 0; i--) {
-			if (prices[i] > rightMax)
-				rightMax = prices[i];
-			if (rightMax - prices[i] > rightMaxProfit)
-				rightMaxProfit = rightMax - prices[i];
-			int currentProfit = rightMaxProfit + (i > 0 ? leftProfit[i - 1] : 0);
-			if (currentProfit > maxProfit) {
-				maxProfit = currentProfit;
-			}
+		int[] first = new int[n];
+		int[] second = new int[n];
+		int min = prices[0];
+		for(int i = 1; i < n; i++){
+			min = Math.min(min, prices[i]);
+			first[i] = Math.max(first[i - 1], prices[i] - min);
 		}
-
-		return maxProfit;
+		
+		int max = prices[n - 1];
+		for(int i = n - 2; i >= 0; i--){
+			max = Math.max(max, prices[i]);
+			second[i] = Math.max(second[i + 1], max - prices[i]);
+		}
+		int res = 0;
+		for(int i = 1; i < n; i++){
+			res = Math.max(res, first[i] + second[i]);
+		}
+		return res;
 	}
 
 	// DP generalizes to k transactions
@@ -67,8 +58,9 @@ public class BestTimeToBuyAndSellStock3 {
 
 	public static void main(String[] args) {
 		// int[] prices = {3, 3};
-		int[] prices = { 1, 2, 4, 3, 5, 7, 2, 4, 9, 0, 12 };
+		//int[] prices = { 1, 2, 4, 3, 5, 7, 2, 4, 9, 0, 12 };
 		// int [] prices = {1, 2, 4, 3, 5, 7, 2};
-		System.out.println(maxProfit(prices));
+		int[] prices = {4, 1, 2};
+		System.out.println(maxProfit2(prices));
 	}
 }

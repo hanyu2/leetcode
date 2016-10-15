@@ -36,7 +36,7 @@ public class MaxSubarray {
 			}
 			if (sum < minSum) {
 				sum = minSum;
-			}
+			}  
 		}
 		return max;
 	}

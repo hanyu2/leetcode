@@ -1,6 +1,6 @@
 package DP;
 
-import Array.Solution;
+import Array.LRUCache;
 
 public class RangeSumQuery2D {
 	int[][] sum;

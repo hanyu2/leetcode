@@ -2,3 +2,6 @@ To get the rightmost 1 bit : num & -num
 
 Integer.bitCount(num);
 Integer.numberOfTrailingZeros(num)%2;
+
+- separate rightest bit of 1， x & (-x)
+- unset rightest bit of 1, x & (x-1)

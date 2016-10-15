@@ -88,5 +88,43 @@ public class MaximumGap {
 		return max;
 	}
 	// radix sort
+	
+	public static int maximumGap3(int[] nums) {
+        if(nums.length <= 1){
+            return 0;
+        }
+        int  min = Integer.MAX_VALUE;
+        int  max = Integer.MIN_VALUE;
+        for(int i : nums){
+            min = Math.min(min, i);
+            max = Math.max(max, i);
+        }
+        int gap = (max - min)/ nums.length + 1;
+        int bucket_num = (max - min) / gap + 1;
+        int min_bucket[] = new int[bucket_num];
+        int max_bucket[] = new int[bucket_num];
+        Arrays.fill(min_bucket, Integer.MAX_VALUE);
+        Arrays.fill(max_bucket, Integer.MIN_VALUE);
+        for(int i : nums){
+            int index = (i - min) / gap;
+            min_bucket[index] = Math.min(min_bucket[index], i);
+            max_bucket[index] = Math.max(max_bucket[index], i);
+        }
+        int maxGap = Integer.MAX_VALUE;
+        int pre = min;
+        for(int i = 0; i < bucket_num; i++){
+            if(min_bucket[i] == Integer.MIN_VALUE || max_bucket[i] == Integer.MAX_VALUE){
+                continue;
+            }
+            maxGap = Math.max(maxGap, min_bucket[i] - pre);
+            pre = max_bucket[i];
+        }
+        maxGap = Math.max(maxGap, max - pre);
+        return maxGap;
+    }
+	public static void main(String[] args){
+		int[] nums = {1, 1000000};
+		maximumGap3(nums);
+	}
 
 }

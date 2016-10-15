@@ -54,7 +54,7 @@ public class CompareVersion {
 	        return 0;
 	    }
 	public static void main(String[] args) {
-		System.out.println(compareVersion2("01", "1"));
+		System.out.println(compareVersion("1.3", "1.47"));
 		System.out.println(compareVersion2("2", "2.5"));
 	}
 }
