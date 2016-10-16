@@ -83,7 +83,7 @@ public class LRUCache {
     	lru.set(1, 1);
     	lru.set(2, 3);
     	lru.set(4, 1);
-    	lru.get(1);
-    	lru.get(2);
+    	System.out.println(lru.get(1));
+    	System.out.println(lru.get(2));
     }
 }
