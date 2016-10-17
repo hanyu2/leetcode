@@ -38,7 +38,7 @@ public class Solution {
             }
         }
         map.put(index, res);
-        return map.get(index);
+        return res;
     }
 
 	public static void main(String[] args) {
