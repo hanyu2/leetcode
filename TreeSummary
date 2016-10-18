@@ -55,22 +55,22 @@ public List<Integer> preorderTraversal(TreeNode root) {
 }
 
 IN ORDER TRAVERSE
-public List<Integer> inorderTraversal(TreeNode root) {
-    List<Integer> result = new ArrayList<>();
-    Deque<TreeNode> stack = new ArrayDeque<>();
-    TreeNode p = root;
-    while(!stack.isEmpty() || p != null) {
-        if(p != null) {
-            stack.push(p);
-            p = p.left;
-        } else {
-            TreeNode node = stack.pop();
-            result.add(node.val);  // Add after all left children
-            p = node.right;   
-        }
-    }
-    return result;
-}
+List<Integer> list = new ArrayList<Integer>();
+
+	    Stack<TreeNode> stack = new Stack<TreeNode>();
+	    TreeNode cur = root;
+
+	    while(cur!=null || !stack.empty()){
+	        while(cur!=null){
+	            stack.add(cur);
+	            cur = cur.left;
+	        }
+	        cur = stack.pop();
+	        list.add(cur.val);
+	        cur = cur.right;
+	    }
+
+	    return list;
 
 POST ORDER TRAVERSE
 public List<Integer> postorderTraversal(TreeNode root) {

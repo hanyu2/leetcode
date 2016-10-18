@@ -1,56 +1,38 @@
 package BFS;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+
+import Tree.TreeNode;
 
 public class Solution {
-	public static int[] findOrder2(int numCourses, int[][] prerequisites) {
-        ArrayList[] graph = new ArrayList[numCourses];
-        for (int i = 0; i < numCourses; i++){
-        	graph[i] = new ArrayList<Integer>();
+
+	public static int maxProfit(int[] prices) {
+        if(prices.length <= 1){
+            return 0;
         }
-        for(int[] pre : prerequisites){
-        	graph[pre[1]].add(pre[0]);
+        int[] max1 = new int[prices.length];
+        int min = prices[0];
+        for(int i = 1; i < prices.length; i++){
+            max1[i] = prices[i] - min;
+            min = Math.min(min, prices[i]);
         }
-        boolean[] visited = new boolean[numCourses];
-        Stack<Integer> stack = new Stack<Integer>();
-        for (int i = 0; i < numCourses; i++) {
-            if (!dfs(graph, i, stack, visited, new boolean[numCourses])){
-            	return new int[0];
-            }
+        int[] max2= new int[prices.length];
+        int max = prices[prices.length - 1];
+        for(int i = prices.length - 2; i >= 0; i--){
+            max2[i] = max - prices[i];
+            max = Math.max(max, prices[i]);
         }
-        int i = 0;
-        int[] result = new int[numCourses];
-        while (!stack.isEmpty()) {
-            result[i++] = stack.pop();
+        int res = 0;
+        for(int i = 0; i < prices.length; i++){
+            res = Math.max(res, max1[i] + max2[i]);
         }
-        return result;
+        return res;
     }
-    
-    private static boolean dfs(ArrayList[] graph, int v, Stack<Integer> stack, boolean[] visited, boolean[] isLoop) {
-        if (visited[v]){
-        	return true;
-        }
-        if (isLoop[v]){
-        	return false;
-        }
-        isLoop[v] = true;
-        for(int i = 0; i < graph[v].size(); i++){
-        	if(!dfs(graph, (int)graph[v].get(i), stack, visited, isLoop)){
-        		return false;
-        	}
-        }
-        visited[v] = true;
-        stack.push(v);
-        return true;
-    }
-    public static void main(String[] args){
-    	int[][] pre = {{1, 0}, {0, 1}};
-    	findOrder2(2, pre);
-    }
+
+	public static void main(String[] args) {
+		int[] prices = {2, 1, 2, 0, 1};
+		maxProfit(prices);
+	}
 }

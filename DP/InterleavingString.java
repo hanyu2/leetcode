@@ -1,6 +1,7 @@
 package DP;
 
 public class InterleavingString {
+	//http://www.myexception.cn/program/1974748.html
 	public static boolean isInterleave(String s1, String s2, String s3) {
 
 		if ((s1.length() + s2.length()) != s3.length())
