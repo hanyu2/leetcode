@@ -5,41 +5,31 @@ import java.util.Stack;
 import Tree.TreeNode;
 
 public class BSTIterator {
-	 private Stack<TreeNode> stack;
-	    public BSTIterator(TreeNode root) {
-	        stack = new Stack<>();
-	        TreeNode cur = root;
-	        while(cur != null){
-	            stack.push(cur);
-	            if(cur.left != null)
-	                cur = cur.left;
-	            else
-	                break;
-	        }
-	    }
+	Stack<TreeNode> stack;
+    public BSTIterator(TreeNode root) {
+        stack = new Stack<TreeNode>();
+        TreeNode cur = root;
+        while(cur != null){
+            stack.push(cur);
+            cur = cur.left;
+        }
+    }
 
-	    /** @return whether we have a next smallest number */
-	    public boolean hasNext() {
-	        return !stack.isEmpty();
-	    }
+    /** @return whether we have a next smallest number */
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
 
-	    /** @return the next smallest number */
-	    public int next() {
-	        TreeNode node = stack.pop();
-	        TreeNode cur = node;
-	        // traversal right branch
-	        if(cur.right != null){
-	            cur = cur.right;
-	            while(cur != null){
-	                stack.push(cur);
-	                if(cur.left != null)
-	                    cur = cur.left;
-	                else
-	                    break;
-	            }
-	        }
-	        return node.val;
-	    }
+    /** @return the next smallest number */
+    public int next() {
+        TreeNode node = stack.pop();
+        TreeNode r = node.right;
+        while(r != null){
+            stack.push(r);
+            r = r.left;
+        }
+        return node.val;
+    }
 }
 
 /**

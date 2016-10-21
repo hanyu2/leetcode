@@ -7,32 +7,27 @@ import java.util.List;
 import Tree.TreeNode;
 
 public class Solution {
-
-	public static int maxProfit(int[] prices) {
-        if(prices.length <= 1){
-            return 0;
+	public static int compareVersion(String version1, String version2) {
+        String[] str1 = version1.split("\\.");
+        String[] str2 = version2.split("\\.");
+        int i = 0;
+        int j = 0;
+        while(i < str1.length || j < str2.length){
+            int num1 = i < str1.length ? Integer.parseInt(str1[i]) : 0;
+            int num2 = j < str2.length ? Integer.parseInt(str2[j]) : 0;
+            if(num1 > num2){
+                return 1;
+            }else if(num1 < num2){
+                return -1;
+            }else{
+                i++;
+                j++;
+            }
         }
-        int[] max1 = new int[prices.length];
-        int min = prices[0];
-        for(int i = 1; i < prices.length; i++){
-            max1[i] = prices[i] - min;
-            min = Math.min(min, prices[i]);
-        }
-        int[] max2= new int[prices.length];
-        int max = prices[prices.length - 1];
-        for(int i = prices.length - 2; i >= 0; i--){
-            max2[i] = max - prices[i];
-            max = Math.max(max, prices[i]);
-        }
-        int res = 0;
-        for(int i = 0; i < prices.length; i++){
-            res = Math.max(res, max1[i] + max2[i]);
-        }
-        return res;
+        return 0;
     }
 
 	public static void main(String[] args) {
-		int[] prices = {2, 1, 2, 0, 1};
-		maxProfit(prices);
+		compareVersion("1.0", "1.1");
 	}
 }

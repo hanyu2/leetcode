@@ -15,7 +15,7 @@ public class FirstMissingPositive {
 		return set.nextClearBit(1);
 	}
 	
-	public int firstMissingPositive2(int[] nums) {
+	public static int firstMissingPositive2(int[] nums) {
         int i = 0;
         while(i < nums.length){
             if(nums[i] == i+1 || nums[i] <= 0 || nums[i] > nums.length) i++;
@@ -27,14 +27,14 @@ public class FirstMissingPositive {
         return i+1;
     }
     
-    private void swap(int[] nums, int i, int j){
+    private static void swap(int[] nums, int i, int j){
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
     }
 	public static void main(String[] args) {
-		int[] nums ={1};
-		System.out.println(firstMissingPositive(nums));
+		int[] nums ={3, 4, -1, 1};
+		System.out.println(firstMissingPositive2(nums));
 		Set<Integer> set = new HashSet<Integer>();
 		set.add(1);
 	}
