@@ -1,0 +1,12 @@
+Inner join
+
+select a.Name
+from Employee a inner join Employee b on a.ManagerId=b.Id
+where a.Salary>b.Salary
+
+
+
+
+select E1.Name 
+from Employee as E1, Employee as E2 
+where E1.ManagerId = E2.Id and E1.Salary > E2.Salary
