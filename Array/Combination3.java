@@ -41,7 +41,7 @@ public class Combination3 {
         for(int i = start; i <= sum && i <= 9; i++){
             List<Integer> temp = new ArrayList<Integer>(list);
             temp.add(i);
-            combine(step - 1, sum - i, temp, res, start + 1);
+            combine(step - 1, sum - i, temp, res, i + 1);
         }
     }
 	public static void main(String[] args) {

@@ -1,33 +1,40 @@
 package BFS;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-
-import Tree.TreeNode;
+import java.util.Map;
+import java.util.Queue;
 
 public class Solution {
-	public static int compareVersion(String version1, String version2) {
-        String[] str1 = version1.split("\\.");
-        String[] str2 = version2.split("\\.");
-        int i = 0;
-        int j = 0;
-        while(i < str1.length || j < str2.length){
-            int num1 = i < str1.length ? Integer.parseInt(str1[i]) : 0;
-            int num2 = j < str2.length ? Integer.parseInt(str2[j]) : 0;
-            if(num1 > num2){
-                return 1;
-            }else if(num1 < num2){
-                return -1;
-            }else{
-                i++;
-                j++;
-            }
-        }
-        return 0;
-    }
+	public static List<List<Integer>> combinationSum3(int k, int n) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (k == 0) {
+			return res;
+		}
+		combine(1, 0, k, n, new ArrayList<Integer>(), res);
+		return res;
+	}
+
+	public static void combine(int index, int sum, int k, int n, List<Integer> list, List<List<Integer>> res) {
+		if (index > 9 || sum > n) {
+			return;
+		}
+		if (sum == n && k == 0) {
+			List<Integer> temp = new ArrayList<Integer>(list);
+			temp.add(index);
+			res.add(temp);
+			return;
+		}
+		for (int i = index; i <= 9; i++) {
+			List<Integer> temp = new ArrayList<Integer>(list);
+			temp.add(i);
+			combine(i + 1, sum + i, k - 1, n, temp, res);
+		}
+	}
 
 	public static void main(String[] args) {
-		compareVersion("1.0", "1.1");
+		System.out.println(combinationSum3(3, 7));
 	}
 }

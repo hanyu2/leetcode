@@ -3,21 +3,21 @@ package Array;
 public class MinimumSizeSubarraySum {
 	public static int minSubArrayLen(int[] nums, int s) {
 		// write your code here
-		int j = 0, i = 0;
-		int sum = 0;
-		int ans = Integer.MAX_VALUE;
-		for (i = 0; i < nums.length; i++) {
-			while (j < nums.length && sum < s) {
-				sum += nums[j];
-				j++;
-			}
-			if (sum >= s)// Do not forget this condition
-				ans = Math.min(ans, j - i);
-			sum -= nums[i];
-		}
-		if (ans == Integer.MAX_VALUE)
-			ans = 0;
-		return ans;
+		if (nums == null || nums.length == 0)
+		    return 0;
+		  
+		  int i = 0, j = 0, sum = 0, min = Integer.MAX_VALUE;
+		  
+		  while (j < nums.length) {
+		    sum += nums[j++];
+		    
+		    while (sum >= s) {
+		      min = Math.min(min, j - i);
+		      sum -= nums[i++];
+		    }
+		  }
+		  
+		 return min == Integer.MAX_VALUE ? 0 : min;
 	}
 
 	// O(nlogn)
