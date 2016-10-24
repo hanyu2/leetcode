@@ -8,33 +8,19 @@ import java.util.Map;
 import java.util.Queue;
 
 public class Solution {
-	public static List<List<Integer>> combinationSum3(int k, int n) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if (k == 0) {
-			return res;
-		}
-		combine(1, 0, k, n, new ArrayList<Integer>(), res);
-		return res;
-	}
-
-	public static void combine(int index, int sum, int k, int n, List<Integer> list, List<List<Integer>> res) {
-		if (index > 9 || sum > n) {
-			return;
-		}
-		if (sum == n && k == 0) {
-			List<Integer> temp = new ArrayList<Integer>(list);
-			temp.add(index);
-			res.add(temp);
-			return;
-		}
-		for (int i = index; i <= 9; i++) {
-			List<Integer> temp = new ArrayList<Integer>(list);
-			temp.add(i);
-			combine(i + 1, sum + i, k - 1, n, temp, res);
-		}
-	}
+	public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        for(int i = 0; i < nums.length - k; i++){
+            for(int j = 1; j <= k; j++){
+                if(nums[i] == nums[i + j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 	public static void main(String[] args) {
-		System.out.println(combinationSum3(3, 7));
+		int[] nums = {99, 99};
+		System.out.println(containsNearbyDuplicate(nums, 2));
 	}
 }
