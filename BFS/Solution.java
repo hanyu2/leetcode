@@ -1,26 +1,28 @@
 package BFS;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Queue;
 
 public class Solution {
-	public static boolean containsNearbyDuplicate(int[] nums, int k) {
-        for(int i = 0; i < nums.length - k; i++){
-            for(int j = 1; j <= k; j++){
-                if(nums[i] == nums[i + j]){
-                    return true;
-                }
+	public static boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int i = 0;
+        int j = n - 1;
+        while(i < m && j >= 0){
+            if(matrix[i][j] == target){
+                return true;
+            }else if(matrix[i][j] > target){
+                i--;
+            } else{
+                j++;
             }
         }
         return false;
     }
-
-	public static void main(String[] args) {
-		int[] nums = {99, 99};
-		System.out.println(containsNearbyDuplicate(nums, 2));
+	public static void main(String[] args){
+		int[][] nums = {{-5}};
+		System.out.println(searchMatrix(nums, -2));
 	}
 }
