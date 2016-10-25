@@ -3,7 +3,7 @@ package BinarySearch;
 public class FirstBadVersion {
 	static int array[] = { 1, 1, 1, 1, 1, 1, 0, 0, 0 };
 
-	public int firstBadVersion(int n) {
+	public static int firstBadVersion(int n) {
         int left = 1;
         int right = n;
         while(left < right){

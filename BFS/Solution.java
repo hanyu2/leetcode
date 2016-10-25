@@ -1,28 +1,51 @@
 package BFS;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
-	public static boolean searchMatrix(int[][] matrix, int target) {
-        int m = matrix.length;
-        int n = matrix[0].length;
-        int i = 0;
-        int j = n - 1;
-        while(i < m && j >= 0){
-            if(matrix[i][j] == target){
-                return true;
-            }else if(matrix[i][j] > target){
-                i--;
-            } else{
-                j++;
+	public static String getHint(String secret, String guess) {
+		Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int A = 0;
+        int B = 0;
+        for(int i = 0; i < secret.length(); i++){
+            if(secret.charAt(i) == guess.charAt(i)){
+                A++;
+                continue;
+            }
+            if(map.containsKey(secret.charAt(i))){
+                map.put(secret.charAt(i), map.get(secret.charAt(i)) + 1);
+            }else if(map.containsKey(guess.charAt(i))){
+                B++;
+                int t = map.get(guess.charAt(i));
+                if(t == 1){
+                    map.remove(guess.charAt(i));
+                }else{
+                    map.put(guess.charAt(i), t - 1);
+                }
+            }
+            if(map.containsKey(secret.charAt(i))){
+            	map.put(secret.charAt(i), map.get(secret.charAt(i)) + 1);
+            }else{
+            	map.put(secret.charAt(i), 1);
+            }
+            
+        }
+        for(int i = 0; i < guess.length(); i++){
+            if(map.containsKey(guess.charAt(i))){
+                B++;
+                int t = map.get(guess.charAt(i));
+                if(t == 1){
+                    map.remove(guess.charAt(i));
+                }else{
+                    map.put(guess.charAt(i), t - 1);
+                }
             }
         }
-        return false;
+        return A + "A" + B + "B";
     }
 	public static void main(String[] args){
-		int[][] nums = {{-5}};
-		System.out.println(searchMatrix(nums, -2));
+		int[] nums = {1};
+		System.out.println(getHint("1807", "7810"));
 	}
 }

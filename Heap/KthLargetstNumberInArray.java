@@ -16,39 +16,39 @@ public class KthLargetstNumberInArray {
 		return pq.peek();
 	}
 	//similar idea with quick sort
-	public static int findKthLargest2(int[] nums, int k) {
-		//shuffle(nums);
+	public int findKthLargest2(int[] nums, int k) {
         k = nums.length - k;
-        int start = 0;
-        int end = nums.length - 1;
-        while(start < end){
-            int j = partition(nums, start, end);
-            if(j < k){
-                start = j + 1;
-            }else if(j > k){
-                end = j - 1;
+        int left = 0;
+        int right = nums.length - 1;
+        while(left < right){
+            int j = partition(nums, left, right);
+            if(j == k){
+                return nums[j];
+            }else if(j < k){
+                left = j + 1;
             }else{
-                break;
+                right = j - 1;
             }
         }
         return nums[k];
     }
-    public static int partition(int [] nums, int start, int end){
-        int i = start;
-        int j = end + 1;
-        while(true){
-            while(i < end && (nums[++i] < nums[start]));
-               
-            while(j > start && (nums[start] < nums[--j]));
-            if(i >= j){
-                break;
+    
+    private int partition(int[] nums, int i, int j) {
+        int x = nums[i];
+        int m = i;
+        int n = i+1;
+        
+        while(n<=j){
+            if(nums[n]<x) {
+                swap(nums, ++m, n);
             }
-            swap(nums, i, j);
+            ++n;
         }
-        swap(nums, start, j);
-        return j;
+        swap(nums,i, m);
+        return m;
     }
-    public static void swap(int [] nums, int i, int j){
+    
+    private static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
