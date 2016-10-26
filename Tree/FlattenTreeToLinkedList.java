@@ -35,6 +35,29 @@ public class FlattenTreeToLinkedList {
 		cur.right = right;
 	}
 
+	public void flatten4(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        if (root.left == null && root.right == null) {
+            return;
+        }
+        while (root != null) {
+            if (root.left == null) {
+                root = root.right;
+                continue;
+            }
+            TreeNode left = root.left;
+            while (left.right != null) {
+                left = left.right;
+            }
+            left.right = root.right;
+            root.right = root.left;
+            root.left = null;
+            root = root.right;
+        }
+    }
+	
 	// DFS Use a stack
 	public void flatten3(TreeNode root) {
 		if (root == null)

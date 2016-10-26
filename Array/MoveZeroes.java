@@ -30,6 +30,25 @@ public class MoveZeroes {
 		nums[i] = nums[j];
 		nums[j] = temp;
 	}
+	//minimize overwrite
+	public static void moveZeroes5(int[] nums){
+		int zeroNum = 0;
+		for(int i = 0; i < nums.length; i++){
+			if(nums[i] == 0){
+				zeroNum++;
+			}else{
+				if(zeroNum != 0){
+					nums[i - zeroNum] = nums[i];
+				}
+			}
+		}
+		for(int i = nums.length - zeroNum; i < nums.length; i++){
+			if(nums[i] != 0){
+				nums[i] = 0;
+			}
+		}
+	}
+	
 	//My solution
 	public void moveZeroes3(int[] nums) {
         int count = 0;
