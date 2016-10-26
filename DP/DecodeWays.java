@@ -2,7 +2,7 @@ package DP;
 
 public class DecodeWays {
 
-	public int numDecodings1(String s) {
+	public static int numDecodings1(String s) {
 		if (s == null || s.length() == 0)
 			return 0;
 		char[] sa = s.toCharArray();
@@ -13,7 +13,7 @@ public class DecodeWays {
 				nums[i] += nums[i - 1];
 			if (i > 1 && sa[i - 2] == '1')
 				nums[i] += nums[i - 2];
-			if (i > 1 && sa[i - 2] == '2' && sa[i - 1] >= '0' && sa[i - 1] <= '6')
+			else if (i > 1 && sa[i - 2] == '2' && sa[i - 1] >= '0' && sa[i - 1] <= '6')
 				nums[i] += nums[i - 2];
 		}
 		return nums[sa.length];
@@ -73,7 +73,7 @@ public class DecodeWays {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(numDecodings2("10003"));
+		System.out.println(numDecodings1("0"));
 		System.out.println(numDecodings2("12415"));
 	}
 }
