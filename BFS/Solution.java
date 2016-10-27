@@ -1,26 +1,41 @@
 package BFS;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Solution {
-	public static int minSubArrayLen(int s, int[] nums) {
-        if(nums.length == 0){
-            return 0;
-        }
-        int min = Integer.MAX_VALUE;
-        int sum = nums[0];
-        int i = 1;
-        int j = 0;
-        while(i < nums.length){
-            if(sum < s){
-                sum += nums[i++];
+	public static int[] intersection(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int i : nums1){
+            if(map.containsKey(i)){
+                map.put(i, map.get(i) + 1);
             }else{
-                min = Math.min(min, i - j);
-                sum -= nums[j++];
+                map.put(i, 1);
             }
         }
-        return min == Integer.MAX_VALUE ? 0 : min;
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i : nums2){
+            if(map.containsKey(i)){
+                list.add(i);
+                int time = map.get(i);
+                if(time == 0){
+                    map.remove(i);
+                }else{
+                    map.put(i, time - 1);
+                }
+            }
+        }
+        int[] res = new int[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            res[i] = list.get(i);
+        }
+        return res;
     }
 	public static void main(String[] args){
-		int[] nums = {1, 2, 3, 4, 5};
-		System.out.println(minSubArrayLen(11, nums));
+		int[] nums = {1};
+		int[] nums2 = {1, 1};
+		System.out.println(intersection(nums, nums2));
 	}
 }
