@@ -6,36 +6,38 @@ import java.util.List;
 import java.util.Map;
 
 public class Solution {
-	public static int[] intersection(int[] nums1, int[] nums2) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int i : nums1){
-            if(map.containsKey(i)){
-                map.put(i, map.get(i) + 1);
-            }else{
-                map.put(i, 1);
-            }
+	public static int lengthOfLIS(int[] nums) {
+        if(nums.length <= 1){
+            return nums.length;
         }
         List<Integer> list = new ArrayList<Integer>();
-        for(int i : nums2){
-            if(map.containsKey(i)){
-                list.add(i);
-                int time = map.get(i);
-                if(time == 0){
-                    map.remove(i);
-                }else{
-                    map.put(i, time - 1);
-                }
+        list.add(nums[0]);
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i] > list.get(list.size() - 1)){
+                list.add(nums[i]);
+            }else{
+                int index = find(list, nums[i]);
+                list.set(index, nums[i]);
             }
         }
-        int[] res = new int[list.size()];
-        for(int i = 0; i < list.size(); i++){
-            res[i] = list.get(i);
+        return list.size();
+    }
+    
+    public static int find(List<Integer> list, int target){
+        int start = 0;
+        int end = list.size() - 1;
+        while(start < end){
+            int mid = (start + end) >> 1;
+            if(list.get(mid) > target){
+                end = mid - 1;
+            }else{
+                start = mid;
+            }
         }
-        return res;
+        return start;
     }
 	public static void main(String[] args){
-		int[] nums = {1};
-		int[] nums2 = {1, 1};
-		System.out.println(intersection(nums, nums2));
+		int[] nums = {10,9,2,5,3,7,101,18};
+		System.out.println(lengthOfLIS(nums));
 	}
 }
