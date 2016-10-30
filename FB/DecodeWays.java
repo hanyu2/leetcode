@@ -1,7 +1,25 @@
-package DP;
+package FB;
 
 public class DecodeWays {
 
+	public static int numDecodings2(String s) {
+		if (s == null || s.length() == 0)
+			return 0;
+		int len = s.length();
+		int[] dp = new int[len + 1];
+		dp[len] = 1;
+		for (int i = len - 1; i >= 0; i--) {
+			if (s.charAt(i) != '0') {
+				dp[i] = dp[i + 1];
+				if (i < len - 1 && Integer.parseInt(s.substring(i, i + 2)) <= 26) {
+					dp[i] += dp[i + 2];
+				}
+			}
+		}
+		return dp[0];
+	}
+	
+	
 	public static int numDecodings1(String s) {
 		if (s == null || s.length() == 0)
 			return 0;
@@ -37,22 +55,7 @@ public class DecodeWays {
 		return memo[0];
 	}
 
-	public static int numDecodings2(String s) {
-		if (s == null || s.length() == 0)
-			return 0;
-		int len = s.length();
-		int[] dp = new int[len + 1];
-		dp[len] = 1;
-		for (int i = len - 1; i >= 0; i--) {
-			if (s.charAt(i) != '0') {
-				dp[i] = dp[i + 1];
-				if (i < len - 1 && Integer.parseInt(s.substring(i, i + 2)) <= 26) {
-					dp[i] += dp[i + 2];
-				}
-			}
-		}
-		return dp[0];
-	}
+	
 
 	// no extra space
 	public int numDecodings3(String s) {
@@ -73,7 +76,7 @@ public class DecodeWays {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(numDecodings1("0"));
+		System.out.println(numDecodings("0"));
 		System.out.println(numDecodings2("12415"));
 	}
 }

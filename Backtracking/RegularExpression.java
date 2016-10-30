@@ -24,6 +24,32 @@ public class RegularExpression {
 		}
 	}
 	
+	//https://www.youtube.com/watch?v=l3hda49XcDE
+	public static boolean isMatch3(String text, String pattern){
+		boolean[][] T = new boolean[text.length() + 1][pattern.length() + 1];
+		T[0][0] = true;
+		for(int j = 1; j < T[0].length; j++){
+			if(pattern.charAt(j - 1) == '*'){
+				T[0][j] = T[0][j - 2];
+			}
+		}
+		
+		for(int i = 1; i < T.length; i++){
+			for(int j = 1; j < T[0].length; j++){
+				if(pattern.charAt(j - 1) == '.' || pattern.charAt(j - 1) == text.charAt(i - 1)){
+					T[i][j] = T[i - 1][j - 1];
+				}else if(pattern.charAt(j - 1) == '*'){
+					T[i][j] = T[i][j - 2];
+					if(pattern.charAt(j - 2) == '.' || pattern.charAt(j - 2) == text.charAt(i - 1)){
+						T[i][j] = T[i][j] | T[i - 1][j];
+					}
+				}else{
+					T[i][j] = false;
+				}
+			}
+		}
+		return T[text.length()][pattern.length()];
+	}
 	
     	//http://www.cnblogs.com/lupx/p/leetcode-10.html
 	public static boolean isMatch2(String s, String p) {
@@ -96,6 +122,6 @@ public class RegularExpression {
 		         return dp[slen][plen];
 		     }
 	public static void main(String[] args) {
-		System.out.println(isMatch("aa", "a*"));
+		System.out.println(isMatch3("aa", "a*"));
 	}
 }
