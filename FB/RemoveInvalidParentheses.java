@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class RemoveInvalidParentheses {
-
+	//http://www.1point3acres.com/bbs/thread-192179-1-1.html
 	public static String removeInvalidParentheses(String str) {
 		// check edge case
 		if (str == null || str.length() == 0) {
