@@ -1,4 +1,4 @@
-package String;
+package FB;
 
 public class IntegerToEnglishWords {
 	private static final String[] LESS_THAN_20 = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
