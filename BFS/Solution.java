@@ -1,43 +1,44 @@
 package BFS;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import Tree.TreeNode;
 
 public class Solution {
-	public static int lengthOfLIS(int[] nums) {
-        if(nums.length <= 1){
-            return nums.length;
+	public static TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        if(root == null || p == null){
+            return null;
         }
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(nums[0]);
-        for(int i = 1; i < nums.length; i++){
-            if(nums[i] > list.get(list.size() - 1)){
-                list.add(nums[i]);
-            }else{
-                int index = find(list, nums[i]);
-                list.set(index, nums[i]);
-            }
+        TreeNode left = findRight(root.left);
+        TreeNode right = findLeft(root.right);
+        if(left == p || right == p){
+        	return left == p ? left : right;
         }
-        return list.size();
+        TreeNode n1 = inorderSuccessor(root.left, p);
+        TreeNode n2 = inorderSuccessor(root.right, p);
+        return n1 == null ? n2 : n1;
+    }
+    public static TreeNode findRight(TreeNode root){
+        if(root == null){
+            return root;
+        }
+        if(root.right != null){
+            root = root.right;
+        }
+        return root;
     }
     
-    public static int find(List<Integer> list, int target){
-        int start = 0;
-        int end = list.size() - 1;
-        while(start < end){
-            int mid = (start + end) >> 1;
-            if(list.get(mid) > target){
-                end = mid - 1;
-            }else{
-                start = mid;
-            }
+    public static TreeNode findLeft(TreeNode root){
+        if(root == null){
+            return null;
         }
-        return start;
+        if(root.left != null){
+            root = root.left;
+        }
+        return root;
     }
 	public static void main(String[] args){
-		int[] nums = {10,9,2,5,3,7,101,18};
-		System.out.println(lengthOfLIS(nums));
+		TreeNode n1 = new TreeNode(2);
+		TreeNode n2 = new TreeNode(1);
+		n1.left = n2;
+		System.out.println(inorderSuccessor(n1, n2).val);
 	}
 }
