@@ -39,7 +39,7 @@ public class SerializeAndDeserializeBinaryTree {
         }
     }
 	
-	 public String serialize2(TreeNode root) {
+	 public static String serialize2(TreeNode root) {
 	        if (root == null) return "";
 	        Queue<TreeNode> q = new LinkedList<>();
 	        StringBuilder res = new StringBuilder();
@@ -47,7 +47,7 @@ public class SerializeAndDeserializeBinaryTree {
 	        while (!q.isEmpty()) {
 	            TreeNode node = q.poll();
 	            if (node == null) {
-	                res.append("n ");
+	                res.append("# ");
 	                continue;
 	            }
 	            res.append(node.val + " ");
@@ -57,7 +57,7 @@ public class SerializeAndDeserializeBinaryTree {
 	        return res.toString();
 	    }
 
-	    public TreeNode deserialize2(String data) {
+	    public static TreeNode deserialize2(String data) {
 	        if (data == "") return null;
 	        Queue<TreeNode> q = new LinkedList<>();
 	        String[] values = data.split(" ");
@@ -65,12 +65,12 @@ public class SerializeAndDeserializeBinaryTree {
 	        q.add(root);
 	        for (int i = 1; i < values.length; i++) {
 	            TreeNode parent = q.poll();
-	            if (!values[i].equals("n")) {
+	            if (!values[i].equals("#")) {
 	                TreeNode left = new TreeNode(Integer.parseInt(values[i]));
 	                parent.left = left;
 	                q.add(left);
 	            }
-	            if (!values[++i].equals("n")) {
+	            if (!values[++i].equals("#")) {
 	                TreeNode right = new TreeNode(Integer.parseInt(values[i]));
 	                parent.right = right;
 	                q.add(right);
@@ -81,7 +81,16 @@ public class SerializeAndDeserializeBinaryTree {
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(1);
 		TreeNode n2 = new TreeNode(2);
-		n1.right = n2;
-		TreeNode n3 = deserialize(serialize(n1));
+		TreeNode n3 = new TreeNode(3);
+		TreeNode n4 = new TreeNode(4);
+		TreeNode n5 = new TreeNode(5);
+		TreeNode n6 = new TreeNode(6);
+		n1.left = n2;
+		n1.right = n3;
+		n3.left = n4;
+		n4.left = n5;
+		n4.right = n6;
+		System.out.println(serialize2(n1));
+		deserialize2(serialize2(n1));
 	}
 }

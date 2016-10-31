@@ -8,37 +8,28 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MergeIntervals {
-	public List<Interval> merge(List<Interval> intervals) {
-		if (intervals.size() <= 1)
-			return intervals;
-
-		// Sort by ascending starting point using an anonymous Comparator
-		Collections.sort(intervals, new Comparator<Interval>() {
-			@Override
-			public int compare(Interval i1, Interval i2) {
-				return Integer.compare(i1.start, i2.start);
-			}
-		});
-
-		List<Interval> result = new LinkedList<Interval>();
-		int start = intervals.get(0).start;
-		int end = intervals.get(0).end;
-
-		for (Interval interval : intervals) {
-			if (interval.start <= end) // Overlapping intervals, move the end if
-										// needed
-				end = Math.max(end, interval.end);
-			else { // Disjoint intervals, add the previous one and reset bounds
-				result.add(new Interval(start, end));
-				start = interval.start;
-				end = interval.end;
-			}
-		}
-
-		// Add the last interval
-		result.add(new Interval(start, end));
-		return result;
-	}
+	public static List<Interval> merge(List<Interval> intervals) {
+        if(intervals.size() <= 1){
+            return intervals;
+        }
+        List<Interval> res = new ArrayList<Interval>();
+        Collections.sort(intervals, new Comparator<Interval>(){
+            public int compare(Interval in1, Interval in2){
+                return in1.start - in2.start;
+            }
+        });
+        res.add(intervals.get(0));
+        int i = 1;
+        for(; i < intervals.size(); i++){
+            Interval last = intervals.get(res.size() - 1);
+            if(intervals.get(i).start <= last.end){
+                last.end = Math.max(intervals.get(i).end, last.end);
+            }else{
+                res.add(intervals.get(i));
+            }
+        }
+        return res;
+    }
 
 	public List<Interval> merge2(List<Interval> intervals) {
 		int n = intervals.size();
@@ -59,5 +50,19 @@ public class MergeIntervals {
 			}
 		}
 		return res;
+	}
+	
+	
+	
+	public static void main(String[] args){
+		Interval i1 = new Interval(2, 3);
+		Interval i2 = new Interval(2, 2);
+		Interval i3 = new Interval(3, 3);
+		Interval i4 = new Interval(1, 3);
+		Interval i5 = new Interval(5, 7);
+		Interval i6 = new Interval(2, 2);
+		Interval i7 = new Interval(4, 6);
+		List<Interval> intervals = new ArrayList<Interval>(Arrays.asList(i1, i2, i3, i4, i5, i6, i7));
+		merge(intervals);
 	}
 }
