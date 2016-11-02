@@ -24,7 +24,7 @@ public class BinaryTreeVerticalOrderTraversal {
 			TreeNode node = queue.poll();
 			int w = weight.get(node);
 			if (!map.containsKey(w)) {
-				map.put(w, new ArrayList<>());
+				map.put(w, new ArrayList<Integer>());
 			}
 			map.get(w).add(node.val);
 			if (node.left != null) {
@@ -51,7 +51,7 @@ public class BinaryTreeVerticalOrderTraversal {
 	    }
 	    computeRange(root, 0);
 	    for(int i = min; i <= max; i++){
-	    	res.add(new ArrayList<>());
+	    	res.add(new ArrayList<Integer>());
 	    }
 	    Queue<TreeNode> q = new LinkedList<>();
 	    Queue<Integer> index = new LinkedList<>();

@@ -1,55 +1,44 @@
 package BFS;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
 
 import Tree.TreeNode;
 
 public class Solution {
-	public static String serialize(TreeNode root) {
+	public static List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
         if(root == null){
-            return "";
+            return res;
         }
-        StringBuilder sb = new StringBuilder();
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        while(!q.isEmpty()){
-            TreeNode node = q.poll();
-            if(node == null){
-                sb.append("#");
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode cur = root;
+        while(cur != null){
+            res.add(cur.val);
+            if(cur.left != null){
+                stack.push(cur.left);
+            }
+            if(cur.right != null){
+                cur = cur.right;
             }else{
-                sb.append(node.val);
-                q.offer(node.left);
-                q.offer(node.right);
+                if(stack.isEmpty()){
+                    cur = null;
+                }else{
+                    cur = stack.pop();
+                }
             }
         }
-        return sb.toString();
-    }
-
-    // Decodes your encoded data to tree.
-    public static TreeNode deserialize(String data) {
-        if(data.length() == 0){
-            return null;
-        }
-        return form(data, 0);
-    }
-    
-    public static TreeNode form(String s, int index){
-        if(index >= s.length()){
-            return null;
-        }
-        char c = s.charAt(index);
-        if(c == '#'){
-            return null;
-        }
-        TreeNode node = new TreeNode(c - '0');
-        node.left = form(s, index * 2 + 1);
-        node.right = form(s, index * 2 + 2);
-        return node;
+        Collections.reverse(res);
+        return res;
     }
 	public static void main(String[] args){
-		TreeNode n1 = new TreeNode(2);
-		/*TreeNode n2 = new TreeNode(1);
-		n1.left = n2;*/
-		System.out.println();
+		TreeNode n1 = new TreeNode(3);
+		TreeNode n2 = new TreeNode(1);
+		TreeNode n3 = new TreeNode(2);
+		n1.left = n2;
+		n1.right = n3;
+		System.out.println(postorderTraversal(n1));
 	}
 }
