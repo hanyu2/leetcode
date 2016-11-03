@@ -4,23 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RomanToInt {
-	public int romanToInt(String s) {
+	public static int romanToInt(String s) {
 		int res = 0;
-		int pre = 0;
-		for (int i = 0; i < s.length(); i++) {
-			int cur = transfer(s.charAt(i));
-			if (cur <= pre) {
-				res += cur;
-			} else {
-				res -= pre * 2;
-				res += cur;
-			}
-			pre = cur;
-		}
-		return res;
+        int pre = 0;
+        int cur = 0;
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            cur = transfer(c);
+            if(cur <= pre){
+                res += cur;
+            }else{
+                res -= 2 * pre;
+                res += cur;
+            }
+            pre = cur;
+        }
+        return res;
 	}
 
-	int transfer(char c) {
+	static int transfer(char c) {
 		switch (c) {
 		case 'I':
 			return 1;
@@ -36,9 +38,8 @@ public class RomanToInt {
 			return 500;
 		case 'M':
 			return 1000;
-		default:
-			return -1;
 		}
+		return 0;
 	}
 	public static int romanToInt2(String s) {
         Map<Character, Integer> map = new HashMap<Character, Integer>();
@@ -65,7 +66,7 @@ public class RomanToInt {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(romanToInt2("MCMXCVI"));
-		System.out.println(romanToInt2("IV"));
+		System.out.println(romanToInt("DCXXI"));
+		System.out.println(romanToInt("IV"));
 	}
 }

@@ -8,37 +8,25 @@ import java.util.Stack;
 import Tree.TreeNode;
 
 public class Solution {
-	public static List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<Integer>();
-        if(root == null){
-            return res;
-        }
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        TreeNode cur = root;
-        while(cur != null){
-            res.add(cur.val);
-            if(cur.left != null){
-                stack.push(cur.left);
-            }
-            if(cur.right != null){
-                cur = cur.right;
-            }else{
-                if(stack.isEmpty()){
-                    cur = null;
-                }else{
-                    cur = stack.pop();
-                }
-            }
-        }
-        Collections.reverse(res);
+	public static List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        sub(nums, 0, new ArrayList<Integer>(), res);
         return res;
     }
+    
+    public static void sub(int[] nums, int index, List<Integer> list, List<List<Integer>> res){
+        res.add(list);
+        for(int i = index; i < nums.length; i++){
+            if(i > index && nums[i] == nums[i - 1]){
+                continue;
+            }
+            List<Integer> temp = new ArrayList<Integer>(list);
+            temp.add(nums[i]);
+            sub(nums, i + 1, temp, res);
+        }
+    }
 	public static void main(String[] args){
-		TreeNode n1 = new TreeNode(3);
-		TreeNode n2 = new TreeNode(1);
-		TreeNode n3 = new TreeNode(2);
-		n1.left = n2;
-		n1.right = n3;
-		System.out.println(postorderTraversal(n1));
+		int[] nums = {1, 2, 2};
+		subsetsWithDup(nums);
 	}
 }
