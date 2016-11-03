@@ -16,7 +16,7 @@ public class KthLargetstNumberInArray {
 		return pq.peek();
 	}
 	//similar idea with quick sort
-	public int findKthLargest2(int[] nums, int k) {
+	public static int findKthLargest2(int[] nums, int k) {
         k = nums.length - k;
         int left = 0;
         int right = nums.length - 1;
@@ -33,7 +33,7 @@ public class KthLargetstNumberInArray {
         return nums[k];
     }
     
-    private int partition(int[] nums, int i, int j) {
+    private static int partition(int[] nums, int i, int j) {
         int x = nums[i];
         int m = i;
         int n = i+1;
@@ -103,7 +103,7 @@ public class KthLargetstNumberInArray {
     }
 
 	public static void main(String[] args) {
-		int [] nums = {4, 1, 2, 5, 9, 6, 3, 8, 7};
-		System.out.println(findKthLargest3(nums, 3));
+		int [] nums = {2, 1};
+		System.out.println(findKthLargest2(nums, 1));
 	}
 }
