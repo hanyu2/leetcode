@@ -1,31 +1,46 @@
 package BFS;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+
 public class Solution {
-	public static int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        while(left < right){
-            int mid = (left + right) / 2;
-            if(nums[mid] == target){
-                return mid;
-            }else if(nums[mid] >= nums[left]){
-                if(target >= nums[left] && target < nums[mid]){
-                    right = mid - 1;
-                }else{
-                    left = mid + 1;
-                }
-            }else{
-                if(target > nums[mid] && target < nums[right]){
-                    left = mid + 1;
-                }else{
-                    right = mid - 1;
-                }
+	public static boolean canFinish(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
+        int[] indegree = new int[numCourses];
+        for(int i = 0; i < numCourses; i++){
+            map.put(i, new ArrayList<Integer>());
+        }
+        for(int[] pre : prerequisites){
+            indegree[pre[1]]++;
+            map.get(pre[0]).add(pre[1]);
+        }
+        Queue<Integer> q = new LinkedList<Integer>();
+        for(int i = 0; i < numCourses; i++){
+            if(indegree[i] == 0){
+                q.offer(i);
             }
         }
-        return -1;
+        
+        int count = numCourses;
+        while(!q.isEmpty()){
+            int t = q.poll();
+            List<Integer> list = map.get(t);
+            for(int i = 0; i < list.size(); i++){
+                indegree[list.get(i)]--;
+                if(indegree[list.get(i)] == 0){
+                    q.offer(list.get(i));
+                }
+            }
+            count--;
+        }
+        return count == 0;
     }
 	public static void main(String[] args){
-		int[] nums = {5, 1, 3};
-		System.out.println(search(nums, 3));
+		int[][] courses = {{1, 0}, {2, 1}};
+		System.out.println(canFinish(3, courses));
 	}
 }
