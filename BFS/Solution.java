@@ -1,46 +1,44 @@
 package BFS;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.Set;
+import java.util.Stack;
 
 public class Solution {
-	public static boolean canFinish(int numCourses, int[][] prerequisites) {
-        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
-        int[] indegree = new int[numCourses];
-        for(int i = 0; i < numCourses; i++){
-            map.put(i, new ArrayList<Integer>());
+	public static boolean validTree(int n, int[][] edges) {
+        List<Set<Integer>> list = new ArrayList<Set<Integer>>();
+        for(int i = 0; i < n; i++){
+            list.add(new HashSet<Integer>());
         }
-        for(int[] pre : prerequisites){
-            indegree[pre[1]]++;
-            map.get(pre[0]).add(pre[1]);
+        for(int[] edge : edges){
+            list.get(edge[0]).add(edge[1]);
+            list.get(edge[1]).add(edge[0]);
         }
-        Queue<Integer> q = new LinkedList<Integer>();
-        for(int i = 0; i < numCourses; i++){
-            if(indegree[i] == 0){
-                q.offer(i);
+        Stack<Integer> stack = new Stack<Integer>();
+        boolean[] visited = new boolean[n];
+        stack.push(0);
+        while(!stack.isEmpty()){
+            int node = stack.pop();
+            if(visited[node]){
+                return false;
+            }
+            visited[node] = true;
+            for(int k : list.get(node)){
+                stack.push(k);
+                list.get(k).remove(node);
             }
         }
-        
-        int count = numCourses;
-        while(!q.isEmpty()){
-            int t = q.poll();
-            List<Integer> list = map.get(t);
-            for(int i = 0; i < list.size(); i++){
-                indegree[list.get(i)]--;
-                if(indegree[list.get(i)] == 0){
-                    q.offer(list.get(i));
-                }
+        for(boolean v : visited){
+            if(!v){
+                return false;
             }
-            count--;
         }
-        return count == 0;
+        return true;
     }
 	public static void main(String[] args){
-		int[][] courses = {{1, 0}, {2, 1}};
-		System.out.println(canFinish(3, courses));
+		int[][] graph = {{0,1},{0,2},{2,3},{2,4}};
+		System.out.println(validTree(5, graph));
 	}
 }
