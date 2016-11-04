@@ -1,35 +1,46 @@
 package FB;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 import Tree.TreeNode;
 
 public class SumOfLeftLeaves {
 	public static int sumOfLeftLeaves(TreeNode root) {
-        if(root == null){
-            return 0;
-        }
-        List<Integer> list = new ArrayList<Integer>();
-        traverse(root.left, 0, list);
-        traverse(root.right, 0, list);
-        int sum = 0;
-        for(Integer i : list){
-            sum += i;
-        }
-        return sum;
+		if(root == null) return 0;
+	    int ans = 0;
+	    if(root.left != null) {
+	        if(root.left.left == null && root.left.right == null) ans += root.left.val;
+	        else ans += sumOfLeftLeaves(root.left);
+	    }
+	    if(root.right != null) {
+	        ans += sumOfLeftLeaves(root.right);
+	    }
+	    
+	    return ans;
     }
     
-    public static void traverse(TreeNode root, int depth, List<Integer> res){
-        if(root == null){
-            return;
-        }
-        if(depth >= res.size()){
-            res.add(root.val);
-        }
-        traverse(root.left, depth + 1, res);
-        traverse(root.right, depth + 1, res);
-    }
+	public int sumOfLeftLeaves2(TreeNode root) {
+	    if(root == null) return 0;
+	    int ans = 0;
+	    Stack<TreeNode> stack = new Stack<TreeNode>();
+	    stack.push(root);
+	    
+	    while(!stack.empty()) {
+	        TreeNode node = stack.pop();
+	        if(node.left != null) {
+	            if (node.left.left == null && node.left.right == null)
+	                ans += node.left.val;
+	            else
+	                stack.push(node.left);
+	        }
+	        if(node.right != null) {
+	            if (node.right.left != null || node.right.right != null)
+	                stack.push(node.right);
+	        }
+	    }
+	    return ans;
+	}
+    
     public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(3);
 		TreeNode n2 = new TreeNode(9);
