@@ -1,37 +1,59 @@
 package BFS;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import Tree.TreeNode;
 
 public class Solution {
-	public static String addBinary(String a, String b) {
-        StringBuilder sb = new StringBuilder();
-        int i = a.length() - 1;
-        int j = b.length() - 1;
-        int carry = 0;
-        while(i >= 0 && j >= 0){
-            int sum = carry;
-            if(i >= 0){
-                sum += a.charAt(i) - '0';
-                i--;
-            }
-            if(j >= 0){
-                sum += b.charAt(j) - '0';
-                j--;
-            }
-            sb.insert(0, sum % 2);
-            carry = sum / 2;
+	public static String serialize(TreeNode root) {
+        if(root == null){
+            return null;
         }
-        if(carry == 1){
-            sb.insert(0, 1);
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        StringBuilder sb = new StringBuilder();
+        q.offer(root);
+        while(!q.isEmpty()){
+            TreeNode node = q.poll();
+            if(node == null){
+                sb.append("# ");
+                continue;
+            }
+            sb.append(root.val + " ");
+            q.offer(node.left);
+            q.offer(node.right);
         }
         return sb.toString();
     }
+
+    // Decodes your encoded data to tree.
+    public static TreeNode deserialize(String data) {
+        if(data== null){
+            return null;
+        }
+        String[] strs = data.split("\\s+");
+        TreeNode root = new TreeNode(Integer.parseInt(strs[0]));
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.offer(root);
+        for(int i = 1; i < strs.length; i++){
+            TreeNode node = q.poll();
+            if(!strs[i].equals("#")){
+                TreeNode left = new TreeNode(Integer.parseInt(strs[i]));
+                node.left = left;
+                q.offer(left);
+            }
+            if(!strs[++i].equals("#")){
+                TreeNode right = new TreeNode(Integer.parseInt(strs[i]));
+                node.right = right;
+                q.offer(right);
+            }
+        }
+        return root;
+    }
 	public static void main(String[] args){
-		int[][] graph = {{0,1},{0,2},{2,3},{2,4}};
-		System.out.println(addBinary("11", "1"));
+		TreeNode n1 = new TreeNode(1);
+		TreeNode n2 = new TreeNode(2);
+		n1.left = n2;
+		System.out.println(serialize(n1));
 	}
 }

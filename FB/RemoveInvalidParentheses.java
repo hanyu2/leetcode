@@ -78,7 +78,7 @@ public class RemoveInvalidParentheses {
 		 }
 		 return res.reverse().toString();
 	 }
-
+	 
 	public static void main(String[] args) throws java.lang.Exception {
 		// your code goes here
 		//String res1 = removeInvalidParentheses2("()())()");
