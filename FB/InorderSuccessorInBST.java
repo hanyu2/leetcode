@@ -23,7 +23,7 @@ public class InorderSuccessorInBST {
 			return successor2(root.right, p);
 		} else {
 			TreeNode left = successor2(root.left, p);
-			return (left != null) ? left : root;
+			return (left == null) ? root : left;
 		}
 	}
 

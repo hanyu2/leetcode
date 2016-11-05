@@ -7,38 +7,31 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Solution {
-	public static boolean validTree(int n, int[][] edges) {
-        List<Set<Integer>> list = new ArrayList<Set<Integer>>();
-        for(int i = 0; i < n; i++){
-            list.add(new HashSet<Integer>());
-        }
-        for(int[] edge : edges){
-            list.get(edge[0]).add(edge[1]);
-            list.get(edge[1]).add(edge[0]);
-        }
-        Stack<Integer> stack = new Stack<Integer>();
-        boolean[] visited = new boolean[n];
-        stack.push(0);
-        while(!stack.isEmpty()){
-            int node = stack.pop();
-            if(visited[node]){
-                return false;
+	public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        int carry = 0;
+        while(i >= 0 && j >= 0){
+            int sum = carry;
+            if(i >= 0){
+                sum += a.charAt(i) - '0';
+                i--;
             }
-            visited[node] = true;
-            for(int k : list.get(node)){
-                stack.push(k);
-                list.get(k).remove(node);
+            if(j >= 0){
+                sum += b.charAt(j) - '0';
+                j--;
             }
+            sb.insert(0, sum % 2);
+            carry = sum / 2;
         }
-        for(boolean v : visited){
-            if(!v){
-                return false;
-            }
+        if(carry == 1){
+            sb.insert(0, 1);
         }
-        return true;
+        return sb.toString();
     }
 	public static void main(String[] args){
 		int[][] graph = {{0,1},{0,2},{2,3},{2,4}};
-		System.out.println(validTree(5, graph));
+		System.out.println(addBinary("11", "1"));
 	}
 }
