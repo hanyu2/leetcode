@@ -1,58 +1,39 @@
 package BFS;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Stack;
 
 import Tree.TreeNode;
 
 public class Solution {
-	public static String minWindow(String s, String t) {
-        if(t.length() == 0){
-            return "";
+	public static String simplifyPath(String path) {
+        String[] strs = path.split("/");
+        Stack<String> stack = new Stack<String>();
+        if(strs.length == 0){
+            return "/";
         }
-        Map<Character, Integer> map = new HashMap<Character, Integer>();
-        for(char c : t.toCharArray()){
-            if(map.containsKey(c)){
-                map.put(c, map.get(c) + 1);
+        for(int i = 0; i < strs.length; i++){
+            if(strs[i].equals("..")){
+                if(!stack.isEmpty()){
+                    stack.pop();
+                }
+            }else if(strs[i].equals(".")){
+                continue;
             }else{
-                map.put(c, 1);
+                stack.push(strs[i]);
             }
         }
-        int start = 0;
-        int head = 0;
-        int end = 0;
-        int count = t.length();
-        int d = Integer.MAX_VALUE;
-        while(end < s.length()){
-            char c = s.charAt(end);
-            if(map.containsKey(c)){
-                int n = map.get(c);
-                n--;
-                map.put(c, n);
-                if(c >= 0){
-                    count--;
-                }
-            }
-            end++;
-            while(count == 0){
-                if(end - start < d){
-                    d = end - start;
-                    head = start;
-                }
-                char x = s.charAt(start);
-                if(map.containsKey(x)){
-                    map.put(x, map.get(x) + 1);
-                    if(map.get(x) > 0){
-                        count++;
-                    }
-                }
-                start++;
-            }
+        if(stack.isEmpty()){
+            return "/";
         }
-        return d == Integer.MAX_VALUE ? "" : s.substring(head, head + d);
-    }
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()){
+            sb.insert(0, stack.pop());
+            sb.insert(0, "/");
+        }
+        return sb.toString();
+	}
 	public static void main(String[] args){
 		TreeNode n1 = new TreeNode(1);
-		System.out.println(minWindow("bba", "ab"));
+		System.out.println(simplifyPath("/..."));
 	}
 }
