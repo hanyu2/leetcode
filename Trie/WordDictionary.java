@@ -19,13 +19,18 @@ public class WordDictionary {
     }
 
     private boolean helper(String s, int index, TrieNode p) {
-        if (index >= s.length()) return p.isWord;
+        if (index >= s.length()){
+        		return p.isWord;
+        }
         char c = s.charAt(index);
         if (c == '.') {
             for (int i = 0; i < p.child.length; i++)
-                if (p.child[i] != null && helper(s, index + 1, p.child[i]))
-                    return true;
+                if (p.child[i] != null && helper(s, index + 1, p.child[i])){
+                		return true;
+                }   
             return false;
-        } else return (p.child[c - 'a'] != null && helper(s, index + 1, p.child[c - 'a']));
+        } else{
+        		return (p.child[c - 'a'] != null && helper(s, index + 1, p.child[c - 'a']));
+        }
     }
 }

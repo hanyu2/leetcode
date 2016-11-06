@@ -64,23 +64,22 @@ public class ValidateBST {
     }
     //Iterative
     public static boolean isValidBST2(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<TreeNode> ();
-           TreeNode cur = root ;
-           TreeNode pre = null ;           
-           while (!stack.isEmpty() || cur != null) {               
-               if (cur != null) {
-                   stack.push(cur);
-                   cur = cur.left ;
-               } else {                
-                   TreeNode p = stack.pop() ;
-                   if (pre != null && p.val <= pre.val) {                      
-                       return false ;
-                   }                   
-                   pre = p ;                       
-                   cur = p.right ;
-               }
-           }
-           return true ; 
+    		Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode pre = null;
+        TreeNode cur = root;
+        while(cur != null || !stack.isEmpty()){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            TreeNode node = stack.pop();
+            if(pre != null && node.val <= pre.val){
+                return false;
+            }
+            pre = node;
+            cur = node.right;
+        }
+        return true;
     }
     
     public static void main(String[] args) {

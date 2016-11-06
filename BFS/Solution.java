@@ -1,59 +1,66 @@
 package BFS;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
-
-import Tree.TreeNode;
+import java.util.List;
 
 public class Solution {
-	public static String serialize(TreeNode root) {
-        if(root == null){
-            return null;
+	public static List<int[]> getSkyline(int[][] buildings) {
+        List<int[]> res = new ArrayList<int[]>();
+        if(buildings.length == 0){
+            return res;
         }
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        StringBuilder sb = new StringBuilder();
-        q.offer(root);
-        while(!q.isEmpty()){
-            TreeNode node = q.poll();
-            if(node == null){
-                sb.append("# ");
-                continue;
-            }
-            sb.append(root.val + " ");
-            q.offer(node.left);
-            q.offer(node.right);
-        }
-        return sb.toString();
+        return partition(buildings, 0, buildings.length - 1);
     }
-
-    // Decodes your encoded data to tree.
-    public static TreeNode deserialize(String data) {
-        if(data== null){
-            return null;
+    public static LinkedList partition(int[][] buildings, int start, int end){
+        if(start < end){
+            int mid = (start + end) / 2;
+            LinkedList<int[]> left = partition(buildings, start, mid);
+            LinkedList<int[]> right = partition(buildings, mid + 1, end);
+            return merge(left, right);
+        }else{
+            LinkedList<int[]> res = new LinkedList<int[]>();
+            res.add(new int[]{buildings[start][0], buildings[start][2]});
+            res.add(new int[]{buildings[start][1]});
+            return res;
         }
-        String[] strs = data.split("\\s+");
-        TreeNode root = new TreeNode(Integer.parseInt(strs[0]));
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        q.offer(root);
-        for(int i = 1; i < strs.length; i++){
-            TreeNode node = q.poll();
-            if(!strs[i].equals("#")){
-                TreeNode left = new TreeNode(Integer.parseInt(strs[i]));
-                node.left = left;
-                q.offer(left);
+    }
+    
+    public static LinkedList<int[]> merge(LinkedList<int[]> l1, LinkedList<int[]> l2){
+        LinkedList<int[]> res = new LinkedList<int[]>();
+        int h1 = 0;
+        int h2 = 0;
+        while(l1.size() > 0 && l2.size() > 0){
+            int x = 0;
+            int h = 0;
+            if(l1.getFirst()[0] < l2.getFirst()[0]){
+                x = l1.getFirst()[0];
+                h1 = l1.getFirst()[1];
+                h = Math.max(h1, h2);
+                l1.removeFirst();
+            }else if(l1.getFirst()[0] > l2.getFirst()[0]){
+                x = l2.getFirst()[0];
+                h2 = l2.getFirst()[1];
+                h = Math.max(h1, h2);
+                l2.removeFirst();
+            }else{
+                x = l1.getFirst()[0];
+                h1 = l1.getFirst()[1];
+                h2 = l2.getFirst()[1];
+                h = Math.max(h1, h2);
+                l1.removeFirst();
+                l2.removeFirst();
             }
-            if(!strs[++i].equals("#")){
-                TreeNode right = new TreeNode(Integer.parseInt(strs[i]));
-                node.right = right;
-                q.offer(right);
+            if(res.size() == 0 || h != res.getLast()[1]){
+                res.add(new int[]{x, h});
             }
         }
-        return root;
+        res.addAll(l1);
+        res.addAll(l2);
+        return res;
     }
 	public static void main(String[] args){
-		TreeNode n1 = new TreeNode(1);
-		TreeNode n2 = new TreeNode(2);
-		n1.left = n2;
-		System.out.println(serialize(n1));
+		int [][] buildings = { {0, 2, 3}, {2, 3, 5}};
+		getSkyline(buildings);
 	}
 }

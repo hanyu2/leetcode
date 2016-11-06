@@ -1,5 +1,7 @@
 package Array;
 
+import javax.print.attribute.standard.NumberUpSupported;
+
 public class SortColors {
 	public static void sortColors(int[] nums) {
        int n = nums.length - 1;
@@ -11,9 +13,9 @@ public class SortColors {
        }
 	}
 	public static void swap(int nums[], int i, int j){
-		nums[i] ^= nums[j];
-		nums[j] ^= nums[i];
-		nums[i] ^= nums[j];
+		int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
 	}
 	
 	public static void sortColors2(int [] nums){
@@ -58,7 +60,8 @@ public class SortColors {
 	
 	public static void main(String[] args) {
 		int nums [] = {1,2,0,1,0,2,0,1};
+		int[] nums2 = {2};
 		//int nums[] = {1, 0};
-		sortColors2(nums);
+		sortColors4(nums2);
 	}
 }
