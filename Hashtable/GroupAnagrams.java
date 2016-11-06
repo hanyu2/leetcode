@@ -33,27 +33,33 @@ public class GroupAnagrams {
 	private static final int[] PRIMES = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
 			67, 71, 73, 79, 83, 89, 97, 101, 107 };
 
-	public List<String> anagrams(String[] strs) {
-		List<String> list = new LinkedList<>();
-		Map<Integer, List<String>> mapString = new HashMap<>();
-		int result = -1;
-		for (int i = 0; i < strs.length; i++) {
-			int mapping = 1;
-			for (int j = 0, max = strs[i].length(); j < max; j++) {
-				mapping *= PRIMES[strs[i].charAt(j) - 'a'];
-			}
-			List<String> strings = mapString.get(mapping);
-			if (strings == null) {
-				strings = new LinkedList<>();
-				mapString.put(mapping, strings);
-			}
-			strings.add(strs[i]);
-		}
-		for (List<String> mapList : mapString.values()) {
-			if (mapList.size() > 1)
-				list.addAll(mapList);
-		}
-		return list;
+	public List<List<String>> anagrams(String[] strs) {
+		 List<List<String>> res = new ArrayList<List<String>>();
+	        if(strs.length == 0){
+	            res.add(new ArrayList<String>());
+	            return res;
+	        }
+	        Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();
+	        for(int i = 0; i < strs.length; i++){
+	            String s = strs[i];
+	            int mapping= 1;
+	            for(int j = 0; j < s.length(); j++){
+	                mapping *= PRIMES[s.charAt(j) - 'a'];
+	            }
+	            if(map.containsKey(mapping)){
+	                map.get(mapping).add(s);
+	            }else{
+	                List<String> list = new ArrayList<String>();
+	                list.add(s);
+	                map.put(mapping, list);
+	            }
+	        }
+	        for(List<String> list : map.values()){
+	            if(list.size() > 0){
+	                res.add(list);
+	            }
+	        }
+	        return res;
 	}
 
 	public static List<List<String>> groupAnagrams2(String[] strs) {

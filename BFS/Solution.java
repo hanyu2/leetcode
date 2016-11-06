@@ -1,57 +1,58 @@
 package BFS;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.HashMap;
+import java.util.Map;
 
 import Tree.TreeNode;
 
 public class Solution {
-	public static String serialize(TreeNode root) {
-        if(root == null){
+	public static String minWindow(String s, String t) {
+        if(t.length() == 0){
             return "";
         }
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        StringBuilder sb = new StringBuilder();
-        q.offer(root);
-        while(!q.isEmpty()){
-            TreeNode node = q.poll();
-            if(root == null){
-                sb.append("# ");
-                continue;
-            }
-            sb.append(node.val + " ");
-            q.offer(node.left);
-            q.offer(node.right);
-        }
-        return sb.toString();
-    }
-
-    // Decodes your encoded data to tree.
-    public static TreeNode deserialize(String data) {
-        if(data.length() == 0){
-            return null;
-        }
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        String[] strs = data.split("\\s+");
-        TreeNode root = new TreeNode(Integer.parseInt(strs[0]));
-        q.offer(root);
-        for(int i = 1; i < strs.length; i++){
-            TreeNode node = q.poll();
-            if(!strs[i].equals("#")){
-                TreeNode left = new TreeNode(Integer.parseInt(strs[i]));
-                node.left = left;
-                q.offer(left);
-            }
-            if(!strs[++i].equals("#")){
-                TreeNode right = new TreeNode(Integer.parseInt(strs[i]));
-                node.right = right;
-                q.offer(right);
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        for(char c : t.toCharArray()){
+            if(map.containsKey(c)){
+                map.put(c, map.get(c) + 1);
+            }else{
+                map.put(c, 1);
             }
         }
-        return root;
+        int start = 0;
+        int head = 0;
+        int end = 0;
+        int count = t.length();
+        int d = Integer.MAX_VALUE;
+        while(end < s.length()){
+            char c = s.charAt(end);
+            if(map.containsKey(c)){
+                int n = map.get(c);
+                n--;
+                map.put(c, n);
+                if(c >= 0){
+                    count--;
+                }
+            }
+            end++;
+            while(count == 0){
+                if(end - start < d){
+                    d = end - start;
+                    head = start;
+                }
+                char x = s.charAt(start);
+                if(map.containsKey(x)){
+                    map.put(x, map.get(x) + 1);
+                    if(map.get(x) > 0){
+                        count++;
+                    }
+                }
+                start++;
+            }
+        }
+        return d == Integer.MAX_VALUE ? "" : s.substring(head, head + d);
     }
 	public static void main(String[] args){
 		TreeNode n1 = new TreeNode(1);
-		System.out.println(serialize(n1));
+		System.out.println(minWindow("bba", "ab"));
 	}
 }
