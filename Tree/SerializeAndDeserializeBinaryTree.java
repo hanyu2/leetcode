@@ -6,36 +6,38 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class SerializeAndDeserializeBinaryTree {
-	public static String serialize(TreeNode root) {
+	public String serialize(TreeNode root) {
         StringBuilder sb = new StringBuilder();
-        buildString(root, sb);
+        ser(root, sb);
         return sb.toString();
     }
-
-    private static void buildString(TreeNode node, StringBuilder sb) {
-        if (node == null) {
-            sb.append("#").append(",");
-        } else {
-            sb.append(node.val).append(",");
-            buildString(node.left, sb);
-            buildString(node.right,sb);
+    
+    public void ser(TreeNode root, StringBuilder sb){
+        if(root == null){
+            sb.append("# ");
+        }else{
+            sb.append(root.val + " ");
+            ser(root.left, sb);
+            ser(root.right, sb);
         }
     }
+
     // Decodes your encoded data to tree.
-    public static TreeNode deserialize(String data) {
-        Deque<String> nodes = new LinkedList<>();
-        nodes.addAll(Arrays.asList(data.split(",")));
-        return buildTree(nodes);
+    public TreeNode deserialize(String data) {
+        Deque<String> q = new LinkedList<String>();
+        q.addAll(Arrays.asList(data.split("\\s+")));
+        return buildTree(q);
     }
     
-    private static TreeNode buildTree(Deque<String> nodes) {
-        String val = nodes.remove();
-        if (val.equals("#")) return null;
-        else {
-            TreeNode node = new TreeNode(Integer.valueOf(val));
-            node.left = buildTree(nodes);
-            node.right = buildTree(nodes);
-            return node;
+    public TreeNode buildTree(Deque<String> q){
+        String val = q.removeFirst();
+        if(val.equals("#")){
+            return null;
+        }else{
+            TreeNode root = new TreeNode(Integer.parseInt(val));
+            root.left = buildTree(q);
+            root.right = buildTree(q);
+            return root;
         }
     }
 	
