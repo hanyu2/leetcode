@@ -1,10 +1,8 @@
-package BFS;
-
-import java.util.Stack;
+package FB;
 
 import Tree.TreeNode;
 
-public class Solution {
+public class MergeSortedArray {
 	public static void merge(int[] nums1, int m, int[] nums2, int n) {
         int k = m + n - 1;
         int i = m - 1;
@@ -21,7 +19,6 @@ public class Solution {
         }
     }
 	public static void main(String[] args){
-		TreeNode n1 = new TreeNode(1);
 		int[] nums1 = {0};
 		int[] nums2 = {1};
 		merge(nums1, 0, nums2, 1);
