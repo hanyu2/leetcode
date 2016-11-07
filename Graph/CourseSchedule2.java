@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class CourseSchedule2 {
-	//https://leetcode.com/discuss/35605/two-ac-solution-in-java-using-bfs-and-dfs-with-explanation
+	// https://leetcode.com/discuss/35605/two-ac-solution-in-java-using-bfs-and-dfs-with-explanation
 	public static int[] findOrder(int numCourses, int[][] prerequisites) {
 		int[] indegrees = new int[numCourses];
 		List<List<Integer>> graphs = new ArrayList<>(numCourses);
@@ -46,52 +46,52 @@ public class CourseSchedule2 {
 		return visited == indegrees.length ? order : new int[0];
 	}
 
-	//DFS
+	// DFS
 	public static int[] findOrder2(int numCourses, int[][] prerequisites) {
-        ArrayList[] graph = new ArrayList[numCourses];
-        for (int i = 0; i < numCourses; i++){
-        	graph[i] = new ArrayList<Integer>();
-        }
-        for(int[] pre : prerequisites){
-        	graph[pre[1]].add(pre[0]);
-        }
-        boolean[] visited = new boolean[numCourses];
-        Stack<Integer> stack = new Stack<Integer>();
-        for (int i = 0; i < numCourses; i++) {
-            if (!dfs(graph, i, stack, visited, new boolean[numCourses])){
-            	return new int[0];
-            }
-        }
-        int i = 0;
-        int[] result = new int[numCourses];
-        while (!stack.isEmpty()) {
-            result[i++] = stack.pop();
-        }
-        return result;
-    }
-    
-    private static boolean dfs(ArrayList[] graph, int v, Stack<Integer> stack, boolean[] visited, boolean[] isLoop) {
-        if (visited[v]){
-        	return true;
-        }
-        if (isLoop[v]){
-        	return false;
-        }
-        isLoop[v] = true;
-        for(int i = 0; i < graph[v].size(); i++){
-        	if(!dfs(graph, (int)graph[v].get(i), stack, visited, isLoop)){
-        		return false;
-        	}
-        }
-        visited[v] = true;
-        stack.push(v);
-        return true;
-    }
-	
+		ArrayList[] graph = new ArrayList[numCourses];
+		for (int i = 0; i < numCourses; i++) {
+			graph[i] = new ArrayList<Integer>();
+		}
+		for (int[] pre : prerequisites) {
+			graph[pre[1]].add(pre[0]);
+		}
+		boolean[] visited = new boolean[numCourses];
+		Stack<Integer> stack = new Stack<Integer>();
+		for (int i = 0; i < numCourses; i++) {
+			if (!dfs(graph, i, stack, visited, new boolean[numCourses])) {
+				return new int[0];
+			}
+		}
+		int i = 0;
+		int[] result = new int[numCourses];
+		while (!stack.isEmpty()) {
+			result[i++] = stack.pop();
+		}
+		return result;
+	}
+
+	private static boolean dfs(ArrayList[] graph, int v, Stack<Integer> stack, boolean[] visited, boolean[] isLoop) {
+		if (visited[v]) {
+			return true;
+		}
+		if (isLoop[v]) {
+			return false;
+		}
+		isLoop[v] = true;
+		for (int i = 0; i < graph[v].size(); i++) {
+			if (!dfs(graph, (int) graph[v].get(i), stack, visited, isLoop)) {
+				return false;
+			}
+		}
+		visited[v] = true;
+		stack.push(v);
+		return true;
+	}
+
 	public static void main(String[] args) {
-		//int[][] pre = { { 1, 0 } };
-		int[][] pre = {{1,0},{2,0},{3,1},{3,2}};
-		
+		// int[][] pre = { { 1, 0 } };
+		int[][] pre = { { 1, 0 }, { 2, 0 }, { 3, 1 }, { 3, 2 } };
+
 		findOrder2(4, pre);
 	}
 }
