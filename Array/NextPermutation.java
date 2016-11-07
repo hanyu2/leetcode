@@ -38,7 +38,7 @@ public class NextPermutation {
 	    while(i < j) swap(nums, i++, j--);
 	} 
 	public static void main(String[] args) {
-		int nums[] = {1, 2, 4, 3};
+		int nums[] = {2, 4, 5, 3, 1};
 		nextPermutation2(nums);
 	}
 }

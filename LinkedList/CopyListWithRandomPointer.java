@@ -35,10 +35,10 @@ public class CopyListWithRandomPointer {
 		RandomListNode n = head;
 		while (n != null) {
 			RandomListNode n2 = new RandomListNode(n.label);
-			RandomListNode tmp = n.next;
+			RandomListNode next = n.next;
 			n.next = n2;
-			n2.next = tmp;
-			n = tmp;
+			n2.next = next;
+			n = next;
 		}
 
 		n = head;
