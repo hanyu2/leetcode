@@ -28,20 +28,18 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	}
 
 	public static int lengthOfLongestSubstring2(String s) {
-		if (s.length() == 0)
-			return 0;
-		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 		int max = 0;
-		for (int i = 0, j = 0; i < s.length(); ++i) {
-			if (map.containsKey(s.charAt(i))) {
-				j = Math.max(j, map.get(s.charAt(i)) + 1);// use abba to test
-				//j = map.get(s.charAt(i));					// without max;
-															// condition
-			}
-			map.put(s.charAt(i), i);
-			max = Math.max(max, i - j + 1);
-		}
-		return max;
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int start = 0;
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(map.containsKey(c)){
+                start = Math.max(start, map.get(c) + 1);
+            }
+            map.put(c, i);
+            max = Math.max(max, i - start + 1);
+        }
+        return max;
 	}
 	//Using only hashset, two pointers
 	public static int lengthOfLongestSubstring3(String s) {
