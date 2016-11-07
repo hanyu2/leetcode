@@ -2,13 +2,16 @@ package FB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class RandomizedSet {
-	ArrayList<Integer> list;
-	HashMap<Integer, Integer> map;
-	java.util.Random rand = new java.util.Random();
-
 	/** Initialize your data structure here. */
+	List<Integer> list;
+	Map<Integer, Integer> map;
+	Random r = new Random();
+
 	public RandomizedSet() {
 		list = new ArrayList<Integer>();
 		map = new HashMap<Integer, Integer>();
@@ -19,7 +22,7 @@ public class RandomizedSet {
 	 * contain the specified element.
 	 */
 	public boolean insert(int val) {
-		if (!map.containsKey(val)) {
+		if (map.containsKey(val)) {
 			return false;
 		}
 		map.put(val, list.size());
@@ -32,15 +35,14 @@ public class RandomizedSet {
 	 * specified element.
 	 */
 	public boolean remove(int val) {
-		if (map.containsKey(val)) {
+		if (!map.containsKey(val)) {
 			return false;
 		}
 		int index = map.get(val);
-		if (index < list.size() - 1) { // not the last one than swap the last one
-										// with this val
-			int lastone = list.get(list.size() - 1);
-			list.set(index, lastone);
-			map.put(lastone, index);
+		if (index < list.size() - 1) {
+			int last = list.get(list.size() - 1);
+			list.set(index, last);
+			map.put(last, index);
 		}
 		map.remove(val);
 		list.remove(list.size() - 1);
@@ -49,6 +51,6 @@ public class RandomizedSet {
 
 	/** Get a random element from the set. */
 	public int getRandom() {
-		return list.get(rand.nextInt(list.size()));
+		return list.get(r.nextInt(list.size()));
 	}
 }
