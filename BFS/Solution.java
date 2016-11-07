@@ -5,25 +5,43 @@ import java.util.Stack;
 import Tree.TreeNode;
 
 public class Solution {
-	public static void merge(int[] nums1, int m, int[] nums2, int n) {
-        int k = m + n - 1;
-        int i = m - 1;
-        int j = n - 1;
-        while(i >= 0 && j >= 0){
-            if(nums1[i] < nums2[j]){
-                nums1[k--] = nums2[j--];
+	public static int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        k = n - k;
+        int left = 0;
+        int right = nums.length - 1;
+        while(left < right){
+            int t = find(nums, left, right);
+            if(t == k){
+                break;
+            }else if(t < k){
+                left = t + 1;
             }else{
-                nums1[k--] = nums1[i--];
+                right = t - 1;
             }
         }
-        while(j >= 0){
-            nums1[k--] = nums2[j--];
+        return nums[k];
+    }
+    
+    public static int find(int[] nums, int start, int end){
+        int pivot = nums[start];
+        int len = start;
+        for(int i = start + 1; i <= end; i++){
+            if(nums[i] < pivot){
+                swap(nums, ++len, i);
+            }
         }
+        swap(nums, start, len);
+        return len;
+    }
+    
+    public static void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 	public static void main(String[] args){
-		TreeNode n1 = new TreeNode(1);
-		int[] nums1 = {0};
-		int[] nums2 = {1};
-		merge(nums1, 0, nums2, 1);
+		int[] nums = {2, 1};
+		System.out.println(findKthLargest(nums, 1));
 	}
 }
