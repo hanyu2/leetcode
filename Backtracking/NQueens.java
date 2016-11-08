@@ -6,10 +6,7 @@ import java.util.List;
 
 public class NQueens {
 	public List<List<String>> solveNQueens(int n) {
-		boolean[]
-		// ocp0 = new boolean[n], //whether there's a queen ocupying nth row, I
-		// don't need it
-		ocp90 = new boolean[n], // whether there's a queen ocupying nth column
+		boolean[] ocp90 = new boolean[n], // whether there's a queen ocupying nth column
 				ocp45 = new boolean[2 * n - 1], // mark 45 degree occupation
 				ocp135 = new boolean[2 * n - 1]; // mark 135 degree occupation
 		List<List<String>> ans = new ArrayList<List<String>>();
@@ -28,7 +25,7 @@ public class NQueens {
 			return;
 		}
 
-		for (int j = 0; j < n; j++)
+		for (int j = 0; j < n; j++){
 			if (!ocp90[j] && !ocp45[depth + j] && !ocp135[n - depth + j - 1]) {
 				ocp90[j] = true;
 				ocp45[depth + j] = true;
@@ -40,6 +37,7 @@ public class NQueens {
 				ocp135[j - depth + n - 1] = false;
 				map[depth][j] = '.';
 			}
+		}
 	}
 
 	private void addSolution(List<List<String>> ans, char[][] map) {

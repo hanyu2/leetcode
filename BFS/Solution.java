@@ -5,48 +5,38 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
-	public static int divide(int dividend, int divisor) {
-        int sign = 1;
-        if((dividend < 0) ^ (divisor < 0)){
-            sign = 1;
+	public static List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums.length == 0){
+            return res;
         }
-        if(divisor == 0){
-            return Integer.MAX_VALUE;
+        List<Integer> num = new ArrayList<Integer>();
+        Arrays.sort(nums);
+        for(int i : nums){
+            num.add(i);
         }
-        long ld = (long)(Math.abs((long)dividend));
-        long lv = (long)(Math.abs((long)divisor));
-        if(ld < lv|| ld == 0){
-            return 0;
-        }
-        long res = div(ld, lv);
-        if(res > Integer.MAX_VALUE){
-            if(sign == 1){
-                return Integer.MAX_VALUE;
-            }else{
-                return Integer.MIN_VALUE;
-            }
-        }
-        if(sign == -1){
-            return (int)(res * sign);
-        }else{
-            return (int)(res);
-        }
+        permute(num, 0, res);
+        return res;
     }
-	
-	public static long div(long ld, long lv){
-        if(ld < lv){
-            return 0l;
+    
+    public static void permute(List<Integer> nums, int index, List<List<Integer>> res){
+        if(index == nums.size() - 1){
+            res.add(new ArrayList<Integer>(nums));
+            return;
         }
-        long sum = lv;
-        long mul = 1;
-        while((sum + sum) <= ld){
-            sum += sum;
-            mul += mul;
+        for(int i = index; i < nums.size(); i++){
+            if(i > index && nums.get(i) == nums.get(i - 1)){
+                continue;
+            }
+            nums.add(index, nums.get(i));
+            nums.remove(i + 1);
+            permute(nums, i + 1, res);
+            nums.add(i + 1, nums.get(index));
+            nums.remove(index);
         }
-        return mul + div(ld - sum, lv);
     }
 
 	public static void main(String[] args) {
-		System.out.println(divide(-1, 1));
+		System.out.println(permuteUnique(new int[]{1, 1, 2}));
 	}
 }
