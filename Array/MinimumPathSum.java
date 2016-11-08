@@ -12,21 +12,21 @@ public class MinimumPathSum {
 			return 0;
 		}
 		int m = grid.length;
-		int n = grid[0].length;
-		int[] dp = new int[n + 1];
-		for (int i = 0; i < n; i++) {
-			dp[i + 1] = grid[0][i] + dp[i];
-		}
-		for (int i = 1; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (j == 0) {
-					dp[j + 1] = grid[i][j] + dp[j + 1];
-				} else {
-					dp[j + 1] = grid[i][j] + Math.min(dp[j], dp[j + 1]);
-				}
-			}
-		}
-		return dp[n];
+        int n = grid[0].length;
+        int[] dp = new int[n + 1];
+        for(int j = 1; j <= n; j++){
+            dp[j] = grid[0][j - 1] + dp[j - 1];
+        }
+        for(int i = 2; i <= m; i++){
+            for(int j = 1; j <= n; j++){
+                if(j == 1){
+                    dp[j] += grid[i - 1][j -1];
+                }else{
+                    dp[j] = grid[i - 1][j - 1] + Math.min(dp[j], dp[j - 1]);
+                }
+            }
+        }
+        return dp[n];
 	}
 	
 	// DP
