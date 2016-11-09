@@ -4,39 +4,42 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sun.print.resources.serviceui;
+
 public class Solution {
-	public static List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if(nums.length == 0){
-            return res;
-        }
-        List<Integer> num = new ArrayList<Integer>();
-        Arrays.sort(nums);
-        for(int i : nums){
-            num.add(i);
-        }
-        permute(num, 0, res);
-        return res;
-    }
-    
-    public static void permute(List<Integer> nums, int index, List<List<Integer>> res){
-        if(index == nums.size() - 1){
-            res.add(new ArrayList<Integer>(nums));
-            return;
-        }
-        for(int i = index; i < nums.size(); i++){
-            if(i > index && nums.get(i) == nums.get(i - 1)){
-                continue;
-            }
-            nums.add(index, nums.get(i));
-            nums.remove(i + 1);
-            permute(nums, i + 1, res);
-            nums.add(i + 1, nums.get(index));
-            nums.remove(index);
-        }
-    }
+	public static void setZeroes(int[][] matrix) {
+		if (matrix.length == 0) {
+			return;
+		}
+		boolean set = false;
+		int m = matrix.length;
+		int n = matrix[0].length;
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (matrix[i][0] == 0) {
+					set = true;
+				}
+				if (matrix[i][j] == 0) {
+					matrix[i][0] = 0;
+					matrix[0][j] = 0;
+				}
+			}
+		}
+		for (int i = 0; i < m; i++) {
+			for (int j = 1; j < n; j++) {
+				if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+					matrix[i][j] = 0;
+				}
+			}
+			if (set) {
+				matrix[i][0] = 0;
+			}
+		}
+	}
+
 
 	public static void main(String[] args) {
-		System.out.println(permuteUnique(new int[]{1, 1, 2}));
+		int[][] matrix = {{0,0,0,5},{4,3,1,4},{0,1,1,4},{1,2,1,3},{0,0,1,1}};
+		setZeroes(matrix);
 	}
 }

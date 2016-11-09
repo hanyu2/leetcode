@@ -35,13 +35,13 @@ public class SortColors {
 	}
 	
 	public static void sortColors3(int [] nums){
-		int j = 0, k = nums.length - 1;
-		for(int i = 0; i <= k; i++){
-			if(nums[i] == 0 && i != j){
-				swap(nums, i--, j++);
+		int left = 0, right = nums.length - 1;
+		for(int i = 0; i <= right; i++){
+			if(nums[i] == 0 && i != left){
+				swap(nums, i--, left++);
 			}else{
-				if(nums[i] == 2 && i != k){
-					swap(nums, i--, k--);
+				if(nums[i] == 2 && i != right){
+					swap(nums, i--, right--);
 				}
 			}
 		}
