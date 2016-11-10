@@ -34,14 +34,14 @@ public class DistinctSubsequences {
 	        return 0;
 	        
 	    int[] counts = new int[T.length()];
-	    for (int indexS = 0; indexS < S.length(); indexS++) {
-	        char charS = S.charAt(indexS);
-	        for (int indexT = T.length() - 1; indexT >= 0; indexT--) {
-	            if (T.charAt(indexT) == charS) {
-	                if (indexT == 0)
+	    for (int i = 0; i < S.length(); i++) {
+	        char charS = S.charAt(i);
+	        for (int j = T.length() - 1; j >= 0; j--) {
+	            if (T.charAt(j) == charS) {
+	                if (j == 0)
 	                    counts[0]++;
 	                else
-	                    counts[indexT] += counts[indexT-1];
+	                    counts[j] += counts[j-1];
 	            }
 	        }
 	    }
