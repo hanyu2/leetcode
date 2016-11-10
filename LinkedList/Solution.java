@@ -7,49 +7,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 public class Solution {
-	public static List<String> wordBreak(String s, Set<String> wordDict) {
-        List<String> res = new ArrayList<String>();
-        if(s.length() == 0){
-            return res;
+	public static ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
         }
-        Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();
-        return breakup(0, s, wordDict, map);
-    }
-    public static List<String> breakup(int index, String s, Set<String> set, Map<Integer, List<String>> map){
-        List<String> res = new ArrayList<String>();
-        if(index == s.length()){
-            res.add("");
-            return res;
-        }
-        
-        for(int i = index + 1; i <= s.length(); i++){
-            String sub = s.substring(index, i);
-            if(set.contains(sub)){
-                List<String> list;
-                if(map.containsKey(i)){
-                    list = map.get(i);
-                }else{
-                    list = breakup(i, s, set, map);
-                }
-                for(String str : list){
-                    res.add(sub + (str.equals("") ? "" : " ") + str);
-                }
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode cur = pre.next;
+        while(cur != null && cur.next != null){
+            ListNode next = cur.next;
+            while(next != null && next.val == cur.val){
+                next = next.next;
+            }
+            if(cur.next == next){
+                head = cur;
+                cur = next;
+            }else{
+                head.next = next;
+                cur = next;
             }
         }
-        map.put(index, res);
-        return res;
+        return dummy.next;
     }
 
 	public static void main(String[] args) {
-		String s = "catsanddog";
-		Set<String> set = new HashSet<String>();
-		set.add("cat");
-		set.add("cats");
-		set.add("and");
-		set.add("sand");
-		set.add("dog");
-		//wordBreak(s, set);
-		wordBreak(s, set);
+		ListNode n1 = new ListNode(1);
+		ListNode n2 = new ListNode(1);
+		n1.next = n2;
+		ListNode res = deleteDuplicates(n1);
 	}
 }
