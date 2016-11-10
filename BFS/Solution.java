@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.sun.xml.internal.fastinfoset.algorithm.FloatEncodingAlgorithm;
+
 import sun.print.resources.serviceui;
 
 public class Solution {
@@ -40,6 +42,8 @@ public class Solution {
 
 	public static void main(String[] args) {
 		int[][] matrix = {{0,0,0,5},{4,3,1,4},{0,1,1,4},{1,2,1,3},{0,0,1,1}};
-		setZeroes(matrix);
+		System.out.println(Float.parseFloat("1000.000000"));
+		int i = 0;
+		
 	}
 }

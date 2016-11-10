@@ -1,58 +1,54 @@
 package Tree;
 
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class CheckSymmetric {
-	public static boolean isSymmetric(TreeNode root){
-		if(root == null){
+	public static boolean isSymmetric(TreeNode root) {
+		if (root == null) {
 			return true;
 		}
 		return check(root.left, root.right);
 	}
 
 	private static boolean check(TreeNode left, TreeNode right) {
-		if(left == null && right == null){
+		if (left == null && right == null) {
 			return true;
 		}
-		if(left == null || right == null){
+		if (left == null || right == null) {
 			return false;
 		}
-		if(left.val != right.val){
+		if (left.val != right.val) {
 			return false;
 		}
 		return check(left.left, right.right) && check(left.right, right.left);
 	}
-	
-	public static boolean nonRecursive(TreeNode root){
-		if(root == null){
+
+	public boolean isSymmetric2(TreeNode root) {
+		if (root == null) {
 			return true;
 		}
-		boolean flag = true;
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		stack.push(root.left);
-		stack.push(root.right);
-		TreeNode left;
-		TreeNode right;
-		while(!stack.isEmpty()){
-			right = stack.pop();
-			left = stack.pop();
-			if(left == null && right == null){
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
+		q.offer(root.left);
+		q.offer(root.right);
+		while (!q.isEmpty()) {
+			TreeNode n1 = q.poll();
+			TreeNode n2 = q.poll();
+			if (n1 == null && n2 == null) {
 				continue;
 			}
-			if((right == null) || (left == null)){
-				flag = false;
-				break;
+			if ((n1 == null) ^ (n2 == null)) {
+				return false;
 			}
-			if(left.val != right.val){
-				flag = false;
-				break;
+			if (n1.val != n2.val) {
+				return false;
 			}
-			
-			stack.push(left.left);
-			stack.push(right.right);
-			stack.push(left.right);
-			stack.push(right.left);
+			q.offer(n1.left);
+			q.offer(n2.right);
+			q.offer(n1.right);
+			q.offer(n2.left);
 		}
-		return flag;
+		return true;
 	}
+
 }
