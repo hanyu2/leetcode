@@ -37,7 +37,7 @@ public class MaxPointsOnALine {
 		return result;
 	}
 	
-	  public int maxPoints2(Point[] points) {
+	  public static int maxPoints2(Point[] points) {
 	        /*
 	        遍历每个点，看它和后面的每个点构成的直线上有多少个点
 	        对每个点建立map，斜率是key
@@ -76,7 +76,7 @@ public class MaxPointsOnALine {
 	        return res;
 	    }
 
-	    public int generateGcd(int x, int y) {
+	    public static int generateGcd(int x, int y) {
 	        if (y == 0) return x;
 	        return generateGcd(y, x % y);
 	    }
@@ -85,9 +85,9 @@ public class MaxPointsOnALine {
 	    public static void main(String[] args) {
 			Point p1 = new Point(0, 0);
 			Point p2 = new Point(1, 1);
-			Point p3 = new Point(1, -1);
+			Point p3 = new Point(-1, -1);
 			Point [] points = {p1, p2, p3};
-			//System.out.println(maxPoints2(points));
+			System.out.println(maxPoints2(points));
 		}
 	    static class Point {
 	      int x;
