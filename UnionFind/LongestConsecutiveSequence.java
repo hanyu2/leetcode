@@ -25,9 +25,6 @@ public class LongestConsecutiveSequence {
 				// will do nothing if n has no neighbors
 				map.put(n - left, sum);
 				map.put(n + right, sum);
-			} else {
-				// duplicates
-				continue;
 			}
 		}
 		return res;
