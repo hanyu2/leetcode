@@ -2,60 +2,6 @@ package LinkedList;
 
 public class SortList {
 	public static ListNode sortList(ListNode head) {
-		if (head == null || head.next == null) {
-			return head;
-		}
-		ListNode end = head;
-		while (end.next != null) {
-			end = end.next;
-		}
-		return sort(head, end);
-	}
-
-	public static ListNode sort(ListNode start, ListNode end) {
-		if (start.next == end) {
-			if (start.val > end.val) {
-				end.next = start;
-				start.next = null;
-				return end;
-			}
-		}
-		if (start == end) {
-			start.next = null;
-			return start;
-		}
-		ListNode middle = middle(start, end);
-		ListNode middleNext = middle.next;
-		ListNode left = sort(start, middle);
-		ListNode right = sort(middleNext, end);
-
-		ListNode dummy = new ListNode(-1);
-		ListNode head = dummy;
-		while (left != null && right != null) {
-			if (left.val < right.val) {
-				head.next = left;
-				left = left.next;
-			} else {
-				head.next = right;
-				right = right.next;
-			}
-			head = head.next;
-		}
-		head.next = left == null ? right : left;
-		return dummy.next;
-	}
-
-	public static ListNode middle(ListNode start, ListNode end) {
-		ListNode slow = start;
-		ListNode fast = start;
-		while (fast != end && fast.next != end) {
-			slow = slow.next;
-			fast = fast.next.next;
-		}
-		return slow;
-	}
-
-	public static ListNode sortList2(ListNode head) {
 		if (head == null || head.next == null)
 			return head;
 
@@ -71,35 +17,30 @@ public class SortList {
 		prev.next = null;
 
 		// step 2. sort each half
-		ListNode l1 = sortList2(head);
-		ListNode l2 = sortList2(slow);
+		ListNode l1 = sortList(head);
+		ListNode l2 = sortList(slow);
 
 		// step 3. merge l1 and l2
 		return merge(l1, l2);
 	}
 
-	static ListNode merge(ListNode l1, ListNode l2) {
-		ListNode l = new ListNode(0), p = l;
-
-		while (l1 != null && l2 != null) {
-			if (l1.val < l2.val) {
-				p.next = l1;
-				l1 = l1.next;
-			} else {
-				p.next = l2;
-				l2 = l2.next;
-			}
-			p = p.next;
-		}
-
-		if (l1 != null)
-			p.next = l1;
-
-		if (l2 != null)
-			p.next = l2;
-
-		return l.next;
-	}
+	public static ListNode merge(ListNode l1, ListNode l2){
+        ListNode dummy = new ListNode(-1);
+        ListNode head = dummy;
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                head.next = l1;
+                l1 = l1.next;
+                head = head.next;
+            }else{
+                head.next = l2;
+                l2= l2.next;
+                head = head.next;
+            }
+        }
+        head.next = l1 == null ? l2 : l1;
+        return dummy.next;
+    }
 
 	public static void main(String[] args) {
 		ListNode n1 = new ListNode(8);
@@ -117,6 +58,6 @@ public class SortList {
 		n5.next = n6;
 		n6.next = n7;
 		// n7.next = n8;
-		ListNode res = sortList2(n1);
+		ListNode res = sortList(n1);
 	}
 }
