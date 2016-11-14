@@ -1,69 +1,47 @@
 package BFS;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class Solution {
-
-	static String[] simpleWords(String[] words) {
-        Set<String> wordDict = new HashSet<String>();
-        for(String word : words){
-            wordDict.add(word);
-        }    
-        List<String> res = new ArrayList<String>();
-        for(String word : words){
-            if(!compound(word, wordDict)){
-                res.add(word);
-            }
-        }
-        String[] simWords = new String[res.size()];
-        for(int i = 0; i < res.size(); i++){
-            simWords[i] = res.get(i);
-        }
-        return simWords;
-    }
-
-    static boolean compound(String word, Set<String> wordDict){
-        boolean wordInDict = false;
-        if(wordDict.contains(word)){
-            wordDict.remove(word);
-            wordInDict = true;
-        }
-        boolean[] check = new boolean[word.length()];
-        for(int i = 0; i < word.length(); i++){
-            String sub = word.substring(0, i + 1);
-            checkContain(sub, wordDict, check);
-        }
-        if(wordInDict){
-            wordDict.add(word);
-        }
-        return check[word.length() - 1];
-    }
-
-    static void checkContain(String word, Set<String> wordDict, boolean[] check){
-       if(wordDict.contains(word)){
-           check[word.length() - 1] = true;
-           return;
-       }
-       for(int i = 0; i < word.length(); i++){
-    	   if(check[i]){
-               String sub = word.substring(i + 1, word.length());
-               if(wordDict.contains(sub)){
-                   check[sub.length() - 1] = true;
-                   return;
-               }
-           }
-       }
-    }
-	
-	public static void main(String[] args) {
-		String[] words = {"chat", "ever", "snapchat", "snap", "salesperson", "per", "person", "sales", "son", "whatsoever", "what", "so"};
-		String[] re = simpleWords(words);
-		for(String string : re){
-			System.out.println(string);
+	public static int findKthLargest(int[] nums, int k) {
+		if (nums.length == 0) {
+			return 0;
 		}
+		k = nums.length - k;
+		int start = 0;
+		int end = nums.length - 1;
+		while (start < end) {
+			int t = find(nums, start, end);
+			if (t == k) {
+				break;
+			} else if (t < k) {
+				start = t + 1;
+			} else {
+				end = t - 1;
+			}
+		}
+		return nums[k];
+	}
+
+	public static int find(int[] nums, int start, int end) {
+		int piv = nums[start];
+		int len = start;
+		for (int i = start + 1; i <= end; i++) {
+			if (nums[i] < piv) {
+				swap(nums, ++len, i);
+			}
+		}
+		swap(nums, start, len);
+		return len;
+	}
+	
+	public static void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
+    }
+
+	public static void main(String[] args) {
+		int[] nums = {-1, 2, 0};
+		findKthLargest(nums, 1);
 	}
 
 }

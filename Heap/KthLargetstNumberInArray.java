@@ -34,18 +34,15 @@ public class KthLargetstNumberInArray {
 		return nums[k];
 	}
 
-	private static int partition(int[] nums, int left, int right) {
-		int x = nums[left];
-		int len = left;
-		int i = left + 1;
-
-		while (i <= right) {
-			if (nums[i] < x) {
+	private static int partition(int[] nums, int start, int end) {
+		int piv = nums[start];
+		int len = start;
+		for (int i = start + 1; i <= end; i++) {
+			if (nums[i] < piv) {
 				swap(nums, ++len, i);
 			}
-			++i;
 		}
-		swap(nums, left, len);
+		swap(nums, start, len);
 		return len;
 	}
 
@@ -103,7 +100,7 @@ public class KthLargetstNumberInArray {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = { 2, 1 };
+		int[] nums = {-1, 2, 0 };
 		System.out.println(findKthLargest2(nums, 1));
 	}
 }
