@@ -2,6 +2,30 @@ package FB;
 
 public class DecodeWays {
 
+	//N(1) space
+	public static int numDecodings4(String s) {
+		int n = s.length();
+        if(n == 0){
+            return 0;
+        }
+        int first = 1;
+        int second = 1;
+        int ans = 0;
+        int pre = 27;
+        for(int i = n - 1; i >= 0; i--){
+            int d = s.charAt(i) - '0';
+            if(d == 0){
+                ans = 0;
+            }else{
+                ans = first + (d * 10 + pre <= 26 ? second : 0);
+            }
+            second = first;
+            first = ans;
+            pre = d;
+        }
+        return ans;
+	}
+
 	public static int numDecodings2(String s) {
 		if (s == null || s.length() == 0)
 			return 0;
@@ -18,8 +42,7 @@ public class DecodeWays {
 		}
 		return dp[0];
 	}
-	
-	
+
 	public static int numDecodings1(String s) {
 		if (s == null || s.length() == 0)
 			return 0;
@@ -55,8 +78,6 @@ public class DecodeWays {
 		return memo[0];
 	}
 
-	
-
 	// no extra space
 	public int numDecodings3(String s) {
 		if (s.length() == 0)
@@ -76,7 +97,7 @@ public class DecodeWays {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(numDecodings("0"));
+		System.out.println(numDecodings1("0"));
 		System.out.println(numDecodings2("12415"));
 	}
 }

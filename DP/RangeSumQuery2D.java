@@ -1,7 +1,5 @@
 package DP;
 
-import Array.LRUCache;
-
 public class RangeSumQuery2D {
 	int[][] sum;
     public RangeSumQuery2D(int[][] matrix) {

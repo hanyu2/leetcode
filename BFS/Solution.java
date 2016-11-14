@@ -1,56 +1,69 @@
 package BFS;
 
-import Tree.TreeNode;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Solution {
-	public static void solve(char[][] board) {
-        if(board.length <= 2){
-            return;
-        }
-        int m = board.length;
-        int n = board[0].length;
-        for(int i = 0; i < n; i++){
-            if(board[0][i] == 'O'){
-                dfs(board, 0, i);
-            }
-            char c = board[m - 1][i];
-            if(c == 'O'){
-                dfs(board, m - 1, i);
+
+	static String[] simpleWords(String[] words) {
+        Set<String> wordDict = new HashSet<String>();
+        for(String word : words){
+            wordDict.add(word);
+        }    
+        List<String> res = new ArrayList<String>();
+        for(String word : words){
+            if(!compound(word, wordDict)){
+                res.add(word);
             }
         }
-        for(int i = 0; i < m; i++){
-            if(board[i][0] == 'O'){
-                dfs(board, i, 0);
-            }
-            if(board[i][n - 1] == 'O'){
-                dfs(board, i, n - 1);
-            }
+        String[] simWords = new String[res.size()];
+        for(int i = 0; i < res.size(); i++){
+            simWords[i] = res.get(i);
         }
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if(board[i][j] == '*'){
-                    board[i][j] = 'O';
-                }
-                if(board[i][j] == 'O'){
-                    board[i][j] = 'X';
-                }
-            }
-        }
-    }
-	
-	public static void dfs(char[][] board, int i, int j){
-        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != 'O'){
-            return;
-        }
-        board[i][j] = '*';
-        dfs(board, i + 1, j);
-        dfs(board, i - 1, j);
-        dfs(board, i, j + 1);
-        dfs(board, i, j - 1);
+        return simWords;
     }
 
+    static boolean compound(String word, Set<String> wordDict){
+        boolean wordInDict = false;
+        if(wordDict.contains(word)){
+            wordDict.remove(word);
+            wordInDict = true;
+        }
+        boolean[] check = new boolean[word.length()];
+        for(int i = 0; i < word.length(); i++){
+            String sub = word.substring(0, i + 1);
+            checkContain(sub, wordDict, check);
+        }
+        if(wordInDict){
+            wordDict.add(word);
+        }
+        return check[word.length() - 1];
+    }
+
+    static void checkContain(String word, Set<String> wordDict, boolean[] check){
+       if(wordDict.contains(word)){
+           check[word.length() - 1] = true;
+           return;
+       }
+       for(int i = 0; i < word.length(); i++){
+    	   if(check[i]){
+               String sub = word.substring(i + 1, word.length());
+               if(wordDict.contains(sub)){
+                   check[sub.length() - 1] = true;
+                   return;
+               }
+           }
+       }
+    }
+	
 	public static void main(String[] args) {
-		char[][] board = {"XXXX".toCharArray(), "XOOX".toCharArray(), "XXOX".toCharArray(), "XOXX".toCharArray()};
-		solve(board);
+		String[] words = {"chat", "ever", "snapchat", "snap", "salesperson", "per", "person", "sales", "son", "whatsoever", "what", "so"};
+		String[] re = simpleWords(words);
+		for(String string : re){
+			System.out.println(string);
+		}
 	}
+
 }
