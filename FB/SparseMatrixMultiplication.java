@@ -18,6 +18,43 @@ import java.util.Map;
 	两个vector相乘*/
 public class SparseMatrixMultiplication {
 	
+	public int[][] multiply2(int[][] A, int[][] B) {
+        int m = A.length;
+        int n = A[0].length;
+        int k = B[0].length;
+        int[][] T = new int[m][k];
+        Map<Integer, Map<Integer, Integer>> mapA = mapify(A);
+        Map<Integer, Map<Integer, Integer>> mapB = mapify(B);
+        for(int i : mapA.keySet()){
+            Map<Integer, Integer> arow = mapA.get(i);
+            for(int j : arow.keySet()){
+                Map<Integer, Integer> bcol = mapB.get(j);
+                if(bcol != null){
+                    for(int t : mapB.get(j).keySet()){
+                        T[i][t] += arow.get(j) * mapB.get(j).get(t);
+                    }
+                }
+            }
+        }
+        return T;
+    }
+	
+	public Map<Integer, Map<Integer, Integer>> mapify(int[][] matrix){
+        Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                if(matrix[i][j] != 0){
+                    if(!map.containsKey(i)){
+                        map.put(i, new HashMap<Integer, Integer>());
+                    }
+                    Map<Integer, Integer> row = map.get(i);
+                    row.put(j, matrix[i][j]);
+                }
+            }
+        }
+        return map;
+    }
+	
 	public int[][] multiply3(int[][] A, int[][] B) {
 		int[][] C = new int[A.length][B[0].length];
         Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
@@ -59,39 +96,5 @@ public class SparseMatrixMultiplication {
 		return C;
 	}
 	
-	//use map to store nonzeroes
-    public int[][] multiply2(int[][] A, int[][] B) {
-        int[][] C = new int[A.length][B[0].length];
-        Map<Integer, Map<Integer, Integer>> arows = map(A);
-        Map<Integer, Map<Integer, Integer>> brows = map(B);
-        for(int i: arows.keySet()) {
-            Map<Integer, Integer> acol = arows.get(i);
-            for(int j: acol.keySet()) {
-                Map<Integer, Integer> bcol = brows.get(j);
-                if (bcol == null) continue;
-                int a = acol.get(j);
-                for(int l: bcol.keySet()) {
-                    C[i][l] += a * bcol.get(l);
-                }
-            }
-        }
-        return C;
-    }
-    
-    private Map<Integer, Map<Integer, Integer>> map(int[][] m) {
-        Map<Integer, Map<Integer, Integer>> rows = new HashMap<>();
-        for(int i=0; i<m.length; i++) {
-            for(int j=0; j<m[i].length; j++) {
-                if (m[i][j]==0) continue;
-                Map<Integer, Integer> cols = rows.get(i);
-                if (cols == null) {
-                    cols = new HashMap<>();
-                    rows.put(i, cols);
-                }
-                cols.put(j, m[i][j]);
-            }
-        }
-        return rows;
-    }
 
 }
