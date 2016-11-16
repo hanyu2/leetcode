@@ -4,24 +4,23 @@ public class DecodeWays {
 
 	//N(1) space
 	public static int numDecodings4(String s) {
-		int n = s.length();
-        if(n == 0){
-            return 0;
-        }
-        int first = 1;
-        int second = 1;
+		int first = 1;
+        int second = 2;
         int ans = 0;
         int pre = 27;
-        for(int i = n - 1; i >= 0; i--){
-            int d = s.charAt(i) - '0';
-            if(d == 0){
+        for(int i = s.length() - 1; i >= 0; i--){
+            int n = s.charAt(i) - '0';
+            if(n == 0){
                 ans = 0;
             }else{
-                ans = first + (d * 10 + pre <= 26 ? second : 0);
+                ans = first;
+                if(n * 10 + pre <= 26){
+                    ans += second;
+                }
             }
             second = first;
             first = ans;
-            pre = d;
+            pre = n;
         }
         return ans;
 	}
