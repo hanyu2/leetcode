@@ -3,7 +3,6 @@ package FB;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /*这道题我当时并没有准备到，但是正因为如此，我认为我跟面试官的交流给我加分了不少。
  * 面试官首先问我每个vector很大，并不能在内存中存下，该怎么办，
  * 我说只需要存下非零的元素和他们的下标就行，
@@ -17,68 +16,68 @@ import java.util.Map;
 	然后问如果有一个向量比另一个长很多怎么办，遍历短的，对长的二分查找。
 	两个vector相乘*/
 public class SparseMatrixMultiplication {
-	
+
 	public int[][] multiply2(int[][] A, int[][] B) {
-        int m = A.length;
-        int n = A[0].length;
-        int k = B[0].length;
-        int[][] T = new int[m][k];
-        Map<Integer, Map<Integer, Integer>> mapA = mapify(A);
-        Map<Integer, Map<Integer, Integer>> mapB = mapify(B);
-        for(int i : mapA.keySet()){
-            Map<Integer, Integer> arow = mapA.get(i);
-            for(int j : arow.keySet()){
-                Map<Integer, Integer> bcol = mapB.get(j);
-                if(bcol != null){
-                    for(int t : mapB.get(j).keySet()){
-                        T[i][t] += arow.get(j) * mapB.get(j).get(t);
+		int m = A.length;
+		int n = A[0].length;
+		int k = B[0].length;
+		int[][] T = new int[m][k];
+		Map<Integer, Map<Integer, Integer>> mapA = mapify(A);
+		Map<Integer, Map<Integer, Integer>> mapB = mapify(B);
+		for(int i : mapA.keySet()){
+            Map<Integer, Integer> rowA = mapA.get(i);
+            for(int j : rowA.keySet()){
+                Map<Integer, Integer> colB = mapB.get(j);
+                if(colB != null){
+                    for(int t : colB.keySet()){
+                        T[i][t] += rowA.get(j) * colB.get(t);
                     }
                 }
             }
         }
-        return T;
-    }
-	
-	public Map<Integer, Map<Integer, Integer>> mapify(int[][] matrix){
-        Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
-                if(matrix[i][j] != 0){
-                    if(!map.containsKey(i)){
-                        map.put(i, new HashMap<Integer, Integer>());
-                    }
-                    Map<Integer, Integer> row = map.get(i);
-                    row.put(j, matrix[i][j]);
-                }
-            }
-        }
-        return map;
-    }
-	
+		return T;
+	}
+
+	public Map<Integer, Map<Integer, Integer>> mapify(int[][] matrix) {
+		Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				if (matrix[i][j] != 0) {
+					if (!map.containsKey(i)) {
+						map.put(i, new HashMap<Integer, Integer>());
+					}
+					Map<Integer, Integer> row = map.get(i);
+					row.put(j, matrix[i][j]);
+				}
+			}
+		}
+		return map;
+	}
+
 	public int[][] multiply3(int[][] A, int[][] B) {
 		int[][] C = new int[A.length][B[0].length];
-        Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
-        for(int j = 0; j < B.length; j++){
-            map.put(j, new HashMap<Integer, Integer>());
-            for(int k = 0; k < B[0].length; k++){
-                if(B[j][k] != 0){
-                    map.get(j).put(k, B[j][k]);
-                }
-            }
-        }
-        
-        for(int i = 0; i < A.length; i++){
-            for(int j = 0; j < A[0].length; j++){
-                if(A[i][j] != 0){
-                    for(int k : map.get(j).keySet()){
-                        C[i][k] += A[i][j] * map.get(j).get(k);
-                    }
-                }
-            }
-        }
-        return C;   
-    }
-	
+		Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
+		for (int j = 0; j < B.length; j++) {
+			map.put(j, new HashMap<Integer, Integer>());
+			for (int k = 0; k < B[0].length; k++) {
+				if (B[j][k] != 0) {
+					map.get(j).put(k, B[j][k]);
+				}
+			}
+		}
+
+		for (int i = 0; i < A.length; i++) {
+			for (int j = 0; j < A[0].length; j++) {
+				if (A[i][j] != 0) {
+					for (int k : map.get(j).keySet()) {
+						C[i][k] += A[i][j] * map.get(j).get(k);
+					}
+				}
+			}
+		}
+		return C;
+	}
+
 	// regular way
 	public int[][] multiply(int[][] A, int[][] B) {
 		int[][] C = new int[A.length][B[0].length];
@@ -95,6 +94,5 @@ public class SparseMatrixMultiplication {
 		}
 		return C;
 	}
-	
 
 }

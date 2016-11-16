@@ -3,56 +3,7 @@ package Tree;
 import java.util.Stack;
 
 public class ValidateBST {
-	// wrong solution
-	 /*    10
-	    5     15
-	        6    20 */
-	/*public boolean isValidBST(TreeNode root) {
-		if (root == null) {
-			return true;
-		}
-		if (root.left != null) {
-			if (root.val > root.left.val) {
-				isValidBST(root.left);
-			} else {
-				return false;
-			}
-		}
-		if (root.right != null) {
-			if (root.val < root.right.val) {
-				isValidBST(root.right);
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}*/
 	
-	//wrong solution
-	//   1
-	// 1
-	/*int last = Integer.MIN_VALUE;
-    public boolean isValidBST(TreeNode root) {
-        if(root == null){
-            return true;
-        }
-        
-        if(!isValidBST(root.left)){
-            return false;
-        }
-        
-        if(root.val < last){
-            return false;
-        }
-        last = root.val;
-        
-        if(!isValidBST(root.right)){
-            return false;
-        }
-        return true;
-    }*/
-	//还有一种方法是利用中序遍历得到数组，然后判断数组是不是递增的就行。用到n的空间。duplicates not working
-	//Avoid [Integer.MIN_VALUE]
 	public boolean isValidBST(TreeNode root) {
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
