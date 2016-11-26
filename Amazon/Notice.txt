@@ -1,0 +1,14 @@
+Work simulation
+对于ineffective的选项直接打一分，然后其他effective的打分都是4到5分。
+遵循的原则是客户>ddl>技术
+
+K nearest
+大家还是要记得加java.util.*
+Closest Points那道题有个edge case是
+if (k <= 0)  return new Point[0]
+
+deep copy
+提醒一下题目里的任意指针不是random，是arbitrary
+
+Rectangle overlap
+地里有人说rectangle overlap有三个test case跑不过去，是因为如果两个长方形有边重叠，也算重叠，所以<或者>，变成=>或者<=就好了。

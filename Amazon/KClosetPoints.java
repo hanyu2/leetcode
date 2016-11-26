@@ -1,10 +1,10 @@
 package Amazon;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class KClosetPoints {
 	public static Point[] Solution(Point[] array, final Point origin, int k) {
+		if (k <= 0)  return new Point[0];
 		Point[] points = new Point[k];
 		PriorityQueue<Point> pq = new PriorityQueue<Point>(k, new Comparator<Point>() {
 			public int compare(Point a, Point b) {
