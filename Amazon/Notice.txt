@@ -1,14 +1,34 @@
 Work simulation
 对于ineffective的选项直接打一分，然后其他effective的打分都是4到5分。
 遵循的原则是客户>ddl>技术
+根据地里的经验 选的选项都偏极端 基本都是 5 4 1 或者 5 1 2这样的组合，要有明确的立场，全程就选了一个3。
+是基于customer > ddl > other features这样的顺序来选的，
+用的这两个面经https://segmentfault.com/a/1190000007519772（主要参考这个，比较有条理）
+和http://www.jianshu.com/p/013e35d551ba。
+只有拿到code snippet的题有标准答案，其他的都靠自由发挥。
+一定要有立场立场立场！另外遇到问你怎么处理的情况有manager的选项基本是最effective的
+WS吧，个人觉得不同每个题12345给全，也没必要都给出层次，老大老二都不好但是老大略好于老二这种我都给2的，比较极端。
 
 K nearest
 大家还是要记得加java.util.*
 Closest Points那道题有个edge case是
 if (k <= 0)  return new Point[0]
+另外K points的输入是没有origin的 直接假设origin是0， k大于数组的长度时 我返回的是sort后的所有点
+
 
 deep copy
 提醒一下题目里的任意指针不是random，是arbitrary
 
 Rectangle overlap
 地里有人说rectangle overlap有三个test case跑不过去，是因为如果两个长方形有边重叠，也算重叠，所以<或者>，变成=>或者<=就好了。
+rectangle有坑，要预处理
+
+MST
+第三题MST写完有一个case木有过 但是听说是不能找到connect方案时需要返回null而不是emptyList。。明明题干里面就是要求empty list。。。什么鬼 然后结果需要排序，题干里也没说。。。
+WS只能参考，真正做的时候还是会很纠结，不过我选的没那么极端。。看地里都说要极端的才好。。可是感觉很多选项还是部分make sense。
+还有现在WS部分是2小时，coding part1 75mins， part2 30mins。
+说实话写MST时间还是挺紧的，最后case都过了，看了地里的MST不合法返回null过了最后一个case。想问问有人和我是一个题目嘛？
+MST基本无坑，只要懂union find，最后输出要排序。
+
+Order dependency
+orderDep有坑，map里string要做key
