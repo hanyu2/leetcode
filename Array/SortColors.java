@@ -1,20 +1,18 @@
 package Array;
 
-import javax.print.attribute.standard.NumberUpSupported;
-
 public class SortColors {
-	public static void sortColors(int[] nums) {
-		int n = nums.length - 1;
-		int count = 0;
-		for (int i = 0; i <= n; i++) {
-			// attention : when 2 <-> 0 then there may be 1 0 2 and the next
-			// while will swap 1 and 0
-			while (nums[i] == 2 && i < n)
-				swap(nums, i, n--);
-			while (nums[i] == 0 && i > count)
-				swap(nums, i, count++);
+	
+	public static void sortColors3(int[] nums) {
+		int left = 0, right = nums.length - 1;
+		for (int i = 0; i <= right; i++) {
+			if (nums[i] == 0 && i != left) {
+				swap(nums, i--, left++);
+			} else if (nums[i] == 2 && i != right) {
+				swap(nums, i--, right--);
+			}
 		}
 	}
+	
 
 	public static void swap(int nums[], int i, int j) {
 		int temp = nums[i];
@@ -38,14 +36,16 @@ public class SortColors {
 		}
 	}
 
-	public static void sortColors3(int[] nums) {
-		int left = 0, right = nums.length - 1;
-		for (int i = 0; i <= right; i++) {
-			if (nums[i] == 0 && i != left) {
-				swap(nums, i--, left++);
-			} else if (nums[i] == 2 && i != right) {
-				swap(nums, i--, right--);
-			}
+	public static void sortColors(int[] nums) {
+		int n = nums.length - 1;
+		int count = 0;
+		for (int i = 0; i <= n; i++) {
+			// attention : when 2 <-> 0 then there may be 1 0 2 and the next
+			// while will swap 1 and 0
+			while (nums[i] == 2 && i < n)
+				swap(nums, i, n--);
+			while (nums[i] == 0 && i > count)
+				swap(nums, i, count++);
 		}
 	}
 

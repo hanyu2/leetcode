@@ -9,32 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class WordBreak2 {
-	//TLE 
-	/*public static List<String> wordBreak(String s, Set<String> wordDict) {
-        List<String> res = new ArrayList<String>();
-        if(s.length() == 0){
-            return res;
-        }
-        StringBuilder sb = new StringBuilder();
-        int index = 0;
-        word(s, res, sb, index, wordDict);
-        return res;
-    }
-    
-    public static void word(String s, List<String> res, StringBuilder sb, int index, Set<String> wordDict){
-        if(index == s.length()){
-            res.add(sb.toString().substring(0, sb.length() - 1));
-            return;
-        }
-        for(int i = index; i <= s.length(); i++){
-            String str = s.substring(index, i);
-            if(wordDict.contains(str)){
-                wordDict.remove(str);
-                word(s, res, new StringBuilder(sb).append(str).append(" "), i, wordDict);
-                wordDict.add(str);
-            }
-        }
-    }*/
     
 	public static List<String> wordBreak(String s, Set<String> wordDict) {
 	    return DFS(s, wordDict, new HashMap<String, LinkedList<String>>());

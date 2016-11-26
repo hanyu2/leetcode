@@ -19,11 +19,11 @@ public class InorderSuccessorInBST {
 		if (root == null)
 			return null;
 
-		if (root.val <= p.val) {
-			return successor2(root.right, p);
-		} else {
+		if (p.val < root.val) {
 			TreeNode left = successor2(root.left, p);
 			return (left == null) ? root : left;
+		} else {
+			return successor2(root.right, p);
 		}
 	}
 
@@ -31,11 +31,11 @@ public class InorderSuccessorInBST {
 		if (root == null)
 			return null;
 
-		if (root.val >= p.val) {
-			return predecessor(root.left, p);
-		} else {
+		if (p.val > root.val) {
 			TreeNode right = predecessor(root.right, p);
 			return (right != null) ? right : root;
+		} else {
+			return predecessor(root.left, p);
 		}
 	}
 }
