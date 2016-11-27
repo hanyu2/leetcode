@@ -6,7 +6,7 @@ public class KClosetPoints {
 	public static Point[] Solution(Point[] array, final Point origin, int k) {
 		if (k <= 0)  return new Point[0];
 		Point[] points = new Point[k];
-		PriorityQueue<Point> pq = new PriorityQueue<Point>(k, new Comparator<Point>() {
+		PriorityQueue<Point> pq = new PriorityQueue<Point>(5, new Comparator<Point>() {
 			public int compare(Point a, Point b) {
 	             if (getDistance(b, origin) >= getDistance(a, origin)){
 	              return 1;

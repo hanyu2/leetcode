@@ -1,4 +1,7 @@
 Work simulation
+amazon leadership principle
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212944&ctid=371
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212936&ctid=371
 对于ineffective的选项直接打一分，然后其他effective的打分都是4到5分。
 遵循的原则是客户>ddl>技术
 根据地里的经验 选的选项都偏极端 基本都是 5 4 1 或者 5 1 2这样的组合，要有明确的立场，全程就选了一个3。
@@ -8,6 +11,9 @@ Work simulation
 只有拿到code snippet的题有标准答案，其他的都靠自由发挥。
 一定要有立场立场立场！另外遇到问你怎么处理的情况有manager的选项基本是最effective的
 WS吧，个人觉得不同每个题12345给全，也没必要都给出层次，老大老二都不好但是老大略好于老二这种我都给2的，比较极端。
+我觉得增加测试数据和增加user testing，manual test 高分，增加测试团队中分，延长周期低分。
+一看就特别好的答案，比如用户至上的，比如团队合作的，就给高分，中间也会有那种勉强可以接受的，就给中间分，像什么“跟manager说这个我做不了”，直接1分
+
 
 K nearest
 大家还是要记得加java.util.*
@@ -29,6 +35,13 @@ WS只能参考，真正做的时候还是会很纠结，不过我选的没那么
 还有现在WS部分是2小时，coding part1 75mins， part2 30mins。
 说实话写MST时间还是挺紧的，最后case都过了，看了地里的MST不合法返回null过了最后一个case。想问问有人和我是一个题目嘛？
 MST基本无坑，只要懂union find，最后输出要排序。
+MST当不能连通全部城市的时候是返回null
+MST返回结果前要记得排序
 
 Order dependency
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212564&ctid=371
 orderDep有坑，map里string要做key
+但是，一定要注意，要用orderName做key，而不是Order。因为输入的orderDependency列表里，名字（orderName）一样的Order，也是不同的instance。
+
+Longest palindrome substring
+这个一次就过了，用的O（N^2）的方法去做， 一开始没有熟悉他给的界面，代码风格也不一样，编译了几次后过了。没有特别的case，安正常的方法都可以过。

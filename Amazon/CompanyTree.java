@@ -1,5 +1,6 @@
 package Amazon;
 import java.util.*; //这次差点儿忘了这个
+//http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212506&ctid=371
 class Node { //这个是题目给好的
     int val;
     ArrayList<Node> children;
