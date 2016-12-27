@@ -6,38 +6,52 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class SerializeAndDeserializeBinaryTree {
-	public String serialize(TreeNode root) {
+    public String serialize(TreeNode root) {
+        // write your code here
+        if(root == null){
+            return " ";
+        }
         StringBuilder sb = new StringBuilder();
         ser(root, sb);
         return sb.toString();
     }
     
-    public void ser(TreeNode root, StringBuilder sb){
+    public void ser(TreeNode root, StringBuilder data){
         if(root == null){
-            sb.append("# ");
+            data.append("# ");
         }else{
-            sb.append(root.val + " ");
-            ser(root.left, sb);
-            ser(root.right, sb);
+            data.append(root.val + " ");
+            ser(root.left, data);
+            ser(root.right, data);
         }
     }
-
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        Deque<String> q = new LinkedList<String>();
-        q.addAll(Arrays.asList(data.split("\\s+")));
-        return buildTree(q);
+	
+	public TreeNode deserialize(String data) {
+        // write your code here
+        if(data.equals(" ")){
+            return null;
+        }
+        String[] path = data.split("\\s+");
+        Queue<String> q = new LinkedList<String>();
+        for(String str : path){
+            q.offer(str);
+        }
+        return des(q);
     }
     
-    public TreeNode buildTree(Deque<String> q){
-        String val = q.removeFirst();
-        if(val.equals("#")){
+    public TreeNode des(Queue<String> q){
+        if(q.isEmpty()){
             return null;
         }else{
-            TreeNode root = new TreeNode(Integer.parseInt(val));
-            root.left = buildTree(q);
-            root.right = buildTree(q);
-            return root;
+            String s = q.poll(); 
+            if(s.equals("#")){
+                return null;
+            }else{
+                TreeNode node = new TreeNode(Integer.parseInt(s));
+                node.left = des(q);
+                node.right = des(q);
+                return node;
+            }
         }
     }
 	
