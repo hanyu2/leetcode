@@ -1,41 +1,37 @@
 package Amazon;
+
 import java.util.*;
-class Result{
-    int id;
-    int value;
-    public Result(int id, int value){
-        this.id = id;
-        this.value = value;
-    }
-}
-public class HighFive {
+
+public class HighFivePra {
 	public static Map<Integer, Double> getHighFive(Result[] results){
 		Map<Integer, Double> res = new HashMap<Integer, Double>();
-		Map<Integer, List<Integer>> values = new HashMap<Integer, List<Integer>>();
+		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		for(Result r : results){
-			List<Integer> list;
-			if(values.containsKey(r.id)){
-				list = values.get(r.id);
+			List<Integer> list = null;
+			if(map.containsKey(r.id)){
+				list = map.get(r.id);
 				list.add(r.value);
-				values.put(r.id, list);
+				map.put(r.id, list);
 			}else{
 				list = new ArrayList<Integer>();
 				list.add(r.value);
-				values.put(r.id, list);
+				map.put(r.id, list);
 			}
 		}
-		for(Integer id : values.keySet()){
-			List<Integer> list = values.get(id);
+		for(Integer id : map.keySet()){
+			List<Integer> list = map.get(id);
 			Collections.sort(list);
 			Collections.reverse(list);
-			int sum = 0;
+			double sum = 0.0;
 			for(int i = 0; i < 5; i++){
 				sum += list.get(i);
 			}
-			res.put(id, (double)sum / 5);
+			sum /= 5;
+			res.put(id, sum);
 		}
 		return res;
 	}
+	
 	public static void main(String[] args) {
         Result r1 = new Result(1, 95);
         Result r2 = new Result(1, 95);

@@ -61,7 +61,7 @@ public class CompanyTree {
         Node l31 = new Node(5);
         Node l32 = new Node(5);
         Node l33 = new Node(5);
-        Node l34 = new Node(5);
+        Node l34 = new Node(7);
         Node l35 = new Node(5);
         Node l36 = new Node(5);
 

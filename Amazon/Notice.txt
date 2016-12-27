@@ -45,3 +45,6 @@ orderDep有坑，map里string要做key
 
 Longest palindrome substring
 这个一次就过了，用的O（N^2）的方法去做， 一开始没有熟悉他给的界面，代码风格也不一样，编译了几次后过了。没有特别的case，安正常的方法都可以过。
+
+Window sum
+注意(arraylist == null || arraylist.size() == 0)要return一个已经初始化的arrayList而不是null，否则会有一个test case过不去。
