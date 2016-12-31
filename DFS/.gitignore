@@ -4,3 +4,6 @@
 /RemoveInvalidParentheses.class
 /Point.class
 /UnionFind.class
+/NumberOfIslands$Point.class
+/NumberOfIslands$UF.class
+/UF.class

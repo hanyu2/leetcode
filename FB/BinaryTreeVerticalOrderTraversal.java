@@ -92,6 +92,6 @@ public class BinaryTreeVerticalOrderTraversal {
 		n2.right = n4;
 		n3.left = n5;
 		n4.right = n6;
-		System.out.println(verticalOrder2(n1));
+		System.out.println(verticalOrder(n1));
 	}
 }

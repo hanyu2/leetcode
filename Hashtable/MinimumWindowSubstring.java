@@ -87,8 +87,9 @@ public class MinimumWindowSubstring {
 		// System.out.println(minWindow("abc", "ab"));
 		// System.out.println(minWindow("ab", "b"));
 		// System.out.println(minWindow2("bba", "ab"));
-		 System.out.println(minWindow2("of_characters_and_as", "aas"));
+		//System.out.println(minWindow2("of_characters_and_as", "aas"));
 		// System.out.println(minWindow("acbbaca", "aba"));
 		// System.out.println(minWindow("ABABBbbBbBB", "BaAA"));
+		System.out.println(minWindow("ADOBECODEBAAC", "ABC"));
 	}
 }

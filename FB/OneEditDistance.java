@@ -1,7 +1,7 @@
 package FB;
 
 public class OneEditDistance {
-	public boolean isOneEditDistance(String s, String t) {
+	public static boolean isOneEditDistance(String s, String t) {
         if(s.length() > t.length()){
             return isOneEditDistance(t, s);
         }
@@ -21,4 +21,7 @@ public class OneEditDistance {
         }
         return s.length() != t.length();
     }
+	public static void main(String[] args) {
+		System.out.println(isOneEditDistance("abc", "abc"));
+	}
 }
