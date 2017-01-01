@@ -1,21 +1,31 @@
 package BFS;
 
+import Tree.TreeNode;
+
 public class Solution {
-	public static int combinationSum4(int[] nums, int target) {
-        int[] dp = new int[target + 1];
-        for(int  i = 1; i <= target; i++){
-            for(int j = 0; j < nums.length; j++){
-                if(target - nums[j] == 0){
-                    dp[i] += 1;
-                }else if(target - nums[j] > 0){
-                    dp[i] += dp[target - nums[j]];
-                }
-            }
+	public static void flatten(TreeNode root) {
+        if(root == null){
+            return;
         }
-        return dp[target];
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        flatten(root.left);
+        flatten(root.right);
+        if(left != null){
+        		root.right = left;
+            while(left.right != null){
+                left = left.right;
+            }
+            left.right = right;
+            root.left = null;
+        }
     }
 	public static void main(String[] args) {
-		int[] nums = {1, 2, 3};
-		System.out.println(combinationSum4(nums, 4));
+		TreeNode n1 = new TreeNode(1);
+		TreeNode n2 = new TreeNode(2);
+		TreeNode n3 = new TreeNode(3);
+		n1.left = n2;
+		n2.left = n3;
+		flatten(n1);
 	}
 }

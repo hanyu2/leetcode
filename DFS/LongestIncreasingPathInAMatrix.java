@@ -32,9 +32,38 @@ public class LongestIncreasingPathInAMatrix {
 	    cache[i][j] = max;
 	    return max;
 	}
+	//TLE
+	static int longest = 1;
+    public static int longestIncreasingPath2(int[][] matrix) {
+        if(matrix == null || matrix.length == 0){
+            return 0;
+        }
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+            		search(matrix, matrix[i][j], i - 1, j, 1);
+                search(matrix, matrix[i][j], i + 1, j, 1);
+                search(matrix, matrix[i][j], i, j - 1, 1);
+                search(matrix, matrix[i][j], i, j + 1, 1);
+            }
+        }
+        return longest;
+    }
+    public static void search(int[][] matrix, int last, int i, int j, int len){
+        if(i < 0 || i >= matrix.length || j < 0 || j >= matrix[0].length || matrix[i][j] <= last){
+            return;
+        }
+        len++;
+        longest = Math.max(len, longest);
+        search(matrix, matrix[i][j], i - 1, j, len);
+        search(matrix, matrix[i][j], i + 1, j, len);
+        search(matrix, matrix[i][j], i, j - 1, len);
+        search(matrix, matrix[i][j], i, j + 1, len);
+    }
 	public static void main(String[] args) {
-		//int[][] matrix = {{9,9,4},{6,6,8},{2,1,1}};
-		int[][] matrix ={{3,4,5},{3,2,6},{2,2,1}};
-		System.out.println(longestIncreasingPath(matrix));
+		int[][] matrix = {{9,9,4},{6,6,8},{2,1,1}};
+		//int[][] matrix ={{3,4,5},{3,2,6},{2,2,1}};
+		System.out.println(longestIncreasingPath2(matrix));
 	}
 }
