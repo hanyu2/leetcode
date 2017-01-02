@@ -6,6 +6,42 @@ import java.util.Queue;
 import java.util.Set;
 
 public class WordBreak {
+	//Scan the dict to get the max possible length of words first before the loop
+	public boolean wordBreak3(String s, Set<String> wordDict) {
+        if(s == null || s.length() == 0){
+            return true;
+        }
+        int n = s.length();
+        boolean [] dp = new boolean[n+1];
+        dp[0] = true ;
+        int maxLength = 0;
+        for(String t : wordDict){
+            maxLength = Math.max(maxLength, t.length());
+        }
+        for(int i = 1; i <= n; i++){
+            for(int j = i-1; j >= Math.max(0, i - maxLength) && !dp[i]; j--){
+                if(dp[j]){
+                    if(wordDict.contains(s.substring(j, i))){
+                        dp[i] = true;
+                    }
+                }
+            }
+        }
+        return dp[n];
+    }
+	public boolean wordBreak1(String s, Set<String> wordDict) {
+        boolean[] f = new boolean[s.length() + 1];
+        f[0] = true;
+        for(int i=1; i <= s.length(); i++){
+            for(int j=0; j < i; j++){
+                if(f[j] && wordDict.contains(s.substring(j, i))){
+                    f[i] = true;
+                    break;
+                }
+            }
+        }
+        return f[s.length()];
+    }
 	public static boolean wordBreak(String s, Set<String> wordDict) {
 		int len = s.length();
 		boolean[] word = new boolean[len];
