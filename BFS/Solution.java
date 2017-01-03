@@ -1,36 +1,46 @@
 package BFS;
 
-import Tree.TreeNode;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Solution {
-	public static String multiply(String num1, String num2) {
-        int m = num1.length();
-        int n = num2.length();
-        int[] res = new int[m + n];
-        for(int i = m - 1; i >= 0; i--){
-            for(int j = n - 1; j >= 0; j--){
-                int n1 = num1.charAt(i) - '0';
-                int n2 = num2.charAt(j) - '0';
-                int mul = n1 * n2 + res[i + j + 1];
-                res[i + j + 1] = mul % 10;
-                res[i + j] += mul / 10;
-            }
+	public static List<String> wordBreak(String s, Set<String> wordDict) {
+        List<String> res = new ArrayList<String>();
+        Map<Integer, List<String>> cache = new HashMap<Integer, List<String>>();
+        List<String> l = new ArrayList<String>();
+        l.add("");
+        cache.put(s.length(), l);
+        return search(s, 0, wordDict, res, cache);
+    }
+    public static List<String> search(String s, int start, Set<String> set, List<String> res, Map<Integer, List<String>> map){
+        if(map.containsKey(start)){
+            return map.get(start);
         }
-        StringBuilder sb = new StringBuilder();
-        boolean zero = false;
-        for(int i = 0; i < res.length; i++){
-            if(res[i] != 0){
-                zero = true;
-                sb.append(res[i]);
-            }else{
-                if(zero){
-                    sb.append(i);
+        List<String> newList = new ArrayList<String>();
+        for(int i = start; i < s.length(); i++){
+            String sub = s.substring(start, i + 1);
+            if(set.contains(sub)){
+                List<String> list = search(s, i + 1, set, res, map);
+                for(String ss : list){
+                    newList.add(sub + (ss.length() == 0 ? "" : " ") + ss);
                 }
             }
         }
-        return sb.length() == 0 ?  "0" : sb.toString();
+        map.put(start, newList);
+        return newList;
     }
 	public static void main(String[] args) {
-		System.out.println(multiply("123", "456"));
+		String s = "catsanddog";
+		Set<String> set = new HashSet<String>();
+		set.add("cat");
+		set.add("cats");
+		set.add("and");
+		set.add("sand");
+		set.add("dog");
+		wordBreak(s, set);
 	}
 }
