@@ -64,8 +64,8 @@ public class ReconstructItinerary {
 	static LinkedList<String> path;
 
 	public static List<String> findItinerary2(String[][] tickets) {
-		flights = new HashMap<>();
-		path = new LinkedList<>();
+		flights = new HashMap<String, PriorityQueue<String>>();
+		path = new LinkedList<String>();
 		for (String[] ticket : tickets) {
 			if (!flights.containsKey(ticket[0])) {
 				flights.put(ticket[0], new PriorityQueue<String>());
