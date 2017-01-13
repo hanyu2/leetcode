@@ -1,50 +1,68 @@
-Work simulation
-amazon leadership principle
-http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212944&ctid=371
-http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212936&ctid=371
-对于ineffective的选项直接打一分，然后其他effective的打分都是4到5分。
-遵循的原则是客户>ddl>技术
-根据地里的经验 选的选项都偏极端 基本都是 5 4 1 或者 5 1 2这样的组合，要有明确的立场，全程就选了一个3。
-是基于customer > ddl > other features这样的顺序来选的，
-用的这两个面经https://segmentfault.com/a/1190000007519772（主要参考这个，比较有条理）
-和http://www.jianshu.com/p/013e35d551ba。
-只有拿到code snippet的题有标准答案，其他的都靠自由发挥。
-一定要有立场立场立场！另外遇到问你怎么处理的情况有manager的选项基本是最effective的
-WS吧，个人觉得不同每个题12345给全，也没必要都给出层次，老大老二都不好但是老大略好于老二这种我都给2的，比较极端。
-我觉得增加测试数据和增加user testing，manual test 高分，增加测试团队中分，延长周期低分。
-一看就特别好的答案，比如用户至上的，比如团队合作的，就给高分，中间也会有那种勉强可以接受的，就给中间分，像什么“跟manager说这个我做不了”，直接1分
+程序里面的一些变量名 （st，et， dur），可以起一些meaningful 的名字
+提醒我写summary 是description。 在程序最前面有个地方让写一段算法的描述，练习的时候我没写过
+提醒我不用自己写输出函数有现成的可以调
 
+第一次考官叫我出去问我代码的情况，我给他看代码的时候，一边解释一边画图，因为自己英语一般 幸好交流过程还算顺利。
+然后考官给了个非常好的idea，他说，optimization最有意思的地方在于你有很多个optimize的标准。
+举个例子，要安排一个货物发货，可以按成本最低来optimize，也就是尽量让货车装满；也可以按照时间最短来optimize，也就是尽量让货物尽早发出去。
+我紧接着就说了我的idea，考官表示也可以（但的确没他的提议好）。
+回去以后我就参考了考官的idea，最后综合了两个aspect去实现。
+第二次叫我出去的是另一个考官，他问我为什么选这个，我说这是the most interesting one，感觉这个答案让他挺满意的，后来他说我的代码没问题。
 
-K nearest
-大家还是要记得加java.util.*
-Closest Points那道题有个edge case是
-if (k <= 0)  return new Point[0]
-另外K points的输入是没有origin的 直接假设origin是0， k大于数组的长度时 我返回的是sort后的所有点
+各自搞各自的， 一个人三道题，
+1）. 根据产品id和目的地地址，找到相应运输方式，两重forloop解决。
+2）. 优化，两个方向二选一： 一、尽量减少为满足requirement。 二、尽快满足顾客需求（记不清，没选这个）
+3）. 减少运送cost
 
+考察点应该在于如何处理调用大project中的各个package中的class， 题目本身不难，都可以通过暴力for loop 解决。
+总时间大概在2.5小时，中间有一次和面试官交流的机会（开始后30分钟-1.5小时任选section），提交代码后有一次。
+建议： 尽快做，时间紧，不要考虑优化。
+第一题其实应该用map。。两loop暴力明显从面试官那里得到了一个比较诧异的表情。。
+当时时间紧，越快做出来越好绝对是真理
 
-deep copy
-提醒一下题目里的任意指针不是random，是arbitrary
+题目还是产品库存运输那道，个人感觉前两个milestone可以在第一次interview前做出来，谈完后可以改进下，写写注释然后看看第三个milestone，
+不过我的时间也不是很够所以第三个就随便写了下。
+第二次interview的时候也只让解释了第二个milestone，不过感觉答得不如第一次好，
+而且答得过程中发现还可以做一点小优化orz……不知最终结果如何
 
-Rectangle overlap
-地里有人说rectangle overlap有三个test case跑不过去，是因为如果两个长方形有边重叠，也算重叠，所以<或者>，变成=>或者<=就好了。
-rectangle有坑，要预处理
+目前来说面经很全面了，题目基本大意都很全面. 最重要的就是找有用的class，里面的method你会用就没问题！
+建议先读一下他给的描述题目的小册子，大概要了解整个系统是个什么结构，输入输出是什么，打印出来又是什么样子的.
+写代码coding style要注意，多写注释没坏处，不要纠结发单率，这个确定不做为代码写的好不好的参考标准！
+代码很长，可以split成多个small function（这是面试官当时说的，但我没时间改了）
+个人认为面试拿想拿offer重要的一点，和面试官要聊的好，有理有据！
+我跟面试官解释我思路的时候，都是边画边说，图文并茂，面试官问的问题也无非就是各种时间空间复杂度，实现方法的优劣，你讲清楚有理有据，面试官没有质疑你的方法，基本就稳了.
+实在描述不出来你就举例子，给他画！
+4.聊天的时候保持微笑，自信一点.对自己的方法一定要果断.如果面试官有对你的方法产生质疑，你就虚心请教面试官有什么改进方法，
+或者你问他真实情况中该怎么办，要让面试官感觉你一直在思考，在交流.
 
-MST
-第三题MST写完有一个case木有过 但是听说是不能找到connect方案时需要返回null而不是emptyList。。明明题干里面就是要求empty list。。。什么鬼 然后结果需要排序，题干里也没说。。。
-WS只能参考，真正做的时候还是会很纠结，不过我选的没那么极端。。看地里都说要极端的才好。。可是感觉很多选项还是部分make sense。
-还有现在WS部分是2小时，coding part1 75mins， part2 30mins。
-说实话写MST时间还是挺紧的，最后case都过了，看了地里的MST不合法返回null过了最后一个case。想问问有人和我是一个题目嘛？
-MST基本无坑，只要懂union find，最后输出要排序。
-MST当不能连通全部城市的时候是返回null
-MST返回结果前要记得排序
+去群面前电话请教了另两位拿到offer的小伙伴的群面流程，在此也谢谢啦，我们三个人的解法都不一样，但结合我们三个人的面试过程，总结一下：
+面试官可能会考察的：
+1. 数据结构，重点重点重点
+2. 优化思路
+3. 时间复杂度
+4. testing
 
-Order dependency
-http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=212564&ctid=371
-orderDep有坑，map里string要做key
-但是，一定要注意，要用orderName做key，而不是Order。因为输入的orderDependency列表里，名字（orderName）一样的Order，也是不同的instance。
+个人感觉交流本身和思路是最重要的，清晰的表达，快速的反应出考官的follow up都很重要
 
-Longest palindrome substring
-这个一次就过了，用的O（N^2）的方法去做， 一开始没有熟悉他给的界面，代码风格也不一样，编译了几次后过了。没有特别的case，安正常的方法都可以过。
+最后提供下第一题的个人的思路，也许不是最优的，抛砖引玉吧：
+1. 先根据location ID 把contents分类（这里我用的是hash map，key是location）
+2. 记录每个location的contents的start time和end time，从小到大扫描一遍
+3. 每个locaiton维护一个priorityQueue每次poll来模拟广告加入的过程
+4. 用一个set维护current contents， 扫描时做三件事：a. 如果时间是current Contents的结束时间就remove这个广告 b。check是否有ID重复 c。看是否超出size 3
+优化 我用到了多线程，每个locaiton是个线程，同时比较了这个解法和两层hashmap嵌套解法的时间复杂度上的优势，以及输入数据利用率的比较
 
-Window sum
-注意(arraylist == null || arraylist.size() == 0)要return一个已经初始化的arrayList而不是null，否则会有一个test case过不去。
+我自己当时的做法是priorityQueue里存的是每个locaiton的广告，按startTime排列
+楼主请问，为什么如果时间是current Contents的结束时间就remove这个广告
+因为如果扫描到的时间是你目前的currentContent的截止时间，就说明这个广告在考虑的这个时刻过期了，需要移除，来给新广告腾位子
+
+schedule这道题的输入，并不是一个成形的schedule，而是scheduleReuques这个类，这个类里面有id, location, starttime, endtime，
+它决定了一个特定的广告放在哪个区域的哪个时间段，输入数据中有很多这个类的对象，所以你们就可以通过建立自己的数据结构来把这些对象都进来，形成schedule。
+而且这些广告在时间上是不能任意分割的。
+比如现在有两个输入：c1,a1,1,5和c1,a1,4,6。那么这两个广告在4-5这个时间段重合了，
+但是你只能把1-5或者4-6这整个时间段的c1删掉，就是删掉整个输入的类，而不是分割广告、删掉4-5这个时间段的c1. 
+然后这题的输出就是输入的这堆scheduleReuques对象中你保留下来的和剔除了的，分成两拨输出来。
+第一题的输出就是第三题的输入，
+第三题也就是给你一堆scheduleReuques对象，你自己先建立schedule，然后再插入新的content。
+第三题要注意的是，你要插入的这堆新的content是相互独立的，相当于你把同一个函数在不同的输入case下运行n遍。反正读题的时候你也能读懂。
+
+http://www.1point3acres.com/bbs/thread-147465-1-1.html
