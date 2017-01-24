@@ -1,0 +1,75 @@
+再写面经之前，先说句题外话-- You will obtain your goal if you maintain your course.
+这也是这段时间一直激励我的话。
+
+请大家只在群内流传该面经。团结起来。感激不尽
+=============================
+进入正题
+
+1. 住的地方距离onsite地方步行可到，但最好还是uber，很方便。
+2. 早饭在酒店门口的吃的，收费，一定要吃好！一定要吃好！一定要吃好！
+
+8：30 到了Doppler，签了NDA, 领一个vistor的牌子，坐在lobby等。9点左右，会有人过来把队伍带过去。
+Bla,Bla介绍一通之后,开始第一部分 group discussion。
+
+part 1
+先说说我是怎么准备group discussion的。onsite前就在leetcode上找medium的题目，看完题目之后直接去
+看别人的答案，以此来训练自己理解别人代码的能力。然后联系着把别人的思路说出来。
+
+onsite时候遇到了 find celebrity 的变形，具体题目真的记不清楚了。我们组的排序是213, 我拿到的是1，
+方法是nested loops，最后的是方法2，时间是O(n),方法3是错误的。
+在group discussion部分，我觉得最重要的一点-- 一定不要紧张，保持兴奋。如果组里面只有你一个中国人，一定
+不要怂，我的组就是两个三哥和我，按照平时练习说就好。
+
+part 2
+milestone 1
+先说说skeleton, 和几个重要的类
+class ProductInventoryExplorer{
+	里面有个方法可以得到inventory, given productId
+}
+
+class ShippingCostExporer{
+	里面有方法能得到 list of shipping cost, given a destination
+}
+
+skeleton：
+class Milestone1{
+	public List<ProductShippingCost> milestone1(String productId, Region shipTo){
+	
+	}
+}
+
+我的思路是用到map。 先得到两个 list 通过call 上面的方法。map 所有的shippingcost, key 是 shipFrom
+，value 是list of ShippingCost. 第三步是遍历第一步得到的inventory, check region == shipFrom(key).
+
+milestone 2
+Strategy: greedy
+Data structure: ArrayList 还有 Colletions.sort （这里用min-heap也能实现相同功能
+1. sort orders by request quantity
+2. call milestone1,得到 list of ProductShippingCost, given an order. 根据order里面的request
+quantity, 选择不同的inventory发货。 此时 我还把ProductShippingCost 按照每个item 的最小shipping day
+给排序了, 这样是想fulfill as many orders as possible的同时，减少送货时间。
+
+skeleton:
+class FulfillShipment{
+	public void milestone2(List<OrderEntry> orderList){
+		
+		FulfillShipment fulfillShipment = new FulfillShipment();
+		
+		for(OrderEntry order : orderList){
+			ShippingBuilder shippingBuilder = fulfillShipment.createShippingBuilder(order);
+			
+			// 几个我用到的built-in function
+			ship();					// 当安排好策略以后，call ship 把product运走
+			cancel();				// 如果判断order不能被fulfill，把之前做的策略取消，库存归到最初
+			getQuantitySofar();		// 返回现在还差多少个能够完成这个订单
+			unableToShip();			// 如果不能fulfill 这个order，把这个order放进一个list好像
+		}
+	}
+}
+
+milestone3 思路和milestone2类似，面试官说不作要求
+==========================================
+最后还有一点想要提醒大家，不管当天你有多累，一定一定要保持兴奋和自信，直到onsite结束。另外还一点，一定多些
+注释和编程一定要规范（变量名+把function分开写）
+============================================
+祝大家好运。
