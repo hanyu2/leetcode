@@ -17,6 +17,26 @@ public class FirstBadVersion {
         return left;
     }
 	
+	public int firstBadVersion2(int n) {
+        int start = 0;
+        int end = n;
+        while(start + 1 < end){
+            int mid = start + (end - start) / 2;
+            if(isBadVersion(mid)){
+                end = mid;
+            }else{
+                start = mid;
+            }
+        }
+        if(isBadVersion(start)){
+            return start;
+        }else if(isBadVersion(end)){
+            return end;
+        }else{
+            return -1;
+        }
+    }
+	
 	public static boolean isBadVersion(int n){
 		if(array[n] == 1){
 			return false;
