@@ -1,54 +1,41 @@
 package BFS;
 
 public class Solution {
-	public static int[] searchRange(int[] nums, int target) {
-		int[] res = { -1, -1 };
-		if (nums == null || nums.length == 0) {
-			return res;
-		}
-		int start = 0;
-		int end = nums.length - 1;
-		while (start + 1 < end) {
-			int mid = start + (end - start) / 2;
-			if (nums[mid] == target) {
-				end = mid;
-			} else if (nums[mid] < target) {
-				start = mid;
-			} else {
-				end = mid;
-			}
-		}
-		if (nums[start] == target) {
-			res[0] = start;
-		}else if(nums[end] == target){
-			res[0] = end;
-		}else{
-			return res;
-		}
-		start = 0;
-		end = nums.length - 1;
-		while (start + 1 < end) {
-			int mid = start + (end - start) / 2;
-			if (nums[mid] == target) {
-				start = mid;
-			} else if (nums[mid] < target) {
-				start = mid;
-			} else {
-				end = mid;
-			}
-		}
-		if (nums[end] == target) {
-			res[1] = end;
-		} else if (nums[start] == target){
-			res[1] = start;
-		}else{
-			res[0] = res[1] = -1;
-		}
-		return res;
-	}
-
+    public static int minCut(String s) {
+        if(isPalindrome(s)){
+            return 0;
+        }
+        int[] dp = new int[s.length() + 1];
+        dp[0] = -1;
+        for(int i = 1 ;i <= s.length() ;i++){
+            int min = i;
+            for(int j = i - 1; j >= 0; j--){
+                String sub = s.substring(j, i);
+                if(isPalindrome(sub)){
+                    int sum = dp[j] + 1;
+                    min = Math.min(sum, min);
+                }
+            }
+            dp[i] = min;
+        }
+        return dp[s.length()];
+    }
+    
+    public static boolean isPalindrome(String s){
+        int left = 0;
+        int right = s.length() - 1;
+        while(left < right){
+            char l = s.charAt(left);
+            char r = s.charAt(right);
+            if(l != r){
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
 	public static void main(String[] args) {
-		int[] nums = { 5, 7, 7, 8, 8, 10 };
-		System.out.println(searchRange(nums, 8));
+		System.out.println(minCut("leet"));
 	}
 }

@@ -145,7 +145,7 @@ class UnionFind {
 	}
 
 	public int find(int node) {
-		while(father[node] == node) {
+		while(father[node] != node) {
 			node = father[node];
 		}
 		return father[node];
